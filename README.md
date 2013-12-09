@@ -2,6 +2,7 @@ Radioactive-Evolution
 =====================
 
 SUMMARY
+
 	Software Website:	http://users.aber.ac.uk/cba1/iwp/
 	Version:			1.0 (Beta)
 	Author:				Chris Ashton
@@ -9,6 +10,7 @@ SUMMARY
 	Contact:			appsupport@christopherashton.com
 
 CONTENTS
+
 	1) Introduction
 	2) License Agreement
 	3) Installation
@@ -35,15 +37,15 @@ a) Unzip the "Radioactive-Evolution.zip". You've probably already done this if y
 b) Upload the unzipped folder to a web directory of your choice.
 c) You can now include the game in any of your web pages- all you need is two elements:
 
-<!-- Put these somewhere in your HTML body, wherever you want the game to appear -->
-<canvas id="Radioactive-Evolution"></canvas>
-<script data-main="Radioactive-Evolution/js/Run" src="http://requirejs.org/docs/release/2.1.5/minified/require.js"></script>
+	<!-- Put these somewhere in your HTML body, wherever you want the game to appear -->
+	<canvas id="Radioactive-Evolution"></canvas>
+	<script data-main="Radioactive-Evolution/js/Run" src="http://requirejs.org/docs/release/2.1.5/minified/require.js"></script>
 
 This assumes the following directory structure:
 
-parent-directory/
----> Radioactive-Evolution/
----> your-web-page.html
+	parent-directory/
+	---> Radioactive-Evolution/
+	---> your-web-page.html
 
 If you've renamed your unzipped folder to something else, or are including the game from a different directory, be sure to update the value inside data-main. This is untested- there may be other variables you need to update, particularly in Includes.js.
 
