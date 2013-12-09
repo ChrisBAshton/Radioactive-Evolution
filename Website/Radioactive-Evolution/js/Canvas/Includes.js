@@ -4,23 +4,23 @@
 
 // images
 var img_tick = new Image();
-img_tick.src = "Radioactive-Evolution/images/tick.png";
+img_tick.src = "images/tick.png";
 var img_cross = new Image();
-img_cross.src = "Radioactive-Evolution/images/cross.png";
+img_cross.src = "images/cross.png";
 // http://medialoot.com/images/thumbs/640x440x1_Clouds_Preview2.jpg
 var img_cloud_1 = new Image();
-img_cloud_1.src = "Radioactive-Evolution/images/cloud1.png";
+img_cloud_1.src = "images/cloud1.png";
 var img_cloud_2 = new Image();
-img_cloud_2.src = "Radioactive-Evolution/images/cloud2.png";
+img_cloud_2.src = "images/cloud2.png";
 // http://findicons.com/icon/38004/sun?id=38015
 var img_sun = new Image();
-img_sun.src = "Radioactive-Evolution/images/sun.png";
+img_sun.src = "images/sun.png";
 // http://www.mayang.com/textures/Nature/images/Sand/
 var img_sand = new Image();
-img_sand.src = "Radioactive-Evolution/images/sand.jpg";
+img_sand.src = "images/sand.jpg";
 // http://www.vectoropenstock.com/previews/3437-Underwater-Vector-Background-.jpg
 var img_water = new Image();
-img_water.src = "Radioactive-Evolution/images/water.jpg";
+img_water.src = "images/water.jpg";
 
 // sounds
 var sound_bg, sound_crunch, sound_death, sound_success;
@@ -44,16 +44,16 @@ if(browser === "safari" || browser == "msie") {
 	sound_success = new DummySound();
 } else {
 	sound_bg = document.createElement('audio');
-	sound_bg.setAttribute('src', "Radioactive-Evolution/sounds/background.wav");	// buffers automatically when created
+	sound_bg.setAttribute('src', "sounds/background.wav");	// buffers automatically when created
 	sound_bg.volume = 0.5;
 	sound_crunch = document.createElement('audio');
-	sound_crunch.setAttribute('src', "Radioactive-Evolution/sounds/crunch.wav");
+	sound_crunch.setAttribute('src', "sounds/crunch.wav");
 	sound_crunch.volume = 1.0;
 	sound_death = document.createElement('audio');
-	sound_death.setAttribute('src', "Radioactive-Evolution/sounds/death.wav");
+	sound_death.setAttribute('src', "sounds/death.wav");
 	sound_death.volume = 1.0;
 	sound_success = document.createElement('audio');
-	sound_success.setAttribute('src', "Radioactive-Evolution/sounds/success.wav");
+	sound_success.setAttribute('src', "sounds/success.wav");
 	sound_success.volume = 1.0;
 }
 

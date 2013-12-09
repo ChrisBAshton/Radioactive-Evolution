@@ -22,8 +22,8 @@ for(var i =0; i < browser_array.length; i++) {
 var scriptQueue = [
 	// these scripts have no dependencies
 	[
-	"http://cdn.craig.is/js/mousetrap/mousetrap.min.js",
-	"Canvas/GoogleFonts",
+	//"http://cdn.craig.is/js/mousetrap/mousetrap.min.js",
+	//"Canvas/GoogleFonts",
 	"Canvas/Layout",
 	"Canvas/Includes",
 	"Achievements/Achievement",
@@ -154,7 +154,7 @@ function updateLoadingScreen(numberOfFiles) {
 	context.fillStyle = "#737373";
 	
 	// display message regarding download progress
-	if(LOADED < 100) {
+	if(LOADED < 97) {
 		context.fillText("Loading... "+LOADED+"%", (layout.getWidth()/2), (layout.getHeight()/2)-30);
 	} else {
 		// everything downloaded, we can start the game
