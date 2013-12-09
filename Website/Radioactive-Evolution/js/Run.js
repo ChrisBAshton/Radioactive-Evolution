@@ -48,12 +48,12 @@ var scriptQueue = [
 	"Achievements/AllGrowth",
 	"Achievements/AllPoison",
 	"Achievements/AllUpgrades",
-	"Menu/MainMenu",
-	"Menu/HelpMenu",
-	"Menu/AchievementsMenu",
-	"Menu/LevelMenu",
-	"Menu/DeathMenu",
-	"Menu/Button",
+	//"Menu/MainMenu",
+	// "Menu/HelpMenu",
+	// "Menu/AchievementsMenu",
+	// "Menu/LevelMenu",
+	// "Menu/DeathMenu",
+	//"Menu/Button",
 	"IO/KeyboardControl",
 	"IO/EventListener"
 	],
@@ -149,12 +149,8 @@ function updateLoadingScreen(numberOfFiles) {
 	context.fillStyle = "#737373";
 	
 	// display message regarding download progress
-	if(LOADED < 97) {
-		context.fillText("Loading... "+LOADED+"%", (layout.getWidth()/2), (layout.getHeight()/2)-30);
-	} else {
-		// everything downloaded, we can start the game
-		start_app();
-	}
+	context.fillText("Loading... "+LOADED+"%", (layout.getWidth()/2), (layout.getHeight()/2)-30);
+
 }
 
 var loadRadioactiveEvolution = function () {
@@ -174,6 +170,10 @@ var loadRadioactiveEvolution = function () {
 				queuePosition = 3;
 				require(scriptQueue[queuePosition], function() {
 					updateLoadingScreen(scriptQueue[queuePosition].length);
+
+						require(['app'], function (app) {
+							app.init();
+						});
 				});
 			});
 		});

@@ -13,14 +13,15 @@ var loop;
 * Event listeners, key listeners etc
 */
 // listen for mouse movements/clicks
-var event = new EventListener();
-canvas.addEventListener("mousemove",event.mouseMoved,false);
-canvas.addEventListener("mousedown",event.mouseClicked,false);
-// sound event listener
-sound_bg.addEventListener('ended', function() {
-	this.currentTime = 0;
-	this.play();
-}, false);
+define(['IO/EventListener'], function (event) {
+	canvas.addEventListener("mousemove",event.mouseMoved,false);
+	canvas.addEventListener("mousedown",event.mouseClicked,false);
+	// sound event listener
+	sound_bg.addEventListener('ended', function() {
+		this.currentTime = 0;
+		this.play();
+	}, false);
+});
 
 /**
 * Gaming variables
