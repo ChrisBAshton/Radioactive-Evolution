@@ -1,8 +1,3 @@
-// Variables for interacting with canvas. All other global variables are in Customise.js
-var CANVAS_NAME = "radioactive-evolution";
-var canvas = document.getElementById(CANVAS_NAME);
-var context= canvas.getContext("2d");
-
 // find out which browser user is using
 var browser = "unknown";
 var browser_array = ["firefox", "chrome", "safari", "opera", "msie"];
@@ -159,58 +154,37 @@ function updateLoadingScreen(numberOfFiles) {
 	} else {
 		// everything downloaded, we can start the game
 		start_app();
-		/*
-		//prompt user for their interaction
-		context.fillText("Fully loaded. Enter 'm' for mouse control (recommended) or 'k' for keyboard control.", (layout.getWidth()/2), (layout.getHeight()/2)-30);
-		Mousetrap.bind('m', function() {
-			Mousetrap.unbind('m');
-			Mousetrap.unbind('k');
-			start_app('m');
-		});
-		Mousetrap.bind('k', function() {
-			Mousetrap.unbind('m');
-			Mousetrap.unbind('k');
-			start_app('k');
-		});
-		*/
 	}
 }
 
-/*
-// As crazy as it seems, RequireJS doesn't seem to like recursive functions- I'd like to implement something like this:
-
-function loadScript(index) {
-	var i = index;
-	console.log("Loading "+scriptQueue[i]);
-	require(scriptQueue[i], function() {
-		updateLoadingScreen(1);
-		if(++i < scriptQueue.length) {
-			loadScript(++i);
-		}
-	});
-}
-loadScript(0);
-
-Instead, this is the cleanest way of loading each script array
-*/
-
-var queuePosition;
-queuePosition = 0;
-require(scriptQueue[queuePosition], function() {
-	updateLoadingScreen(scriptQueue[queuePosition].length);
-	
-	queuePosition = 1;
+var loadRadioactiveEvolution = function () {
+	var queuePosition;
+	queuePosition = 0;
 	require(scriptQueue[queuePosition], function() {
-		updateLoadingScreen(scriptQueue[queuePosition].length);queuePosition = 1;
+		updateLoadingScreen(scriptQueue[queuePosition].length);
 		
-		queuePosition = 2;
+		queuePosition = 1;
 		require(scriptQueue[queuePosition], function() {
-			updateLoadingScreen(scriptQueue[queuePosition].length);
+			updateLoadingScreen(scriptQueue[queuePosition].length);queuePosition = 1;
 			
-			queuePosition = 3;
+			queuePosition = 2;
 			require(scriptQueue[queuePosition], function() {
 				updateLoadingScreen(scriptQueue[queuePosition].length);
+				
+				queuePosition = 3;
+				require(scriptQueue[queuePosition], function() {
+					updateLoadingScreen(scriptQueue[queuePosition].length);
+				});
 			});
 		});
 	});
-});
+};
+
+var CANVAS_NAME = document.getElementById('radioactive-evolution-script').getAttribute('data-container-div');
+var canvas_container = document.getElementById(CANVAS_NAME);
+
+var canvas = document.createElement('canvas');
+canvas_container.appendChild(canvas);
+var context= canvas.getContext("2d");
+
+loadRadioactiveEvolution();
