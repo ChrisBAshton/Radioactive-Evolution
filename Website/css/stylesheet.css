@@ -1,0 +1,117 @@
+html {
+	font-family: Verdana;
+	font-size: 15px;
+}
+
+body {
+	background-color: #FFFFFF;
+	overflow: scroll;
+}
+
+h1 {
+	font-family: 'Economica', sans-serif;
+	font-size: 70px;
+	padding: 20px 0px 30px 20px;
+}
+
+h2 {
+	font-family: 'Economica', sans-serif;
+	font-size: 28px;
+	padding: 15px 0px 15px 5px;
+}
+
+p {
+	padding: 5px;
+	line-height: 120%;
+}
+
+code {
+	font-family: 'Courier New', sans-serif;
+}
+
+em {
+	font-style: italic;
+}
+
+strong {
+	font-weight: bold;
+}
+
+a {
+	color: #737373;
+	text-decoration: none;
+	font-weight: bold;
+}
+a:hover {
+	color: orange;
+}
+	
+#menu {
+	/* Positioning */
+	width: 300px;
+	float: left;
+	/* Appearance */
+}
+
+	#menu h1 {
+		font-size: 30px;
+		/* top right bottom left */
+		padding: 30px 10px 30px 10px;
+		text-align: center;
+	}
+
+	#menu ul li a {
+		/*
+			Set anchor to fill out the size of the li- this
+			makes the whole li clickable.
+			
+			Make width the width of #menu minus (2*padding of #menu ul li a)
+		*/
+		width: 240px;
+		padding: 30px;
+		display: block;
+		
+		color: black;
+		font-weight: normal;
+	}
+	#menu ul li a:hover {
+		/* Need to repeat this because we reset color in "#menu ul li a" */
+		color: orange;
+	}
+	
+	#menu ul li {
+	   border-top: 1px solid #EDEDED;
+	   border-bottom: 1px solid #EDEDED;
+	}
+	#menu ul li:hover {
+		animation: bounce 1s;
+		animation-fill-mode: forwards;
+	}
+	@keyframes bounce {
+		to {
+			background-color: #EDEDED;
+			border-color: #000000;
+		}
+	}
+	
+	#menu p {
+		/* This element contains the copyright information etc */
+		text-align: center;
+		padding: 30px 10px 30px 10px;
+	}
+
+#content {
+	/* Positioning */
+	width: 70%;
+	float: left;
+	/* Appearance */
+	border-left: 1px dashed #737373;
+	padding: 30px;
+}
+
+#content ul li {
+	padding: 5px 0px 20px 0px;
+	margin-left: 45px;
+	list-style-type: circle;
+	line-height: 120%;
+}
