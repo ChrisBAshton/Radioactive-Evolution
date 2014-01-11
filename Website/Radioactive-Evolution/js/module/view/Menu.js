@@ -117,7 +117,7 @@ define(['module/controller/pubsub', 'module/view/Button'], function (pubsub, But
 		* @param {Number} x2	The mouse's X co-ordinate
 		* @param {Number} y2	The mouse's Y co-ordinate
 		*/
-		this.mouseMoved = function(mouseX,mouseY) {
+		this.mouseMoved = function(mouseX, mouseY) {
 			// loop through buttons to highlight any buttons cursor may be hovering over
 			for(var i = 0; i < this.buttons.length; i++) {
 				this.buttons[i].setSelected(this.intersects(this.buttons[i], mouseX, mouseY));

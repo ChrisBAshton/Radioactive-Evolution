@@ -1,4 +1,4 @@
-define(['module/model/ClassExtender', 'module/view/Menu', 'module/controller/Game', 'module/controller/MenuInstance'], function (Extender, Menu, game, menu) {
+define(['module/controller/pubsub', 'module/model/ClassExtender', 'module/view/Menu', 'module/controller/Game'], function (pubsub, Extender, Menu, game) {
 
 	var MainMenu = function () {
 
@@ -26,10 +26,10 @@ define(['module/model/ClassExtender', 'module/view/Menu', 'module/controller/Gam
 							game.start();
 							break;
 						case "help":
-							menu.set('help');
+							pubsub.emitEvent('regame:menu:new', ['help']);
 							break;
 						case "achievements":
-							menu.set('achievements');
+							pubsub.emitEvent('regame:menu:new', ['achievements']);
 							break;
 					}
 				}

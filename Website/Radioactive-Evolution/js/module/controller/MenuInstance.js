@@ -1,8 +1,21 @@
-define(['module/view/Menu_Main', 'module/view/Menu_Level', 'module/view/Menu_Death', 'module/view/Menu_Achievements', 'module/view/Menu_Help'], function (MainMenu, LevelMenu, DeathMenu, AchievementsMenu, HelpMenu) {
+define(['module/controller/pubsub', 'module/view/Menu_Main', 'module/view/Menu_Level', 'module/view/Menu_Death', 'module/view/Menu_Achievements', 'module/view/Menu_Help'], function (pubsub, MainMenu, LevelMenu, DeathMenu, AchievementsMenu, HelpMenu) {
 
 	var MenuInstance = function () {
 
-		var instance = null;
+		var instance = null,
+			self = this;
+
+		this.init = function () {
+			_listen();
+			self.set('main');
+			instance.draw();
+		};
+
+		var _listen = function () {
+			pubsub.addListener('regame:menu:new', function (menu) {
+				self.set(menu);
+			});
+		}
 
 		this.set = function (menu) {
 			switch (menu) {
@@ -27,11 +40,6 @@ define(['module/view/Menu_Main', 'module/view/Menu_Level', 'module/view/Menu_Dea
 		this.get = function () {
 			return instance;
 		}
-
-		this.init = function () {
-			this.set('main');
-			instance.draw();
-		};
 
 	};
 
