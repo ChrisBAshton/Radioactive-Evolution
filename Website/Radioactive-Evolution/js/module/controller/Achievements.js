@@ -2,30 +2,60 @@ define([], function () {
 
 	var Achievements = function () {
 
+		var achievements;
+
 		/**
 		* Checks local storage for previously achieved achievements.
 		*
 		* @method loadAchievements
 		*/
 		this.load = function () {
-			achievements = new Array(new Level3(), new Level5(), new Level10(), new EarlyDeath(), new BigEarner(), new FishKiller(), new AllGrowth(), new AllPoison(), new AllUpgrades());
+
+			var title,
+				isAlreadyAchieved;
+
+			_initialiseAchievements();
+			
 			for(var i = 0; i < achievements.length; i++) {
-				// check local storage for achieved achievements
-				var savedAchievement = localStorage[achievements[i].getTitle()];
-				// first time user, so achievements haven't been earned- save this in local storage
-				if(savedAchievement == null) {
-					localStorage[achievements[i].getTitle()] = false;
-				} else if(savedAchievement == true || savedAchievement == "true") {
-					/*
-						Cannot set boolean values, but W3C updated the spec in 2009 to accept booleans. I'm implementing
-						backwards compatibility.
-						http://stackoverflow.com/questions/3263161/cannot-set-boolean-values-in-localstorage
-					*/
-					// user has achieved achievement in the past, so update the achievement with this.
+
+				title = achievements[i].getTitle();
+				isAlreadyAchieved = _isAchieved(title);
+				
+				if(isAlreadyAchieved) {
 					achievements[i].setAchieved(true);
+				} else {
+					// first time user, so achievements haven't been earned- save this in local storage
+					localStorage[title] = false;
 				}
 			}
 		}
+
+		/**
+		 * Initialises the array of achievements with Achievement objects.
+		 */
+		var _initialiseAchievements = function () {
+			achievements = new Array(
+				new Level3(),
+				new Level5(),
+				new Level10(),
+				new EarlyDeath(),
+				new BigEarner(),
+				new FishKiller(),
+				new AllGrowth(),
+				new AllPoison(),
+				new AllUpgrades()
+			);
+		};
+
+		/**
+		 * Checks if the given achievement is already in local storage.
+		 *
+		 * @param achievementTitle {String} The name of the achievement.
+		 * @return {Boolean} 				True if set, false if not.
+		 */
+		var _isAchieved = function (achievementTitle) {
+			return localStorage[achievementTitle] == null ? false:true;
+		};
 
 		/**
 		* Loop through all achievements and check each of them to see if they've been achieved.
