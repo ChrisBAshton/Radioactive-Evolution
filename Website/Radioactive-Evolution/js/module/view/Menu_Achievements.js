@@ -5,33 +5,21 @@ define(['module/model/ClassExtender', 'module/view/Menu', 'module/controller/Gam
 		Extender.extend(Menu, this);
 
 		// add custom buttons	
-		var mainMenu = new Button("mainMenu", "Return to menu", (layout.getWidth()/2)-(this.button_width/2), layout.getSystemLevel() + 50, this.button_width, this.button_height);
+		this.createButton("mainMenu", "Return to menu", (layout.getWidth()/2)-(this.button_width/2), layout.getSystemLevel() + 50, this.button_width, this.button_height);
 		
-		var level3 = new Button("level3", "Reached Level 3", (layout.getWidth()/100)*35-(this.button_width), (layout.getHeight()/3), this.button_width, this.button_height );
-		var level5 = new Button("level5", "Reached Level 5", (layout.getWidth()/2)-(this.button_width/2), (layout.getHeight()/3), this.button_width, this.button_height);
-		var level10 = new Button("level10", "Reached Level 10", (layout.getWidth()/100)*65, (layout.getHeight()/3), this.button_width, this.button_height );
+		this.createButton("level3", "Reached Level 3", (layout.getWidth()/100)*35-(this.button_width), (layout.getHeight()/3), this.button_width, this.button_height );
+		this.createButton("level5", "Reached Level 5", (layout.getWidth()/2)-(this.button_width/2), (layout.getHeight()/3), this.button_width, this.button_height);
+		this.createButton("level10", "Reached Level 10", (layout.getWidth()/100)*65, (layout.getHeight()/3), this.button_width, this.button_height );
 		
-		var earlyDeath = new Button("earlyDeath", "Die within 5 seconds", (layout.getWidth()/100)*35-(this.button_width), (layout.getHeight()/3)+(this.button_height+10), this.button_width, this.button_height );
-		var bigEarner = new Button("bigEarner", "Earn over 200XP", (layout.getWidth()/2)-(this.button_width/2), (layout.getHeight()/3)+(this.button_height+10), this.button_width, this.button_height);
-		var fishKiller = new Button("fishKiller", "Kill 10 fish in one level", (layout.getWidth()/100)*65, (layout.getHeight()/3)+(this.button_height+10), this.button_width, this.button_height );
+		this.createButton("earlyDeath", "Die within 5 seconds", (layout.getWidth()/100)*35-(this.button_width), (layout.getHeight()/3)+(this.button_height+10), this.button_width, this.button_height );
+		this.createButton("bigEarner", "Earn over 200XP", (layout.getWidth()/2)-(this.button_width/2), (layout.getHeight()/3)+(this.button_height+10), this.button_width, this.button_height);
+		this.createButton("fishKiller", "Kill 10 fish in one level", (layout.getWidth()/100)*65, (layout.getHeight()/3)+(this.button_height+10), this.button_width, this.button_height );
 		
-		var allGrowth = new Button("allGrowth", "Purchased all growth upgrades", (layout.getWidth()/100)*35-(this.button_width), (layout.getHeight()/3)+(this.button_height*2)+20, this.button_width, this.button_height );	
-		var allPoison = new Button("allPoison", "Purchased all poison upgrades", (layout.getWidth()/2)-(this.button_width/2), (layout.getHeight()/3)+(this.button_height*2)+20, this.button_width, this.button_height );
-		var allUpgrades = new Button("allUpgrades", "Purchased all upgrades", (layout.getWidth()/100)*65, (layout.getHeight()/3)+(this.button_height*2)+20, this.button_width, this.button_height );
+		this.createButton("allGrowth", "Purchased all growth upgrades", (layout.getWidth()/100)*35-(this.button_width), (layout.getHeight()/3)+(this.button_height*2)+20, this.button_width, this.button_height );	
+		this.createButton("allPoison", "Purchased all poison upgrades", (layout.getWidth()/2)-(this.button_width/2), (layout.getHeight()/3)+(this.button_height*2)+20, this.button_width, this.button_height );
+		this.createButton("allUpgrades", "Purchased all upgrades", (layout.getWidth()/100)*65, (layout.getHeight()/3)+(this.button_height*2)+20, this.button_width, this.button_height );
 		
-		var clear = new Button("clear", "Reset all achievements", (layout.getWidth()/100)*65, layout.getSystemLevel() + 50, 250, 50);
-		
-		this.buttons.push(mainMenu);
-		this.buttons.push(level3);
-		this.buttons.push(level5);
-		this.buttons.push(level10);
-		this.buttons.push(earlyDeath);
-		this.buttons.push(bigEarner);
-		this.buttons.push(fishKiller);
-		this.buttons.push(allGrowth);
-		this.buttons.push(allPoison);
-		this.buttons.push(allUpgrades);
-		this.buttons.push(clear);
+		this.createButton("clear", "Reset all achievements", (layout.getWidth()/100)*65, layout.getSystemLevel() + 50, 250, 50);
 		
 		// used for rewarding user
 		this.message;
@@ -44,7 +32,7 @@ define(['module/model/ClassExtender', 'module/view/Menu', 'module/controller/Gam
 		* @override
 		* @method drawExtra
 		*/
-		AchievementsMenu.prototype.drawExtra = function() {
+		this.drawExtra = function() {
 			// set size of icons
 			var iconSize = 50;
 			for(var i = 0; i < this.buttons.length; i++) {
@@ -101,7 +89,7 @@ define(['module/model/ClassExtender', 'module/view/Menu', 'module/controller/Gam
 		* @param {Number} mouseX	The mouse's X co-ordinate
 		* @param {Number} mouseY	The mouse's Y co-ordinate
 		*/
-		AchievementsMenu.prototype.mouseClicked = function(mouseX,mouseY) {
+		this.mouseClicked = function(mouseX,mouseY) {
 			for(var i = 0; i < this.buttons.length; i++) {
 				if(this.buttons[i].isSelected()) {
 					if(this.buttons[i].getKey() == "mainMenu") {
@@ -125,7 +113,7 @@ define(['module/model/ClassExtender', 'module/view/Menu', 'module/controller/Gam
 		* @param {String} achievementName	Name of the achievement
 		* @return {Achievement} 			Instantiated achievement object.
 		*/
-		AchievementsMenu.prototype.getAchievementInstance = function(achievementName) {
+		this.getAchievementInstance = function(achievementName) {
 			for(var i = 0; i < achievements.length; i++) {
 				if(achievements[i].getTitle() == achievementName) {
 					return achievements[i];
@@ -141,7 +129,7 @@ define(['module/model/ClassExtender', 'module/view/Menu', 'module/controller/Gam
 		* @method rewardUser
 		* @param {Achievement} achievementInstance	Achievement object selected
 		*/
-		AchievementsMenu.prototype.rewardUser = function(achievementInstance) {
+		this.rewardUser = function(achievementInstance) {
 			if(achievementInstance.isAchieved()) {
 				// user has achieved the achievement
 				switch(achievementInstance.getTitle()) {
