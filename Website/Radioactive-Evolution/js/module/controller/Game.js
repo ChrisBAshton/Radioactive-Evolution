@@ -1,25 +1,48 @@
-define(['module/controller/pubsub', 'module/controller/Achievements', 'module/view/Painter'], function (pubsub, achievements, Painter) {
+define(['module/controller/pubsub', 'module/controller/Achievements', 'module/view/Painter', 'module/model/Countdown', 'module/model/Level'], function (pubsub, achievements, Painter, countdown, level) {
 
 	var Game = function () {
 
 		var self = this,
-			fish = new Array();
+			fish = new Array(),
+			loop;
 
-		pubsub.addListener('regame:game:start', function () {
-			self.start();
-		});
-		pubsub.addListener('regame:game:stop', function () {
-			self.stop();
-		});
-		pubsub.addListener('regame:game:pause', function () {
-			self.pause();
-		});
-		pubsub.addListener('regame:game:resume', function () {
-			self.resume();
-		});
-		pubsub.addListener('regame:game:reset', function () {
-			self.reset();
-		});
+		this.init = function () {
+			_listen();
+			this.reset();
+		};
+
+		var _listen = function () {
+			pubsub.addListener('regame:game:reset', function () {
+				self.reset();
+			});
+			pubsub.addListener('regame:game:start', function () {
+				self.start();
+			});
+			pubsub.addListener('regame:game:stop', function () {
+				self.stop();
+			});
+			pubsub.addListener('regame:game:pause', function () {
+				self.pause();
+			});
+			pubsub.addListener('regame:game:resume', function () {
+				self.resume();
+			});
+		};
+
+		/**
+		* Called before stop_game(). Resets all of the vital game variables, including
+		* level, XP earned, etc.
+		*
+		* @method reset_game
+		*/
+		this.reset = function () {
+			// reset level variables
+			notification = "";
+			xp = 0;
+			final_score = 0;
+			fish_killed = 0;
+			//level = 1;
+		}
 
 		/**
 		* Starts the game, not necessarily from scratch. This method is called both from the main
@@ -31,20 +54,20 @@ define(['module/controller/pubsub', 'module/controller/Achievements', 'module/vi
 		this.start = function () {
 			// check achievements have been achieved
 			achievements.check();
-			// nullify the menu
-			menu = null;
 			// hide the cursor
 			Painter.changeCursor("none");
 			// start game animation
-			loop = setInterval(function(){animate()}, countdown.getFrameInterval());
+			loop = setInterval(function(){level.animate()}, countdown.getFrameInterval());
+			
 			// generate fish and plankton
-			populate();
+			level.populate();
 			// reset countdown timer
 			countdown.reset();
+
 			// start background noise
-			sound_bg.play();
+			//sound_bg.play();
 			// draw the first game frame
-			painter.redraw();
+			Painter.redraw();
 		}
 
 		/**
@@ -91,7 +114,7 @@ define(['module/controller/pubsub', 'module/controller/Achievements', 'module/vi
 		*/
 		this.resume = function() {
 			// resume animation
-			loop = setInterval(function(){animate()}, countdown.getFrameInterval());
+			loop = setInterval(function(){level.animate()}, countdown.getFrameInterval());
 			// remove menu
 			menu = null;
 			// hide cursor
@@ -99,22 +122,6 @@ define(['module/controller/pubsub', 'module/controller/Achievements', 'module/vi
 			// paint game
 			painter.redraw();
 		}
-
-		/**
-		* Called before stop_game(). Resets all of the vital game variables, including
-		* level, XP earned, etc.
-		*
-		* @method reset_game
-		*/
-		this.reset = function () {
-			// reset level variables
-			notification = "";
-			xp = 0;
-			final_score = 0;
-			fish_killed = 0;
-			level = 1;
-		}
-
 
 	};
 

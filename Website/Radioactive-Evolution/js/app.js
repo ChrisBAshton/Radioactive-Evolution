@@ -21,7 +21,7 @@ define(['module/controller/Achievements', 'module/controller/Game', 'module/cont
 			// load achievements from HTML5 local storage, if any
 			achievements.load();
 			// set game variables
-			game.reset();
+			game.init();
 			// load menu
 			menu.init();
 		};

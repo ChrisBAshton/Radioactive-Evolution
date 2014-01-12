@@ -1,4 +1,4 @@
-define(['module/model/Layout', 'module/model/Assets'], function (layout, assets) {
+define(['module/model/Layout', 'module/model/Assets', 'module/model/Level', 'module/model/LevelConfig'], function (layout, assets, level, LevelConfig) {
 
     /**
     * An abstract class that paints the game environment to the canvas, including the
@@ -45,20 +45,20 @@ define(['module/model/Layout', 'module/model/Assets'], function (layout, assets)
             this.draw_background();
             
             // draw plankton
-            for(var i=0; i < number_of_plankton; i++) {
-                plankton[i].draw();
+            for(var i=0; i < LevelConfig.number_of_plankton; i++) {
+                level.plankton[i].draw();
             }
             
             // draw poison
-            for(var i=0; i < number_of_poison; i++) {
-                if(poison[i] != null) {
-                    poison[i].draw();
+            for(var i=0; i < LevelConfig.number_of_poison; i++) {
+                if(level.poison[i] != null) {
+                    level.poison[i].draw();
                 }
             }
             
             // draw fish
-            for(var i=0; i < number_of_fish; i++) {
-                fish[i].draw();
+            for(var i=0; i < LevelConfig.number_of_fish; i++) {
+                level.fish[i].draw();
             }
             
             // draw user
@@ -111,7 +111,7 @@ define(['module/model/Layout', 'module/model/Assets'], function (layout, assets)
             context.fillStyle = "#FFFFFF";
             context.font = "24px Jura";
             context.textAlign = 'left';
-            context.fillText("Level "+level, 10, 30);
+            //context.fillText("Level "+level, 10, 30);
             
             context.textAlign = 'center';
             // if(!menu.isInView()) {
