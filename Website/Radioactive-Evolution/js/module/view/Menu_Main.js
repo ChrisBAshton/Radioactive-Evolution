@@ -1,4 +1,4 @@
-define(['module/controller/pubsub', 'module/model/ClassExtender', 'module/view/Menu', 'module/controller/Game'], function (pubsub, Extender, Menu, game) {
+define(['module/controller/pubsub', 'module/model/ClassExtender', 'module/view/Menu', 'module/controller/Game', 'module/model/layout'], function (pubsub, Extender, Menu, game, layout) {
 
 	var MainMenu = function () {
 
@@ -23,7 +23,7 @@ define(['module/controller/pubsub', 'module/model/ClassExtender', 'module/view/M
 				if(this.buttons[i].isSelected()) {
 					switch(this.buttons[i].getKey()) {
 						case "play":
-							game.start();
+							pubsub.emitEvent('regame:game:start');
 							break;
 						case "help":
 							pubsub.emitEvent('regame:menu:new', ['help']);

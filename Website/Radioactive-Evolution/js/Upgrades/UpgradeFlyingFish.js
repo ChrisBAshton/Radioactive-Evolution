@@ -1,3 +1,5 @@
+define(['Upgrades/Upgrade'], function (Upgrade) {
+
 /**
 * With the flying fish ability, the user can move their fish above the surface level of the water,
 * avoiding the powerless predators below the water!
@@ -31,3 +33,8 @@ UpgradeFlyingFish.prototype.updateCost = function() {
 			this.description = "Leap above the surface of the water to avoid your predators!";
 	}
 }
+
+
+	return new UpgradeFlyingFish();
+
+});

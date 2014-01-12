@@ -1,3 +1,5 @@
+define(['Upgrades/Upgrade'], function (Upgrade) {
+
 /**
 * Investing in murky water increases the level of plankton in the water, making it quicker and easier 
 * for the user to gain XP.
@@ -77,3 +79,5 @@ UpgradeMurkyWater.prototype.specificUpgrades = function() {
 			break;
 	}
 }
+
+});

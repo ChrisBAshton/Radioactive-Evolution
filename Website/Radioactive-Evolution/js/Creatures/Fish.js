@@ -1,3 +1,6 @@
+define(['module/model/Layout'], function (layout) {
+
+
 /**
 * Defines a fish.
 *
@@ -5,7 +8,7 @@
 * @extends Creature
 * @constructor
 */
-function Fish() {
+var Fish = function () {
 	// call the parent constructor
 	Creature.call(this);
 	// set properties
@@ -186,3 +189,7 @@ Fish.prototype.move = function() {
 		}
 	}
 }
+
+	return Fish;
+
+});

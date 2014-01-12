@@ -1,3 +1,5 @@
+define([], function () {
+
 /**
 * A creature is a "living" thing that exists within a player's level.
 * 
@@ -6,7 +8,7 @@
 * @class Creature
 * @constructor
 */
-function Creature() {
+var Creature = function () {
 	this.x = 0;
 	this.y = 0;
 	this.width = 0;
@@ -125,3 +127,7 @@ function drawEllipse(x, y, w, h) {
 	context.closePath();
 	context.stroke();
 }
+
+return Creature;
+
+});

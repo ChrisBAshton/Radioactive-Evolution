@@ -1,3 +1,5 @@
+define(['Upgrades/Upgrade'], function (Upgrade) {
+
 /**
 * Growing, as the name suggests, increases the player's fish size. As the player can eat any fish
 * they're bigger than, this upgrade is obviously useful for survival.
@@ -6,7 +8,7 @@
 * @extends Upgrade
 * @constructor
 */
-function UpgradeGrow() {
+var UpgradeGrow = function () {
 	// call the parent constructor
 	Upgrade.call(this);
 	// initialise variables
@@ -70,3 +72,7 @@ UpgradeGrow.prototype.specificUpgrades = function() {
 	height = Math.floor(width/2);
 	user.setSize(width, height);
 }
+
+	return new UpgradeGrow();
+
+});

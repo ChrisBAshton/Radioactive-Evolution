@@ -1,4 +1,4 @@
-define(['module/controller/pubsub'], function (pubsub) {
+define(['module/controller/pubsub', 'Creatures/User', 'module/controller/MenuInstance'], function (pubsub, user, menuInstance) {
 	/**
 	* A class defining what actions to take when the user moves or clicks the mouse.
 	*
@@ -19,13 +19,13 @@ define(['module/controller/pubsub'], function (pubsub) {
 			mouseX = Math.floor((e.clientX-bounding_box.left) * (canvas.width/bounding_box.width));
 			mouseY = Math.floor((e.clientY-bounding_box.top) * (canvas.height/bounding_box.height));	
 			
-			if(!menu) {
+			if(menuInstance.exists()) {
+				// invoke menu's mouseMoved() method, if any
+				menuInstance.menu().mouseMoved(mouseX,mouseY);
+				menuInstance.menu().draw();
+			} else {
 				// update user's position
 				user.move(mouseX, mouseY);
-			} else {
-				// invoke menu's mouseMoved() method, if any
-				menu.mouseMoved(mouseX,mouseY);
-				menu.draw();
 			}
 
 			pubsub.emitEvent('regame:mouse:moved', [mouseX, mouseY]);
@@ -45,7 +45,17 @@ define(['module/controller/pubsub'], function (pubsub) {
 			mouseY = Math.floor((e.clientY-bounding_box.top) * (canvas.height/bounding_box.height));	
 			
 			// if user is playing the game
-			if(!menu) {
+			if(menuInstance.exists()) {
+				// call menu mouseClicked() function
+				menuInstance.menu().mouseClicked(mouseX,mouseY);
+				// mouse click could have started the game, thereby setting menu to null. Check `menu` exists before calling its method.
+				if(menuInstance.exists()) {
+					menuInstance.menu().draw();
+				} else {
+					// menu has been nullified and game has started- set the user position to mouse coordinates
+					user.move(mouseX,mouseY);
+				}
+			} else {
 				// look for an "unused" poison object
 				for(i=0; i < number_of_poison; i++) {
 					if(poison[i] == null) {
@@ -53,16 +63,6 @@ define(['module/controller/pubsub'], function (pubsub) {
 						poison[i] = new Poison(mouseX,mouseY);
 						break;
 					}
-				}
-			} else {
-				// call menu mouseClicked() function
-				menu.mouseClicked(mouseX,mouseY);
-				// mouse click could have started the game, thereby setting menu to null. Check `menu` exists before calling its method.
-				if(!menu) {
-					// menu has been nullified and game has started- set the user position to mouse coordinates
-					user.move(mouseX,mouseY);
-				} else {
-					menu.draw();
 				}
 			}
 

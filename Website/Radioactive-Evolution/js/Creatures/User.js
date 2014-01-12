@@ -1,3 +1,6 @@
+define(['Creatures/Creature', 'module/model/ClassExtender', 'module/controller/pubsub', 'module/model/Layout', 'Upgrades/UpgradeCamouflage', 'Upgrades/UpgradeFlyingFish'], function (Creature, Extender, pubsub, layout, upgrade_camouflage, upgrade_flying) {
+
+
 /**
 * Defines a User.
 *
@@ -5,17 +8,21 @@
 * @extends Creature
 * @constructor
 */
-function User() {
-	// call the parent constructor
-	Creature.call(this);
+var User = function () {
+
+	var self = this;
+
+    Extender.extend(Creature, this);
+
 	// set up for keyboard control
 	this.keyboardMovement = "NO_KEY_DOWN";
 	// set properties
 	this.reset();
-}
 
-// inherit from Creature
-User.prototype = Object.create(Creature.prototype);
+	pubsub.addListener('regame:game:reset', function () {
+		self.reset();
+	});
+}
 
 /**
 * Resets all of the user's variables
@@ -29,11 +36,12 @@ User.prototype.reset = function() {
 	this.color = "red";
 	this.currentlyCamouflaged = false;
 	// set evolutionary upgrades
-	upgrade_camouflage = new UpgradeCamouflage();
-	upgrade_flying = new UpgradeFlyingFish();
-	upgrade_grow = new UpgradeGrow();
-	upgrade_murkyWater = new UpgradeMurkyWater();
-	upgrade_poison = new UpgradePoison();
+	// TODO - Chris Ashton 2014
+	// upgrade_camouflage = new UpgradeCamouflage();
+	// upgrade_flying = new UpgradeFlyingFish();
+	// upgrade_grow = new UpgradeGrow();
+	// upgrade_murkyWater = new UpgradeMurkyWater();
+	// upgrade_poison = new UpgradePoison();
 }
 
 /**
@@ -214,3 +222,7 @@ User.prototype.keyboardMove = function() {
 User.prototype.keyboardPause = function() {
 	this.keyboardMovement = "NO_KEY_DOWN";
 }
+
+	return new User();
+
+});

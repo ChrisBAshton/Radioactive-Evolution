@@ -1,7 +1,9 @@
-define(['module/controller/pubsub', 'module/model/ClassExtender', 'module/view/Menu', 'module/controller/Game', 'module/controller/Achievements'], function (pubsub, Extender, Menu, game, Achievements) {
+define(['module/controller/pubsub', 'module/model/ClassExtender', 'module/view/Menu', 'module/controller/Game', 'module/controller/Achievements', 'module/model/Layout', 'module/model/Assets'], function (pubsub, Extender, Menu, game, Achievements, layout, assets) {
 
 	var AchievementsMenu = function () {
 		
+		var self = this;
+
 		Extender.extend(Menu, this);
 
 		// add custom buttons	
@@ -33,29 +35,28 @@ define(['module/controller/pubsub', 'module/model/ClassExtender', 'module/view/M
 		*/
 		this.drawExtra = function() {
 			// set size of icons
-			var iconSize = 50;
+			var iconSize = 50,
+				achievement,
+				icon;
+
 			for(var i = 0; i < this.buttons.length; i++) {
-				var achievement = Achievements.getAchievementInstance(this.buttons[i].getKey());
+				achievement = Achievements.getAchievementInstance(this.buttons[i].getKey());
 				if(achievement !== null) {
 					if(achievement.isAchieved()) {
-						context.drawImage(
-							img_tick, 
-							(this.buttons[i].getX()+this.buttons[i].getWidth())-iconSize, 
-							(this.buttons[i].getY()+this.buttons[i].getHeight())-iconSize,
-							iconSize,
-							iconSize
-						);
+						icon = assets.img_tick;
 					} else {
-						context.drawImage(
-							img_cross, 
-							(this.buttons[i].getX()+this.buttons[i].getWidth())-iconSize, 
-							(this.buttons[i].getY()+this.buttons[i].getHeight())-iconSize,
-							iconSize,
-							iconSize
-						);
+						icon = assets.img_cross;
 					}
+					context.drawImage(
+						icon, 
+						(this.buttons[i].getX()+this.buttons[i].getWidth())-iconSize, 
+						(this.buttons[i].getY()+this.buttons[i].getHeight())-iconSize,
+						iconSize,
+						iconSize
+					);
 				}
 			}
+
 			if(this.message) {
 				// draw box
 				context.fillStyle = "black";

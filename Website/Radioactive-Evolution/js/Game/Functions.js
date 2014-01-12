@@ -1,89 +1,7 @@
+define(['Creatures/Fish', 'Creatures/User'], function (Fish, user) {
 
 
-/**
-* Changes the cursor to the specified type.
-*
-* @method changeCursor
-* @param {String} cursor	The cursor to change to.
-*/
-function changeCursor(cursor) {
-	switch(cursor) {
-		case "none":
-			// hide cursor (e.g. during gameplay)
-			document.getElementById(CANVAS_NAME).style.cursor = "none";
-			//document.getElementById(CANVAS_NAME).style.cursor = 'url("Radioactive-Evolution/images/blank.cur"), none';
-			break;
-		case "default":
-			// show the cursor so that user can find their way around menu
-			document.getElementById(CANVAS_NAME).style.cursor = "default";
-			break;
-			// turn cursor into hand to show that something is clickable
-		case "pointer":
-			document.getElementById(CANVAS_NAME).style.cursor = "pointer";
-			break;
-		default:
-			document.getElementById(CANVAS_NAME).style.cursor = "auto";
-	}
-}
 
-/**
-* Move all creatures and paint results to canvas.
-* If countdown reaches zero, trigger LevelMenu.
-*
-* @method animate
-*/
-function animate() {
-	// move user if appropriate keyboard key is down
-	user.keyboardMove();
-	
-	// move plankton
-	for(var i=0; i < number_of_plankton; i++) {
-		plankton[i].move();
-		plankton[i].glow();
-	}
-	// move poison
-	for(var i=0; i < number_of_poison; i++) {
-		if(poison[i] !== null) {
-			poison[i].move();
-		}
-	}
-	// move fish
-	for(var i=0; i < number_of_fish; i++) {
-		fish[i].move();
-	}
-	countdown.nextFrame();
-	if(countdown.secondsLeft() <= 0) {
-		// user survived the level and now has the opportunity to purchase upgrades
-		menu = new LevelMenu();
-		stop_game();
-	}
-	// calculate collisions etc
-	calculate();
-	painter.redraw();
-}
-
-/**
-* Generate all of the creatures for the level.
-*
-* @method populate
-*/
-function populate() {
-	if(level === 1) {
-		number_of_fish = 3;
-	} else {
-		number_of_fish++;
-	}
-	// reset creatures between levels
-	for(var i=0; i < number_of_plankton; i++) {
-		plankton[i] = new Plankton();
-	}
-	for(var i=0; i < number_of_fish; i++) {
-		fish[i] = new Fish();
-	}
-	for(var i=0; i < number_of_poison; i++) {
-		poison[i] = null;
-	}
-}
 
 /**
 * Check for collisions and process the impact of any such collisions,
@@ -180,3 +98,6 @@ function collision(obj1, obj2) {
 	
 	return (Xoverlap && Yoverlap);
 }
+
+	
+});

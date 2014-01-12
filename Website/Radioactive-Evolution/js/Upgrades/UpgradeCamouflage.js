@@ -1,3 +1,6 @@
+define(['Upgrades/Upgrade'], function (Upgrade) {
+
+
 /**
 * With the camouflage ability, the user will blend into the sand should they move close enough
 * to the sand level.
@@ -6,7 +9,7 @@
 * @extends Upgrade
 * @constructor
 */
-function UpgradeCamouflage() {
+var UpgradeCamouflage = function () {
 	// call the parent constructor
 	Upgrade.call(this);
 	// initialise variables
@@ -31,3 +34,7 @@ UpgradeCamouflage.prototype.updateCost = function() {
 			this.description = "Blend into the sand to evade your enemy!";
 	}
 }
+
+	return new UpgradeCamouflage();
+
+});

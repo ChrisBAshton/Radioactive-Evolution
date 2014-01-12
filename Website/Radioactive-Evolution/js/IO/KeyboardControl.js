@@ -11,6 +11,9 @@ if (typeof Mousetrap !== 'undefined') {
 
 	// help screen
 	Mousetrap.bind('space', function() {
+		
+		pubsub.emitEvent('regame:menu:new', ['help']);
+		
 		if(!menu) {
 			pause_game();
 		} else if(notification == "Game Paused") {

@@ -1,4 +1,4 @@
-define([], function () {
+define(['Achievements/Level3', 'Achievements/Level5', 'Achievements/Level10', 'Achievements/AllGrowth', 'Achievements/AllPoison', 'Achievements/AllUpgrades', 'Achievements/BigEarner', 'Achievements/EarlyDeath', 'Achievements/FishKiller'], function (Level3, Level5, Level10, AllGrowth, AllPoison, AllUpgrades, BigEarner, EarlyDeath, FishKiller) {
 
 	var Achievements = function () {
 

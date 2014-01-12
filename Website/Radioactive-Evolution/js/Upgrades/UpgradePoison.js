@@ -1,3 +1,5 @@
+define(['Upgrades/Upgrade'], function (Upgrade) {
+
 /**
 * Purchasing the poison ability allows the user to left-click on the canvas to leave behind 
 * toxins of poison. If other fish swim into this poison, they immediately die, turn blue and 
@@ -78,3 +80,5 @@ UpgradePoison.prototype.specificUpgrades = function() {
 			break;
 	}
 }
+
+});

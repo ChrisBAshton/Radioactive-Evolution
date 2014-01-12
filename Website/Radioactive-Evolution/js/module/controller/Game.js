@@ -1,6 +1,25 @@
-define(['module/controller/Achievements'], function (achievements) {
+define(['module/controller/pubsub', 'module/controller/Achievements', 'module/view/Painter'], function (pubsub, achievements, Painter) {
 
 	var Game = function () {
+
+		var self = this,
+			fish = new Array();
+
+		pubsub.addListener('regame:game:start', function () {
+			self.start();
+		});
+		pubsub.addListener('regame:game:stop', function () {
+			self.stop();
+		});
+		pubsub.addListener('regame:game:pause', function () {
+			self.pause();
+		});
+		pubsub.addListener('regame:game:resume', function () {
+			self.resume();
+		});
+		pubsub.addListener('regame:game:reset', function () {
+			self.reset();
+		});
 
 		/**
 		* Starts the game, not necessarily from scratch. This method is called both from the main
@@ -15,7 +34,7 @@ define(['module/controller/Achievements'], function (achievements) {
 			// nullify the menu
 			menu = null;
 			// hide the cursor
-			changeCursor("none");
+			Painter.changeCursor("none");
 			// start game animation
 			loop = setInterval(function(){animate()}, countdown.getFrameInterval());
 			// generate fish and plankton
@@ -44,7 +63,7 @@ define(['module/controller/Achievements'], function (achievements) {
 			// check for any new achievements gained
 			checkAchievements();
 			// give the user their cursor back!
-			changeCursor("default");
+			Painter.changeCursor("default");
 			// draw the menu
 			// glitch - for some obscure reason, calling menu.draw() directly doesn't work 
 			// in this instance, so we get the setTimeout function to call it
@@ -76,7 +95,7 @@ define(['module/controller/Achievements'], function (achievements) {
 			// remove menu
 			menu = null;
 			// hide cursor
-			changeCursor("none");
+			Painter.changeCursor("none");
 			// paint game
 			painter.redraw();
 		}
@@ -94,13 +113,9 @@ define(['module/controller/Achievements'], function (achievements) {
 			final_score = 0;
 			fish_killed = 0;
 			level = 1;
-			user.reset();
-			// reset upgrades
-			var upgrades = new Array(upgrade_camouflage, upgrade_flying, upgrade_grow, upgrade_murkyWater, upgrade_poison);
-			for(var i = 0; i < upgrades.length; i++) {
-				upgrades[i].reset();
-			}
 		}
+
+
 	};
 
 	return new Game();

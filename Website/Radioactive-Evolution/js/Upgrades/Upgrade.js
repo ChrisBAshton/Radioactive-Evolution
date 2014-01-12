@@ -1,3 +1,6 @@
+define(['module/controller/pubsub'], function (pubsub) {
+
+
 /**
 * An upgrade is an ability or property that the user is able to purchase, using XP, to improve their
 * gaming experience and help them to meet the demands of the challenging later levels.
@@ -7,12 +10,20 @@
 * @class Upgrade
 * @constructor
 */
-function Upgrade() {
+var Upgrade = function () {
+
+	var self = this;
+
 	this.maxLevel = 0;
 	this.currentLevel = 0;
 	this.cost = 0;
 	this.title = "";
 	this.description = "";
+
+	pubsub.addListener('regame:game:reset', function () {
+		self.reset();
+	});
+
 }
 
 /**
@@ -136,3 +147,7 @@ Upgrade.prototype.updateCost = function() {
 Upgrade.prototype.specificUpgrades = function() {
 
 }
+
+return Upgrade;
+
+});

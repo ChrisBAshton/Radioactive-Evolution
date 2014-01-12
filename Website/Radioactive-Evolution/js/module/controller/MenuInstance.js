@@ -14,6 +14,9 @@ define(['module/controller/pubsub', 'module/view/Menu_Main', 'module/view/Menu_L
 			pubsub.addListener('regame:menu:new', function (menu) {
 				self.set(menu);
 			});
+			pubsub.addListener('regame:game:start', function () {
+				instance = null;
+			});
 		}
 
 		this.set = function (menu) {
@@ -38,8 +41,12 @@ define(['module/controller/pubsub', 'module/view/Menu_Main', 'module/view/Menu_L
 			instance.draw();
 		};
 
-		this.get = function () {
+		this.menu = function () {
 			return instance;
+		}
+
+		this.exists = function () {
+			return instance !== null;
 		}
 
 	};

@@ -1,4 +1,4 @@
-define(['module/controller/pubsub', 'module/view/Button'], function (pubsub, Button) {
+define(['module/controller/pubsub', 'module/view/Button', 'module/view/Painter'], function (pubsub, Button, painter) {
 
 	/**
 	* A menu is practically any screen outside of the core gameplay. It is often made up of buttons which can 
@@ -34,7 +34,7 @@ define(['module/controller/pubsub', 'module/view/Button'], function (pubsub, But
 			painter.draw_summary();
 			
 			// default cursor by default, turn to pointer if over a button
-			changeCursor("default");
+			painter.changeCursor("default");
 
 			// length stored as variable gives better performance (http://stackoverflow.com/a/10167931)
 			var length = this.buttons.length;
@@ -55,7 +55,7 @@ define(['module/controller/pubsub', 'module/view/Button'], function (pubsub, But
 					if(selected) {
 						// hovering over button, so highlight it with a different border color
 						context.strokeStyle = 'yellow';
-						changeCursor("pointer");
+						painter.changeCursor("pointer");
 					} else {
 						context.strokeStyle = '#FFFFFF';
 					}

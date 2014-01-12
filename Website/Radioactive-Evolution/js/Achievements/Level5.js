@@ -1,3 +1,5 @@
+define(['module/controller/pubsub', 'module/model/ClassExtender', 'Achievements/Achievement'], function (pubsub, Extender, Achievement) {
+
 /**
 * An achievement gained by reaching level 5.
 *
@@ -5,14 +7,11 @@
 * @extends Achievement
 * @constructor
 */
-function Level5 () {
-	// call the parent constructor
-	Achievement.call(this);
+var Level5 = function () {
+    var self = this;
+    Extender.extend(Achievement, this);
 	this.title="level5";
 }
-
-// inherit from Achievement
-Level5.prototype = Object.create(Achievement.prototype);
 
 /**
 * Check if the achievement has been achieved.
@@ -26,3 +25,7 @@ Level5.prototype.checkAchieved = function() {
 		this.saveAchieved(true);
 	}
 }
+
+return Level5;
+
+});
