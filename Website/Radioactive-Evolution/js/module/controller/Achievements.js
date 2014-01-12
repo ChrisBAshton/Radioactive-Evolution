@@ -2,7 +2,8 @@ define([], function () {
 
 	var Achievements = function () {
 
-		var achievements;
+		var self = this,
+			achievements;
 
 		/**
 		* Checks local storage for previously achieved achievements.
@@ -69,6 +70,27 @@ define([], function () {
 					achievements[i].checkAchieved();
 				}
 			}
+		}
+
+		/**
+		* Get instance of the achievement, given its name.
+		*
+		* @method getAchievementInstance
+		* @param {String} achievementName	Name of the achievement
+		* @return {Achievement|Null} 		Instantiated achievement object.
+		*/
+		this.getAchievementInstance = function(achievementName) {
+			for(var i = 0; i < achievements.length; i++) {
+				if(achievements[i].getTitle() == achievementName) {
+					return achievements[i];
+				}
+			}
+			return null
+		}
+
+		this.reset = function () {
+			localStorage.clear();
+			self.load();
 		}
 	}
 

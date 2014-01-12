@@ -1,4 +1,4 @@
-define(['module/model/ClassExtender', 'module/view/Menu', 'module/controller/Game', 'module/controller/MenuInstance'], function (Extender, Menu, game, menu) {
+define(['module/controller/pubsub', 'module/model/ClassExtender', 'module/view/Menu', 'module/controller/Game', 'module/controller/Achievements'], function (pubsub, Extender, Menu, game, Achievements) {
 
 	var AchievementsMenu = function () {
 		
@@ -24,7 +24,6 @@ define(['module/model/ClassExtender', 'module/view/Menu', 'module/controller/Gam
 		// used for rewarding user
 		this.message;
 
-
 		/**
 		* Print icons over each achievement button, showing the user at a
 		* glance whether or not they've achieved that achievement yet.
@@ -36,12 +35,7 @@ define(['module/model/ClassExtender', 'module/view/Menu', 'module/controller/Gam
 			// set size of icons
 			var iconSize = 50;
 			for(var i = 0; i < this.buttons.length; i++) {
-				var achievement = null;
-				for(var j = 0; j < achievements.length; j++) {
-					if(achievements[j].getTitle() == this.buttons[i].getKey()) {
-						achievement = achievements[j];
-					}
-				}
+				var achievement = Achievements.getAchievementInstance(this.buttons[i].getKey());
 				if(achievement !== null) {
 					if(achievement.isAchieved()) {
 						context.drawImage(
@@ -93,30 +87,13 @@ define(['module/model/ClassExtender', 'module/view/Menu', 'module/controller/Gam
 			for(var i = 0; i < this.buttons.length; i++) {
 				if(this.buttons[i].isSelected()) {
 					if(this.buttons[i].getKey() == "mainMenu") {
-						menu = new MainMenu();
+						pubsub.emitEvent('regame:menu:new', ['main']);
 					} else if(this.buttons[i].getKey() == "clear") {
-						// clear all achievements
-						localStorage.clear();
-						// initialise all achievements to false
-						loadAchievements();
+						Achievements.reset();
+						self.draw();
 					} else {
-						this.rewardUser(this.getAchievementInstance(this.buttons[i].getKey()));
+						this.rewardUser(Achievements.getAchievementInstance(this.buttons[i].getKey()));
 					}
-				}
-			}
-		}
-
-		/**
-		* Get instance of the achievement, given its name.
-		*
-		* @method getAchievementInstance
-		* @param {String} achievementName	Name of the achievement
-		* @return {Achievement} 			Instantiated achievement object.
-		*/
-		this.getAchievementInstance = function(achievementName) {
-			for(var i = 0; i < achievements.length; i++) {
-				if(achievements[i].getTitle() == achievementName) {
-					return achievements[i];
 				}
 			}
 		}

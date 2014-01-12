@@ -8,7 +8,6 @@ define(['module/controller/pubsub', 'module/view/Menu_Main', 'module/view/Menu_L
 		this.init = function () {
 			_listen();
 			self.set('main');
-			instance.draw();
 		};
 
 		var _listen = function () {
@@ -35,6 +34,8 @@ define(['module/controller/pubsub', 'module/view/Menu_Main', 'module/view/Menu_L
 				instance = new HelpMenu();
 				break;
 			}
+
+			instance.draw();
 		};
 
 		this.get = function () {
