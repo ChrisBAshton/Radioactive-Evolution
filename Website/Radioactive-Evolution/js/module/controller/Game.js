@@ -2,9 +2,7 @@ define(['module/controller/pubsub', 'module/controller/Achievements', 'module/vi
 
 	var Game = function () {
 
-		var self = this,
-			fish = new Array(),
-			loop;
+		var self = this;
 
 		this.init = function () {
 			_listen();
@@ -12,10 +10,14 @@ define(['module/controller/pubsub', 'module/controller/Achievements', 'module/vi
 		};
 
 		var _listen = function () {
-			pubsub.addListener('regame:game:reset', function () {
+			pubsub.addListener('regame:game:reset', function (callback) {
 				self.reset();
+				if (typeof callback === 'function') {
+					callback();
+				}
 			});
-			pubsub.addListener('regame:game:start', function () {
+			pubsub.addListener('regame:game:start', function (source) {
+				console.log('start called', source);
 				self.start();
 			});
 			pubsub.addListener('regame:game:stop', function () {
@@ -36,6 +38,9 @@ define(['module/controller/pubsub', 'module/controller/Achievements', 'module/vi
 		* @method reset_game
 		*/
 		this.reset = function () {
+
+			console.log('reset called');
+
 			// reset level variables
 			notification = "";
 			xp = 0;
@@ -52,12 +57,13 @@ define(['module/controller/pubsub', 'module/controller/Achievements', 'module/vi
 		* @method start_game
 		*/
 		this.start = function () {
+
 			// check achievements have been achieved
 			achievements.check();
 			// hide the cursor
 			Painter.changeCursor("none");
 			// start game animation
-			loop = setInterval(function(){level.animate()}, countdown.getFrameInterval());
+			startAnimating();
 			
 			// generate fish and plankton
 			level.populate();
@@ -67,7 +73,7 @@ define(['module/controller/pubsub', 'module/controller/Achievements', 'module/vi
 			// start background noise
 			//sound_bg.play();
 			// draw the first game frame
-			Painter.redraw();
+			//Painter.redraw();
 		}
 
 		/**
@@ -78,19 +84,21 @@ define(['module/controller/pubsub', 'module/controller/Achievements', 'module/vi
 		* @method stop_game
 		*/
 		this.stop = function () {
-			// stop background noise
-			sound_bg.currentTime = 0;
-			sound_bg.pause();
+			// stop background noise TODO
+			// sound_bg.currentTime = 0;
+			// sound_bg.pause();
 			// stop animation
-			clearInterval(loop);
+			stopAnimating();
 			// check for any new achievements gained
-			checkAchievements();
+			achievements.check();
 			// give the user their cursor back!
 			Painter.changeCursor("default");
 			// draw the menu
 			// glitch - for some obscure reason, calling menu.draw() directly doesn't work 
 			// in this instance, so we get the setTimeout function to call it
-			setTimeout(function(){menu.draw();}, 0);
+			// setTimeout(function(){
+			// 	menu.draw();
+			// }, 0);
 		}
 
 		/**
@@ -100,9 +108,9 @@ define(['module/controller/pubsub', 'module/controller/Achievements', 'module/vi
 		*/
 		this.pause = function () {
 			// stop animation
-			clearInterval(loop);
+			stopAnimating();
 			// create help menu
-			menu = new HelpMenu();
+			pubsub.emitEvent('regame:menu:new', ['help']);
 			// draw menu
 			menu.draw();
 		}
@@ -113,15 +121,28 @@ define(['module/controller/pubsub', 'module/controller/Achievements', 'module/vi
 		* @method resume_game()
 		*/
 		this.resume = function() {
+			
+			console.log('resume called');
+
 			// resume animation
-			loop = setInterval(function(){level.animate()}, countdown.getFrameInterval());
+			startAnimating();
 			// remove menu
 			menu = null;
 			// hide cursor
 			Painter.changeCursor("none");
 			// paint game
-			painter.redraw();
+			Painter.redraw();
 		}
+
+		var startAnimating = function () {
+			console.log('setting ' + self.loop);
+			self.loop = setInterval(function(){level.animate()}, countdown.getFrameInterval());
+		};
+
+		var stopAnimating = function () {
+			console.log('clearing ' + self.loop);
+			clearInterval(self.loop);
+		};
 
 	};
 

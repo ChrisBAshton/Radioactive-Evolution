@@ -19,11 +19,12 @@ define(['module/controller/pubsub', 'module/model/ClassExtender', 'module/view/M
 		* @param {Number} mouseY	The mouse's Y co-ordinate
 		*/
 		this.mouseClicked = function(mouseX,mouseY) {
+			console.log('clicked in Menu Main');
 			for(var i = 0; i < this.buttons.length; i++) {
 				if(this.buttons[i].isSelected()) {
 					switch(this.buttons[i].getKey()) {
 						case "play":
-							pubsub.emitEvent('regame:game:start');
+							pubsub.emitEvent('regame:game:start', [this]);
 							break;
 						case "help":
 							pubsub.emitEvent('regame:menu:new', ['help']);

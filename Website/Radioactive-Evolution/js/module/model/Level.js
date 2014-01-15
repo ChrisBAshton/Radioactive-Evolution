@@ -1,7 +1,5 @@
 define(['module/controller/pubsub', 'module/model/LevelConfig', 'Creatures/Fish', 'Creatures/Plankton', 'Creatures/User', 'module/model/Countdown'], function (pubsub, LevelConfig, Fish, Plankton, user, countdown) {
 
-    console.log(LevelConfig);
-
     /**
     * Gaming variables
     */
@@ -36,6 +34,7 @@ define(['module/controller/pubsub', 'module/model/LevelConfig', 'Creatures/Fish'
         * @method animate
         */
         this.animate = function () {
+            
             // move user if appropriate keyboard key is down
             user.keyboardMove();
             
@@ -57,12 +56,13 @@ define(['module/controller/pubsub', 'module/model/LevelConfig', 'Creatures/Fish'
             countdown.nextFrame();
             if(countdown.secondsLeft() <= 0) {
                 // user survived the level and now has the opportunity to purchase upgrades
-                menu = new LevelMenu();
-                stop_game();
+                pubsub.emitEvent('regame:game:stop');
+                pubsub.emitEvent('regame:menu:new', ['level']);
+            } else {
+                // calculate collisions etc
+                self.calculate();
+                pubsub.emitEvent('regame:paint:redraw');
             }
-            // calculate collisions etc
-            self.calculate();
-            painter.redraw();
         };
 
         /**
@@ -80,11 +80,9 @@ define(['module/controller/pubsub', 'module/model/LevelConfig', 'Creatures/Fish'
             for(var i=0; i < LevelConfig.number_of_plankton; i++) {
                 plankton[i] = new Plankton();
             }
-            console.log('DIES HERE:');
             for(var i=0; i < LevelConfig.number_of_fish; i++) {
                 fish[i] = new Fish();
             }
-            console.log('How about here?');
             for(var i=0; i < LevelConfig.number_of_poison; i++) {
                 poison[i] = null;
             }
@@ -98,7 +96,7 @@ define(['module/controller/pubsub', 'module/model/LevelConfig', 'Creatures/Fish'
         */
         this.calculate = function () {
             // check user has eaten plankton
-            for(var i=0; i < number_of_plankton; i++) {
+            for(var i=0; i < LevelConfig.number_of_plankton; i++) {
                 if(collision(user, plankton[i])) {
                     // play crunch sound. Reset time to zero so that sound plays multiple times if user hits multiple plankton in short time frame
                     sound_crunch.currentTime=0;
@@ -111,10 +109,10 @@ define(['module/controller/pubsub', 'module/model/LevelConfig', 'Creatures/Fish'
             }
             
             // check fish has wandered into poison
-            for(var i=0; i < number_of_poison; i++) {
+            for(var i=0; i < LevelConfig.number_of_poison; i++) {
                 if(poison[i] !== null) {
                     // poison has been placed by the user- check against other fish coordinates
-                    for(var j=0; j < number_of_fish; j++) {
+                    for(var j=0; j < LevelConfig.number_of_fish; j++) {
                         // check fish is alive- a dead fish can't eat poison!
                         if(fish[j].isAlive()) {
                             // if fish comes into contact with poison
@@ -131,7 +129,7 @@ define(['module/controller/pubsub', 'module/model/LevelConfig', 'Creatures/Fish'
             }
             
             // check user has touched a fish
-            for(var i=0; i < number_of_fish; i++) {
+            for(var i=0; i < LevelConfig.number_of_fish; i++) {
                 if(collision(user, fish[i])) {
                     
                     if(fish[i].isAlive()) {
@@ -145,8 +143,8 @@ define(['module/controller/pubsub', 'module/model/LevelConfig', 'Creatures/Fish'
                             fish_killed++;
                         } else {
                             // user is dead
-                            menu = new DeathMenu();
-                            stop_game();
+                            pubsub.emitEvent('regame:game:stop');
+                            pubsub.emitEvent('regame:menu:new', ['death']);
                         }
                     } else {
                         // player eats the dead fish and gets some XP (but not as much as if they'd eaten the fish directly)
@@ -167,7 +165,7 @@ define(['module/controller/pubsub', 'module/model/LevelConfig', 'Creatures/Fish'
         * @param {Creature} obj2    The second object
         * @return {Boolean}         True if the two objects have collided
         */
-        this.collision = function (obj1, obj2) {
+        var collision = function (obj1, obj2) {
             // x,y are the CENTRAL coordinates of the object
             // calculate side coordinates
             var obj1_left = obj1.getX() - (obj1.getWidth()/2);

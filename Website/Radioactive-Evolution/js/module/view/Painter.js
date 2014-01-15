@@ -1,4 +1,4 @@
-define(['module/model/Layout', 'module/model/Assets', 'module/model/Level', 'module/model/LevelConfig'], function (layout, assets, level, LevelConfig) {
+define(['module/controller/pubsub', 'module/model/Layout', 'module/model/Assets', 'module/model/Level', 'module/model/LevelConfig', 'Creatures/User'], function (pubsub, layout, assets, level, LevelConfig, user) {
 
     /**
     * An abstract class that paints the game environment to the canvas, including the
@@ -9,6 +9,12 @@ define(['module/model/Layout', 'module/model/Assets', 'module/model/Level', 'mod
     */
     var Painter = function () {
     
+        var self = this;
+
+        pubsub.addListener('regame:paint:redraw', function () {
+            self.redraw();
+        });
+
         /**
         * Changes the cursor to the specified type.
         *

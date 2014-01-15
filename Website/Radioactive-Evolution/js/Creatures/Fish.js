@@ -1,4 +1,4 @@
-define(['module/controller/pubsub', 'module/model/ClassExtender', 'Creatures/Creature', 'module/model/Layout'], function (pubsub, Extender, Creature, layout) {
+define(['module/controller/pubsub', 'module/model/ClassExtender', 'Creatures/Creature', 'module/model/Layout', 'Creatures/User'], function (pubsub, Extender, Creature, layout, user) {
 
 	/**
 	* Defines a fish.

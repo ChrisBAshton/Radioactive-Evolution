@@ -12,7 +12,7 @@ define([], function () {
 
         this.init = function () {
             // number of seconds per level
-            self.LEVEL_DURATION = 30;
+            self.LEVEL_DURATION = 10;
             // sets the number of milliseconds between frames
             self.frameInterval = 20;
             // therefore calculates the number of frames per second

@@ -32,52 +32,58 @@ define(['module/controller/pubsub', 'module/view/Button', 'module/view/Painter']
 		this.draw = function() {
 			painter.draw_background();
 			painter.draw_summary();
-			
-			// default cursor by default, turn to pointer if over a button
-			painter.changeCursor("default");
+			this.drawButtons();
+			// draw anything extra defined in subclasses
+			this.drawExtra();
+		};
 
+		this.drawButtons = function () {
 			// length stored as variable gives better performance (http://stackoverflow.com/a/10167931)
 			var length = this.buttons.length;
 			// loop through all of the buttons
 			for(var i = 0; i < length; i++) {
-				// only display the button if it is supposed to be visible
-				if(this.buttons[i].isVisible()) {
-					// selected is true if user is hovering over button, false if not
-					var selected = this.buttons[i].isSelected();
-					
-					// draw button
-					context.beginPath();
-					context.rect(this.buttons[i].getX(), this.buttons[i].getY(), this.buttons[i].getWidth(), this.buttons[i].getHeight());
-					context.fillStyle = '#333333';
-					context.fill();
-					// draw border button
-					context.lineWidth = 1;
-					if(selected) {
-						// hovering over button, so highlight it with a different border color
-						context.strokeStyle = 'yellow';
-						painter.changeCursor("pointer");
-					} else {
-						context.strokeStyle = '#FFFFFF';
-					}
-					context.closePath();
-					context.stroke();
-					
-					// paste button text
-					if(selected) {
-						context.fillStyle = "#FFFFFF";
-					} else {
-						context.fillStyle = "#737373";
-					}
-					context.font = "bold 16px Arial";
-					context.textAlign = 'center';
-					context.fillText(this.buttons[i].getText(), 
-						this.buttons[i].getX()+(this.buttons[i].getWidth()/2), 
-						this.buttons[i].getY()+(this.buttons[i].getHeight()/2)+6);
-				}
+				this.drawButton(this.buttons[i]);
 			}
-			
-			// draw anything extra defined in subclasses
-			this.drawExtra();
+		}
+
+		this.drawButton = function (button) {
+			// default cursor by default, turn to pointer if over a button
+			painter.changeCursor("default");
+
+			// only display the button if it is supposed to be visible
+			if(button.isVisible()) {
+				// selected is true if user is hovering over button, false if not
+				var selected = button.isSelected();
+				
+				// draw button
+				context.beginPath();
+				context.rect(button.getX(), button.getY(), button.getWidth(), button.getHeight());
+				context.fillStyle = '#333333';
+				context.fill();
+				// draw border button
+				context.lineWidth = 1;
+				if(selected) {
+					// hovering over button, so highlight it with a different border color
+					context.strokeStyle = 'yellow';
+					painter.changeCursor("pointer");
+				} else {
+					context.strokeStyle = '#FFFFFF';
+				}
+				context.closePath();
+				context.stroke();
+				
+				// paste button text
+				if(selected) {
+					context.fillStyle = "#FFFFFF";
+				} else {
+					context.fillStyle = "#737373";
+				}
+				context.font = "bold 16px Arial";
+				context.textAlign = 'center';
+				context.fillText(button.getText(), 
+					button.getX()+(button.getWidth()/2), 
+					button.getY()+(button.getHeight()/2)+6);
+			}
 		};
 
 		/**
@@ -169,6 +175,7 @@ define(['module/controller/pubsub', 'module/view/Button', 'module/view/Painter']
 		}
 
 		pubsub.addListener('regame:mouse:clicked', function (x, y) {
+			console.log('clicked in Menu');
 			self.mouseClicked(x, y);
 		});
 

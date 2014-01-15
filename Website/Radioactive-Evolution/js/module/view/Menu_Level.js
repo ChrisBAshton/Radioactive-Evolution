@@ -1,7 +1,14 @@
-define(['module/model/ClassExtender', 'module/view/Menu', 'module/controller/Game', 'module/controller/MenuInstance'], function (Extender, Menu, game, menu) {
+define(['module/controller/pubsub', 'module/model/ClassExtender', 'module/view/Menu', 'module/controller/Game', 'module/controller/Achievements', 'module/model/Layout', 'module/model/Assets',
+	'Upgrades/UpgradeCamouflage',
+	'Upgrades/UpgradeFlyingFish',
+	'Upgrades/UpgradeGrow',
+	'Upgrades/UpgradeMurkyWater',
+	'Upgrades/UpgradePoison'], function (pubsub, Extender, Menu, game, Achievements, layout, assets, upgrade_camouflage, upgrade_flying, upgrade_grow, upgrade_murkyWater, upgrade_poison) {
 
 	var MenuLevel = function () {
 		
+		var self = this;
+
 		Extender.extend(Menu, this);
 
 		/**
@@ -68,19 +75,6 @@ define(['module/model/ClassExtender', 'module/view/Menu', 'module/controller/Gam
 		}
 
 		/**
-		* Provides a description and an XP cost for the provided upgrade, ready for overlaying on top of
-		* the corresponding button.
-		*
-		* @override
-		* @method getUpgradeDescription
-		* @param {Upgrade} upgrade	The mouse's X co-ordinate
-		* @return {String} The description of the upgrade.
-		*/
-		this.getUpgradeDescription = function(upgrade) {
-			return (upgrade.getTitle()+" - Level "+(upgrade.getLevel()+1)+" - "+upgrade.getCost()+"XP");
-		}
-
-		/**
 		* Checks for button presses and responds appropriately.
 		*
 		* @override
@@ -132,34 +126,43 @@ define(['module/model/ClassExtender', 'module/view/Menu', 'module/controller/Gam
 			}
 		}
 
+		/**
+		* Provides a description and an XP cost for the provided upgrade, ready for overlaying on top of
+		* the corresponding button.
+		*
+		* @override
+		* @method getUpgradeDescription
+		* @param {Upgrade} upgrade	The mouse's X co-ordinate
+		* @return {String} The description of the upgrade.
+		*/
+		this.getUpgradeDescription = function(upgrade) {
+			return (upgrade.getTitle()+" - Level "+(upgrade.getLevel()+1)+" - "+upgrade.getCost()+"XP");
+		}
+
 		var init = function () {
 			// add custom buttons	
-			var nextLevel = new Button("nextLevel", "Next Level", (layout.getWidth()/2)-(this.button_width/2), layout.getSystemLevel() + 50, this.button_width, this.button_height);
+			self.createButton("nextLevel", "Next Level", (layout.getWidth()/2)-(self.button_width/2), layout.getSystemLevel() + 50, self.button_width, self.button_height);
 			// temporary variable for setting the button text
 			var upgrade;
 			
 			// set the buttons
 			upgrade = upgrade_grow;
-			var grow = new Button("grow", this.getUpgradeDescription(upgrade), (layout.getWidth()/100)*35-(this.button_width), (layout.getHeight()/2)-50, this.button_width, this.button_height );
+			self.createButton("grow", self.getUpgradeDescription(upgrade), (layout.getWidth()/100)*35-(self.button_width), (layout.getHeight()/2)-50, self.button_width, self.button_height );
+			
 			upgrade = upgrade_poison;
-			var poison = new Button("poison", this.getUpgradeDescription(upgrade), (layout.getWidth()/2)-(this.button_width/2), (layout.getHeight()/2)-50, this.button_width, this.button_height  );
+			self.createButton("poison", self.getUpgradeDescription(upgrade), (layout.getWidth()/2)-(self.button_width/2), (layout.getHeight()/2)-50, self.button_width, self.button_height  );
+			
 			upgrade = upgrade_murkyWater;
-			var murkyWater = new Button("murkyWater", this.getUpgradeDescription(upgrade), (layout.getWidth()/100)*65, (layout.getHeight()/2)-50, this.button_width, this.button_height );
+			self.createButton("murkyWater", self.getUpgradeDescription(upgrade), (layout.getWidth()/100)*65, (layout.getHeight()/2)-50, self.button_width, self.button_height );
 			
 			upgrade = upgrade_camouflage;
-			var camouflage = new Button("camouflage", this.getUpgradeDescription(upgrade), (layout.getWidth()/2)-20 - this.button_width, (layout.getHeight()/1.5), this.button_width, this.button_height );
-			upgrade = upgrade_flying;
-			var flyingFish = new Button("flyingFish", this.getUpgradeDescription(upgrade), (layout.getWidth()/2)+20, (layout.getHeight()/1.5), this.button_width, this.button_height);
+			self.createButton("camouflage", self.getUpgradeDescription(upgrade), (layout.getWidth()/2)-20 - self.button_width, (layout.getHeight()/1.5), self.button_width, self.button_height );
 			
-			this.buttons.push(nextLevel);
-			this.buttons.push(camouflage);
-			this.buttons.push(flyingFish);
-			this.buttons.push(grow);
-			this.buttons.push(murkyWater);
-			this.buttons.push(poison);
+			upgrade = upgrade_flying;
+			self.createButton("flyingFish", self.getUpgradeDescription(upgrade), (layout.getWidth()/2)+20, (layout.getHeight()/1.5), self.button_width, self.button_height);
 			
 			// check for buttons that are hidden
-			this.checkButtonVisibility();
+			self.checkButtonVisibility();
 		}
 
 		init();

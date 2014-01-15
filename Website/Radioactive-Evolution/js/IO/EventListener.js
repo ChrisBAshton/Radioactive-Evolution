@@ -66,7 +66,8 @@ define(['module/controller/pubsub', 'Creatures/User', 'module/controller/MenuIns
 				}
 			}
 
-			pubsub.emitEvent('regame:mouse:clicked', [mouseX, mouseY]);
+			//console.log('clicked in event listener');
+			//pubsub.emitEvent('regame:mouse:clicked', [mouseX, mouseY]);
 		}
 	}
 

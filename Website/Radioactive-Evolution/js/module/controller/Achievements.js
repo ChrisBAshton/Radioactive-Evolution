@@ -61,7 +61,7 @@ define(['Achievements/Level3', 'Achievements/Level5', 'Achievements/Level10', 'A
 		/**
 		* Loop through all achievements and check each of them to see if they've been achieved.
 		*
-		* @method checkAchievements
+		* @method check
 		*/
 		this.check = function () {
 			for(var i = 0; i < achievements.length; i++) {
