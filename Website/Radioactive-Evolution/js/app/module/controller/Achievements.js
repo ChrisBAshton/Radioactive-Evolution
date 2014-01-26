@@ -46,7 +46,6 @@ define(['achievements/level_3', 'achievements/level_5', 'achievements/level_10',
 				new AllPoison(),
 				new AllUpgrades()
 			);
-			console.log(achievements);
 		};
 
 		/**

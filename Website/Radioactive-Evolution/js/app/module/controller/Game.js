@@ -6,7 +6,7 @@ define(['bootstrap', 'module/controller/Achievements', 'module/view/Painter', 'm
 
 		this.init = function () {
 			_listen();
-			this.reset();
+			self.reset();
 		};
 
 		var _listen = function () {
