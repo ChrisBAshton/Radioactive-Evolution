@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/model/ClassExtender', 'upgrades/_upgrade'], function (bs, Extender, Upgrade) {
+define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 
 	/**
 	* With the camouflage ability, the user will blend into the sand should they move close enough
@@ -9,7 +9,7 @@ define(['bootstrap', 'module/model/ClassExtender', 'upgrades/_upgrade'], functio
 	* @constructor
 	*/
 	var UpgradeCamouflage = function () {
-		Extender.extend(Upgrade, this);
+		bs.extend(Upgrade, this);
 		// initialise variables
 		this.maxLevel = 1;
 		this.title = "Camouflage";

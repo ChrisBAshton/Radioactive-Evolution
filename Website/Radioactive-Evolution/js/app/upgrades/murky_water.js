@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/model/ClassExtender', 'upgrades/_upgrade'], function (bs, Extender, Upgrade) {
+define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 
 	/**
 	* Investing in murky water increases the level of plankton in the water, making it quicker and easier 
@@ -9,7 +9,7 @@ define(['bootstrap', 'module/model/ClassExtender', 'upgrades/_upgrade'], functio
 	* @constructor
 	*/
 	var UpgradeMurkyWater = function () {
-		Extender.extend(Upgrade, this);
+		bs.extend(Upgrade, this);
 		// initialise variables
 		this.maxLevel = 5;
 		this.title = "Murky Water";

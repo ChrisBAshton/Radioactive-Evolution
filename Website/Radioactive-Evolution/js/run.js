@@ -1,5 +1,6 @@
 var config = {
-	paths: {
+	baseUrl: "js/app",
+	paths: { // relative to baseUrl
 		"lib": "../lib"
 	}
 };

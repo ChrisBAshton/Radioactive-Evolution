@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/model/ClassExtender', 'upgrades/_upgrade', 'creatures/user'], function (bs, Extender, Upgrade, user) {
+define(['bootstrap', 'upgrades/_upgrade', 'creatures/user'], function (bs, Upgrade, user) {
 
 	/**
 	* Growing, as the name suggests, increases the player's fish size. As the player can eat any fish
@@ -10,7 +10,7 @@ define(['bootstrap', 'module/model/ClassExtender', 'upgrades/_upgrade', 'creatur
 	*/
 	var UpgradeGrow = function () {
 		// call the parent constructor
-		Extender.extend(Upgrade, this);
+		bs.extend(Upgrade, this);
 
 		// initialise variables
 		this.maxLevel = 4;

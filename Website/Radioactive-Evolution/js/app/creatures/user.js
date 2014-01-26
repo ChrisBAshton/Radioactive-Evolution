@@ -1,4 +1,4 @@
-define(['creatures/_creature', 'module/model/ClassExtender', 'bootstrap', 'module/model/Layout', 'upgrades/camouflage', 'upgrades/flying_fish'], function (Creature, Extender, bs, layout, upgrade_camouflage, upgrade_flying) {
+define(['creatures/_creature', 'bootstrap', 'module/model/Layout', 'upgrades/camouflage', 'upgrades/flying_fish'], function (Creature, bs, layout, upgrade_camouflage, upgrade_flying) {
 
 
 /**
@@ -12,7 +12,7 @@ var User = function () {
 
 	var self = this;
 
-    Extender.extend(Creature, this);
+    bs.extend(Creature, this);
 
 	// set up for keyboard control
 	this.keyboardMovement = "NO_KEY_DOWN";

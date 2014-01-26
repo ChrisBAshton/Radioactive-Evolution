@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/model/ClassExtender', 'upgrades/_upgrade'], function (bs, Extender, Upgrade) {
+define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 
 	/**
 	* With the flying fish ability, the user can move their fish above the surface level of the water,
@@ -9,7 +9,7 @@ define(['bootstrap', 'module/model/ClassExtender', 'upgrades/_upgrade'], functio
 	* @constructor
 	*/
 	var UpgradeFlyingFish = function () {
-		Extender.extend(Upgrade, this);
+		bs.extend(Upgrade, this);
 		// initialise variables
 		this.maxLevel = 1;
 		this.title = "Flying Fish";

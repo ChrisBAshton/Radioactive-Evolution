@@ -1,10 +1,9 @@
-define(['bootstrap', 'module/model/ClassExtender', 'menu/_menu', 'module/controller/Game', 'module/controller/Achievements', 'module/model/Layout', 'module/model/Assets'], function (bs, Extender, Menu, game, Achievements, layout, assets) {
+define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/Achievements', 'module/model/Layout', 'module/model/Assets'], function (bs, Menu, game, Achievements, layout, assets) {
 
 	var AchievementsMenu = function () {
 		
 		var self = this;
-
-		Extender.extend(Menu, this);
+		bs.extend(Menu, this);
 
 		// add custom buttons	
 		this.createButton("mainMenu", "Return to menu", (layout.getWidth()/2)-(this.button_width/2), layout.getSystemLevel() + 50, this.button_width, this.button_height);

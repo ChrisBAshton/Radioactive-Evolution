@@ -1,8 +1,8 @@
-define(['bootstrap', 'module/model/ClassExtender', 'menu/_menu', 'module/controller/Game', 'module/model/layout'], function (bs, Extender, Menu, game, layout) {
+define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/model/layout'], function (bs, Menu, game, layout) {
 
 	var MainMenu = function () {
 
-		Extender.extend(Menu, this);
+		bs.extend(Menu, this);
 
 		this.createButton("play", "Play Game", (layout.getWidth()/4)-50, layout.getHeight()/2, this.button_width, this.button_height);
 		this.createButton("achievements", "View Achievements",(layout.getWidth()/2)+50, (layout.getHeight()/2), this.button_width, this.button_height);

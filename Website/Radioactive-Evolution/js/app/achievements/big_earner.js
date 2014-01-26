@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/model/ClassExtender', 'achievements/_achievement'], function (bs, Extender, Achievement) {
+define(['bootstrap', 'achievements/_achievement'], function (bs, Achievement) {
 
     /**
     * An achievement gained by earning a certain amount of XP in one play-through.
@@ -9,7 +9,7 @@ define(['bootstrap', 'module/model/ClassExtender', 'achievements/_achievement'],
     */
     var BigEarner = function () {
         var self = this;
-        Extender.extend(Achievement, this);
+        bs.extend(Achievement, this);
     	this.title="bigEarner";
     }
 

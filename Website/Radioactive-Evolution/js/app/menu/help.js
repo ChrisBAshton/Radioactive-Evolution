@@ -1,8 +1,8 @@
-define(['module/model/ClassExtender', 'menu/_menu', 'module/controller/Game', 'module/controller/MenuInstance'], function (Extender, Menu, game, menu) {
+define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/MenuInstance'], function (bs, Menu, game, menu) {
 
 	var HelpMenu = function () {
 		
-		Extender.extend(Menu, this);
+		bs.extend(Menu, this);
 		notification = "Game Paused";
 
 		/**

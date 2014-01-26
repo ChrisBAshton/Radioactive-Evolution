@@ -37,9 +37,6 @@ define(['bootstrap', 'module/controller/Achievements', 'module/view/Painter', 'm
 		* @method reset_game
 		*/
 		this.reset = function () {
-
-			console.log('reset called');
-
 			// reset level variables
 			notification = "";
 			xp = 0;
@@ -120,9 +117,6 @@ define(['bootstrap', 'module/controller/Achievements', 'module/view/Painter', 'm
 		* @method resume_game()
 		*/
 		this.resume = function() {
-			
-			console.log('resume called');
-
 			// resume animation
 			startAnimating();
 			// remove menu
@@ -134,12 +128,10 @@ define(['bootstrap', 'module/controller/Achievements', 'module/view/Painter', 'm
 		}
 
 		var startAnimating = function () {
-			console.log('setting ' + self.loop);
 			self.loop = setInterval(function(){level.animate()}, countdown.getFrameInterval());
 		};
 
 		var stopAnimating = function () {
-			console.log('clearing ' + self.loop);
 			clearInterval(self.loop);
 		};
 

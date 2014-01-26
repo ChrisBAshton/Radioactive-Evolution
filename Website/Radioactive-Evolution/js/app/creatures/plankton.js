@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/model/ClassExtender', 'creatures/_creature', 'module/model/Layout', 'module/model/Countdown'], function (bs, Extender, Creature, layout, countdown) {
+define(['bootstrap', 'creatures/_creature', 'module/model/Layout', 'module/model/Countdown'], function (bs, Creature, layout, countdown) {
 
 	/**
 	* Defines a plankton.
@@ -9,7 +9,7 @@ define(['bootstrap', 'module/model/ClassExtender', 'creatures/_creature', 'modul
 	*/
 	var Plankton = function () {
         var self = this;
-        Extender.extend(Creature, this);
+        bs.extend(Creature, this);
 
 		/**
 		* Resets all of the plankton's variables

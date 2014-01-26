@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/model/ClassExtender', 'upgrades/_upgrade'], function (bs, Extender, Upgrade) {
+define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 
 	/**
 	* Purchasing the poison ability allows the user to left-click on the canvas to leave behind 
@@ -10,7 +10,7 @@ define(['bootstrap', 'module/model/ClassExtender', 'upgrades/_upgrade'], functio
 	* @constructor
 	*/
 	var UpgradePoison = function () {
-		Extender.extend(Upgrade, this);
+		bs.extend(Upgrade, this);
 		// initialise variables
 		this.maxLevel = 5;
 		this.title = "Poison";

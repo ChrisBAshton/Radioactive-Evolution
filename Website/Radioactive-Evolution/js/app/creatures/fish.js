@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/model/ClassExtender', 'creatures/_creature', 'module/model/Layout', 'creatures/user'], function (bs, Extender, Creature, layout, user) {
+define(['bootstrap', 'creatures/_creature', 'module/model/Layout', 'creatures/user'], function (bs, Creature, layout, user) {
 
 	/**
 	* Defines a fish.
@@ -9,7 +9,7 @@ define(['bootstrap', 'module/model/ClassExtender', 'creatures/_creature', 'modul
 	*/
 	var Fish = function () {
         var self = this;
-        Extender.extend(Creature, this);
+        bs.extend(Creature, this);
 
 		/**
 		* Resets all of the fish's variables

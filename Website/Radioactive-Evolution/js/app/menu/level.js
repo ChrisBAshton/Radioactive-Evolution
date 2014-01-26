@@ -1,15 +1,15 @@
-define(['bootstrap', 'module/model/ClassExtender', 'menu/_menu', 'module/controller/Game', 'module/controller/Achievements', 'module/model/Layout', 'module/model/Assets',
+define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/Achievements', 'module/model/Layout', 'module/model/Assets',
 	'upgrades/camouflage',
 	'upgrades/flying_fish',
 	'upgrades/grow',
 	'upgrades/murky_water',
-	'upgrades/poison'], function (bs, Extender, Menu, game, Achievements, layout, assets, upgrade_camouflage, upgrade_flying, upgrade_grow, upgrade_murkyWater, upgrade_poison) {
+	'upgrades/poison'], function (bs, Menu, game, Achievements, layout, assets, upgrade_camouflage, upgrade_flying, upgrade_grow, upgrade_murkyWater, upgrade_poison) {
 
 	var MenuLevel = function () {
 		
 		var self = this;
 
-		Extender.extend(Menu, this);
+		bs.extend(Menu, this);
 
 		/**
 		* Checks for buttons being hovered over and provides the user with a description

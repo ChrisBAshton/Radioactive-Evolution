@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/model/ClassExtender', 'achievements/_achievement', 'upgrades/grow'], function (bs, Extender, Achievement, upgrade_grow) {
+define(['bootstrap', 'achievements/_achievement', 'upgrades/grow'], function (bs, Achievement, upgrade_grow) {
 
     /**
     * An achievement gained by purchasing all of the growth upgrades.
@@ -9,7 +9,7 @@ define(['bootstrap', 'module/model/ClassExtender', 'achievements/_achievement', 
     */
     var AllGrowth = function () {
         var self = this;
-        Extender.extend(Achievement, this);
+        bs.extend(Achievement, this);
     	this.title="allGrowth";
     }
 

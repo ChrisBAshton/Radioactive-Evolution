@@ -1,11 +1,3 @@
-/**
-* TODO - this should be moved to controller.
-*
-*/
-
-
-
-
 define(['module/controller/Achievements', 'module/controller/Game', 'module/controller/MenuInstance', 'IO/EventListener', 'IO/Sound'], function (achievements, game, menu, event, sound) {
 
 	var App = function () {
@@ -21,13 +13,9 @@ define(['module/controller/Achievements', 'module/controller/Game', 'module/cont
 		* @method start_app
 		*/
 		this.init = function () {
-			// load achievements from HTML5 local storage, if any
 			achievements.load();
-			// set game variables
 			game.init();
-			// load menu
 			menu.init();
-			// load sound
 			sound.init();
 		};
 

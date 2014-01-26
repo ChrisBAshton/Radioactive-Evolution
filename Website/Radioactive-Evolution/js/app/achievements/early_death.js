@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/model/ClassExtender', 'achievements/_achievement'], function (bs, Extender, Achievement) {
+define(['bootstrap', 'achievements/_achievement'], function (bs, Achievement) {
 
     /**
     * An achievement gained by completely failing and dying within a few seconds (on any level).
@@ -9,7 +9,7 @@ define(['bootstrap', 'module/model/ClassExtender', 'achievements/_achievement'],
     */
     var EarlyDeath = function () {
         var self = this;
-        Extender.extend(Achievement, this);
+        bs.extend(Achievement, this);
     	this.title="earlyDeath";
     }
 

@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/model/ClassExtender', 'achievements/_achievement'], function (bs, Extender, Achievement) {
+define(['bootstrap', 'achievements/_achievement'], function (bs, Achievement) {
 
     /**
     * An achievement gained by reaching level 3.
@@ -9,7 +9,7 @@ define(['bootstrap', 'module/model/ClassExtender', 'achievements/_achievement'],
     */
     var Level3 = function () {
         var self = this;
-        Extender.extend(Achievement, this);
+        bs.extend(Achievement, this);
     	this.title="level3";
     }
 

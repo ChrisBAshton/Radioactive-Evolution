@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/model/ClassExtender', 'menu/_menu', 'module/controller/Game', 'module/controller/Achievements', 'module/model/Layout', 'module/model/Assets'], function (bs, Extender, Menu, game, Achievements, layout, assets) {
+define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/Achievements', 'module/model/Layout', 'module/model/Assets'], function (bs, Menu, game, Achievements, layout, assets) {
 
     /**
     * The menu shown when the user dies; offers them the chance to restart or 
@@ -10,7 +10,7 @@ define(['bootstrap', 'module/model/ClassExtender', 'menu/_menu', 'module/control
     */
     var DeathMenu = function () {
         
-        Extender.extend(Menu, this);
+        bs.extend(Menu, this);
         
         // add custom buttons   
         this.createButton("restart", "Restart", (layout.getWidth()/4)-50, layout.getHeight()/2, this.button_width, this.button_height);

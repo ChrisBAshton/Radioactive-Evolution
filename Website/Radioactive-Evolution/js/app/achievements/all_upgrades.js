@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/model/ClassExtender', 'achievements/_achievement', 'upgrades/camouflage', 'upgrades/grow', 'upgrades/murky_water', 'upgrades/poison'], function (bs, Extender, Achievement, upgrade_camouflage, upgrade_flying, upgrade_grow, upgrade_murkyWater, upgrade_poison) {
+define(['bootstrap', 'achievements/_achievement', 'upgrades/camouflage', 'upgrades/grow', 'upgrades/murky_water', 'upgrades/poison'], function (bs, Achievement, upgrade_camouflage, upgrade_flying, upgrade_grow, upgrade_murkyWater, upgrade_poison) {
 
 	/**
 	* An achievement gained by purchasing all upgrades in one play-through session.
@@ -9,7 +9,7 @@ define(['bootstrap', 'module/model/ClassExtender', 'achievements/_achievement', 
 	*/
 	var AllUpgrades = function () {
         var self = this;
-        Extender.extend(Achievement, this);
+        bs.extend(Achievement, this);
 		this.title="allUpgrades";
 	}
 

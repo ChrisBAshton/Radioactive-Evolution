@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/model/ClassExtender', 'achievements/_achievement'], function (bs, Extender, Achievement) {
+define(['bootstrap', 'achievements/_achievement'], function (bs, Achievement) {
 
     /**
     * An achievement gained by killing a certain number of fish in one level.
@@ -9,7 +9,7 @@ define(['bootstrap', 'module/model/ClassExtender', 'achievements/_achievement'],
     */
     var FishKiller = function () {
         var self = this;
-        Extender.extend(Achievement, this);
+        bs.extend(Achievement, this);
     	this.title="fishKiller";
     }
 
