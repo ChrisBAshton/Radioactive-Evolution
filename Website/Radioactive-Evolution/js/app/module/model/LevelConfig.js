@@ -1,3 +1,13 @@
+/*
+
+TODO - remove this class in favour of the config.js file
+
+*/
+
+
+
+
+
 define([], function () {
 
     var LevelConfig = function () {

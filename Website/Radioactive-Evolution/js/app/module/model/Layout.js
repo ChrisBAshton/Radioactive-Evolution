@@ -1,3 +1,14 @@
+/*
+
+TODO - remove this file and transfer vars and functionality to painter/config instead
+
+
+*/
+
+
+
+
+
 define([], function () {
 
     /**

@@ -1,5 +1,4 @@
-define([], function () {
-
+define(function () {
     var browser = "unknown";
     var browser_array = ["firefox", "chrome", "safari", "opera", "msie"];
     for(var i =0; i < browser_array.length; i++) {
@@ -11,5 +10,4 @@ define([], function () {
     }
 
     return browser;
-
 });

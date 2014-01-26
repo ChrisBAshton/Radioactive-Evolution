@@ -1,4 +1,4 @@
-// TODO - use.
+// TODO - use. And rename to game_config.js
 define(function() {
     return {
         game {

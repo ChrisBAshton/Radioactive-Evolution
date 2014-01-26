@@ -18,12 +18,13 @@ define(['bootstrap', 'module/model/Layout', 'module/model/Assets', 'module/model
             self.loadFonts();
         };
 
+        /**
+         *   A script for loading Google fonts.
+         *
+         * See more customisable stuff at:
+         * https://developers.google.com/webfonts/docs/webfont_loader#Events
+         */
         this.loadFonts = function () {
-            /**
-            *   A script for loading Google fonts.
-            */
-
-            // See more customisable stuff at https://developers.google.com/webfonts/docs/webfont_loader#Events
             WebFontConfig = {
                 google: { families: [ 'Jura::latin' ] },
                 active: function() {

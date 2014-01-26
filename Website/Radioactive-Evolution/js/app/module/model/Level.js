@@ -1,3 +1,12 @@
+/*
+
+TODO - remove the vars from this class and point to config.js instead
+
+*/
+
+
+
+
 define(['bootstrap', 'module/model/LevelConfig', 'creatures/fish', 'creatures/plankton', 'creatures/user', 'module/model/Countdown'], function (bs, LevelConfig, Fish, Plankton, user, countdown) {
 
     /**
