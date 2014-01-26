@@ -16,8 +16,7 @@ define(['module/controller/pubsub', 'module/controller/Achievements', 'module/vi
 					callback();
 				}
 			});
-			pubsub.addListener('regame:game:start', function (source) {
-				console.log('start called', source);
+			pubsub.addListener('regame:game:start', function () {
 				self.start();
 			});
 			pubsub.addListener('regame:game:stop', function () {

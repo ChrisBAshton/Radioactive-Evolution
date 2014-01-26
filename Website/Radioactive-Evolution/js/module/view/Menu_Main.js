@@ -24,7 +24,7 @@ define(['module/controller/pubsub', 'module/model/ClassExtender', 'module/view/M
 				if(this.buttons[i].isSelected()) {
 					switch(this.buttons[i].getKey()) {
 						case "play":
-							pubsub.emitEvent('regame:game:start', [this]);
+							pubsub.emitEvent('regame:game:start');
 							break;
 						case "help":
 							pubsub.emitEvent('regame:menu:new', ['help']);

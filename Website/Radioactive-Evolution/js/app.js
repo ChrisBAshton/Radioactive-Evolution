@@ -1,15 +1,18 @@
-define(['module/controller/Achievements', 'module/controller/Game', 'module/controller/MenuInstance', 'IO/EventListener'], function (achievements, game, menu, event) {
+/**
+* TODO - this should be moved to controller.
+*
+*/
+
+
+
+
+define(['module/controller/Achievements', 'module/controller/Game', 'module/controller/MenuInstance', 'IO/EventListener', 'IO/Sound'], function (achievements, game, menu, event, sound) {
 
 	var App = function () {
 
 		// listen for mouse movements/clicks
 	    canvas.addEventListener("mousemove",event.mouseMoved,false);
 	    canvas.addEventListener("mousedown",event.mouseClicked,false);
-	    // sound event listener
-	    // sound_bg.addEventListener('ended', function() {
-	    //  this.currentTime = 0;
-	    //  this.play();
-	    // }, false);
 
 		/**
 		* Starts the application. Loads the achievements stored in HTML5 local storage,
@@ -24,6 +27,8 @@ define(['module/controller/Achievements', 'module/controller/Game', 'module/cont
 			game.init();
 			// load menu
 			menu.init();
+			// load sound
+			sound.init();
 		};
 
 	};

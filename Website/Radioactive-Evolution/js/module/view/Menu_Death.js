@@ -34,9 +34,9 @@ define(['module/controller/pubsub', 'module/model/ClassExtender', 'module/view/M
                 if(this.buttons[i].isSelected()) {
                     switch(this.buttons[i].getKey()) {
                         case "restart":
-                            pubsub.emitEvent('regame:game:reset', function () {
+                            pubsub.emitEvent('regame:game:reset', [function () {
                                 pubsub.emitEvent('regame:game:start');
-                            });
+                            }]);
                             break;
                         case "mainMenu":
                             pubsub.emitEvent('regame:game:reset');

@@ -21,9 +21,11 @@ define(['Achievements/Level3', 'Achievements/Level5', 'Achievements/Level10', 'A
 
 				title = achievements[i].getTitle();
 				isAlreadyAchieved = _isAchieved(title);
+				console.log("isAlreadyAchieved", isAlreadyAchieved);
 				
 				if(isAlreadyAchieved) {
 					achievements[i].setAchieved(true);
+					console.log("achieved", achievements[i]);
 				} else {
 					// first time user, so achievements haven't been earned- save this in local storage
 					localStorage[title] = false;
@@ -46,6 +48,7 @@ define(['Achievements/Level3', 'Achievements/Level5', 'Achievements/Level10', 'A
 				new AllPoison(),
 				new AllUpgrades()
 			);
+			console.log(achievements);
 		};
 
 		/**
@@ -55,7 +58,7 @@ define(['Achievements/Level3', 'Achievements/Level5', 'Achievements/Level10', 'A
 		 * @return {Boolean} 				True if set, false if not.
 		 */
 		var _isAchieved = function (achievementTitle) {
-			return localStorage[achievementTitle] == null ? false:true;
+			return localStorage[achievementTitle] === 'false' ? false:true;// === null ? false:true;
 		};
 
 		/**
