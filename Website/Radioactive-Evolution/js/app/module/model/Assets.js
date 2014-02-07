@@ -1,4 +1,4 @@
-define(['module/model/Browser', 'bootstrap'], function (browser, bs) {
+define(['_helpers/browser', 'bootstrap'], function (browser, bs) {
 
 /**
 *   A script for loading the required sounds and images

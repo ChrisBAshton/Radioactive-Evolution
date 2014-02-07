@@ -1,4 +1,4 @@
-define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/Achievements', 'module/model/Layout', 'module/model/Assets'], function (bs, Menu, game, Achievements, layout, assets) {
+define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/Achievements', 'module/model/Assets'], function (bs, Menu, game, Achievements, layout, assets) {
 
 	var AchievementsMenu = function () {
 		
@@ -6,21 +6,21 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 		bs.extend(Menu, this);
 
 		// add custom buttons	
-		this.createButton("mainMenu", "Return to menu", (layout.getWidth()/2)-(this.button_width/2), layout.getSystemLevel() + 50, this.button_width, this.button_height);
+		this.createButton("mainMenu", "Return to menu", (bs.config.canvas.width/2)-(this.button_width/2), bs.config.canvas.elements.console + 50, this.button_width, this.button_height);
 		
-		this.createButton("level3", "Reached Level 3", (layout.getWidth()/100)*35-(this.button_width), (layout.getHeight()/3), this.button_width, this.button_height );
-		this.createButton("level5", "Reached Level 5", (layout.getWidth()/2)-(this.button_width/2), (layout.getHeight()/3), this.button_width, this.button_height);
-		this.createButton("level10", "Reached Level 10", (layout.getWidth()/100)*65, (layout.getHeight()/3), this.button_width, this.button_height );
+		this.createButton("level3", "Reached Level 3", (bs.config.canvas.width/100)*35-(this.button_width), (bs.config.canvas.height/3), this.button_width, this.button_height );
+		this.createButton("level5", "Reached Level 5", (bs.config.canvas.width/2)-(this.button_width/2), (bs.config.canvas.height/3), this.button_width, this.button_height);
+		this.createButton("level10", "Reached Level 10", (bs.config.canvas.width/100)*65, (bs.config.canvas.height/3), this.button_width, this.button_height );
 		
-		this.createButton("earlyDeath", "Die within 5 seconds", (layout.getWidth()/100)*35-(this.button_width), (layout.getHeight()/3)+(this.button_height+10), this.button_width, this.button_height );
-		this.createButton("bigEarner", "Earn over 200XP", (layout.getWidth()/2)-(this.button_width/2), (layout.getHeight()/3)+(this.button_height+10), this.button_width, this.button_height);
-		this.createButton("fishKiller", "Kill 10 fish in one level", (layout.getWidth()/100)*65, (layout.getHeight()/3)+(this.button_height+10), this.button_width, this.button_height );
+		this.createButton("earlyDeath", "Die within 5 seconds", (bs.config.canvas.width/100)*35-(this.button_width), (bs.config.canvas.height/3)+(this.button_height+10), this.button_width, this.button_height );
+		this.createButton("bigEarner", "Earn over 200XP", (bs.config.canvas.width/2)-(this.button_width/2), (bs.config.canvas.height/3)+(this.button_height+10), this.button_width, this.button_height);
+		this.createButton("fishKiller", "Kill 10 fish in one level", (bs.config.canvas.width/100)*65, (bs.config.canvas.height/3)+(this.button_height+10), this.button_width, this.button_height );
 		
-		this.createButton("allGrowth", "Purchased all growth upgrades", (layout.getWidth()/100)*35-(this.button_width), (layout.getHeight()/3)+(this.button_height*2)+20, this.button_width, this.button_height );	
-		this.createButton("allPoison", "Purchased all poison upgrades", (layout.getWidth()/2)-(this.button_width/2), (layout.getHeight()/3)+(this.button_height*2)+20, this.button_width, this.button_height );
-		this.createButton("allUpgrades", "Purchased all upgrades", (layout.getWidth()/100)*65, (layout.getHeight()/3)+(this.button_height*2)+20, this.button_width, this.button_height );
+		this.createButton("allGrowth", "Purchased all growth upgrades", (bs.config.canvas.width/100)*35-(this.button_width), (bs.config.canvas.height/3)+(this.button_height*2)+20, this.button_width, this.button_height );	
+		this.createButton("allPoison", "Purchased all poison upgrades", (bs.config.canvas.width/2)-(this.button_width/2), (bs.config.canvas.height/3)+(this.button_height*2)+20, this.button_width, this.button_height );
+		this.createButton("allUpgrades", "Purchased all upgrades", (bs.config.canvas.width/100)*65, (bs.config.canvas.height/3)+(this.button_height*2)+20, this.button_width, this.button_height );
 		
-		this.createButton("clear", "Reset all achievements", (layout.getWidth()/100)*65, layout.getSystemLevel() + 50, 250, 50);
+		this.createButton("clear", "Reset all achievements", (bs.config.canvas.width/100)*65, bs.config.canvas.elements.console + 50, 250, 50);
 		
 		// used for rewarding user
 		this.message;
@@ -60,9 +60,9 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 				// draw box
 				context.fillStyle = "black";
 				context.fillRect(
-					(layout.getWidth()/100)*35-(this.button_width), 
-					layout.getSandLevel()+15, 
-					(layout.getWidth() /100) *80, 
+					(bs.config.canvas.width/100)*35-(this.button_width), 
+					bs.config.canvas.elements.sand+15, 
+					(bs.config.canvas.width /100) *80, 
 					25
 				);
 				
@@ -71,7 +71,7 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 				context.font = "12px Verdana";
 				context.textAlign = 'center';
 			
-				context.fillText(this.message, (layout.getWidth()/2), layout.getSandLevel()+30);
+				context.fillText(this.message, (bs.config.canvas.width/2), bs.config.canvas.elements.sand+30);
 			}
 		}
 

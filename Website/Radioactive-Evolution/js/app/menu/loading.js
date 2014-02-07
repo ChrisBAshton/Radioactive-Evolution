@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/model/Layout', 'module/model/Browser'], function (bs, layout, browser) {
+define(['bootstrap', '_helpers/browser'], function (bs, browser) {
 
     var LoadingScreen = function (TOTAL_FILES) {
 
@@ -39,19 +39,19 @@ define(['bootstrap', 'module/model/Layout', 'module/model/Browser'], function (b
             
             // draw background colour
             context.fillStyle = "#EDEDED";
-            context.fillRect(0, 0, layout.getWidth(), layout.getHeight());
+            context.fillRect(0, 0, bs.config.canvas.width, bs.config.canvas.height);
             // draw loading bar background
-            var lingrad = context.createLinearGradient((layout.getWidth()/4), (layout.getHeight()/2)-10, (layout.getWidth()/4), (layout.getHeight()/2)+10);
+            var lingrad = context.createLinearGradient((bs.config.canvas.width/4), (bs.config.canvas.height/2)-10, (bs.config.canvas.width/4), (bs.config.canvas.height/2)+10);
             lingrad.addColorStop(0, '#7d7e7d');
             lingrad.addColorStop(1, '#0e0e0e');
             context.fillStyle = lingrad;
-            context.fillRect((layout.getWidth()/4), (layout.getHeight()/2)-10, (layout.getWidth()/2), 10);
+            context.fillRect((bs.config.canvas.width/4), (bs.config.canvas.height/2)-10, (bs.config.canvas.width/2), 10);
             // draw loading bar
-            var highlightGrad = context.createLinearGradient((layout.getWidth()/4), (layout.getHeight()/2)-10, (layout.getWidth()/4), (layout.getHeight()/2)+10);
+            var highlightGrad = context.createLinearGradient((bs.config.canvas.width/4), (bs.config.canvas.height/2)-10, (bs.config.canvas.width/4), (bs.config.canvas.height/2)+10);
             highlightGrad.addColorStop(0, '#333333');
             highlightGrad.addColorStop(1, '#666666');
             context.fillStyle = highlightGrad;
-            context.fillRect((layout.getWidth()/4), (layout.getHeight()/2)-10, ((layout.getWidth()/2)/100) * LOADED, 10);
+            context.fillRect((bs.config.canvas.width/4), (bs.config.canvas.height/2)-10, ((bs.config.canvas.width/2)/100) * LOADED, 10);
             
             // set up text
             context.fillStyle = "#737373";
@@ -82,12 +82,12 @@ define(['bootstrap', 'module/model/Layout', 'module/model/Browser'], function (b
                     var message = "Your browser has not been recognised, so the game might not work as expected.";
                     break;
             }
-            context.fillText(message, (layout.getWidth()/2), layout.getSandLevel());
+            context.fillText(message, (bs.config.canvas.width/2), bs.config.canvas.elements.sand);
             // reset color
             context.fillStyle = "#737373";
             
             // display message regarding download progress
-            context.fillText("Loading... "+LOADED+"%", (layout.getWidth()/2), (layout.getHeight()/2)-30);
+            context.fillText("Loading... "+LOADED+"%", (bs.config.canvas.width/2), (bs.config.canvas.height/2)-30);
 
         }
     };

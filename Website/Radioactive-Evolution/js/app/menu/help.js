@@ -19,10 +19,10 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 			context.save();
 			
 			// define box size and position
-			y = layout.getSystemLevel() + 20;
-			height = layout.getWaterLevel()-y-20;
+			y = bs.config.canvas.elements.console + 20;
+			height = bs.config.canvas.elements.water-y-20;
 			width = 350;
-			x = (layout.getWidth()/2) - (width/2);
+			x = (bs.config.canvas.width/2) - (width/2);
 			// define box background gradient
 			gradient = context.createLinearGradient(x,y,x+width,y+height);
 			gradient.addColorStop(0, '#FFFFFF');
@@ -40,11 +40,11 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 			context.fillStyle = "#000000";
 			context.font = "24px Jura";
 			context.textAlign = 'center';
-			context.fillText("Press Spacebar to Continue", layout.getWidth()/2, y+30);
+			context.fillText("Press Spacebar to Continue", bs.config.canvas.width/2, y+30);
 			
 			// define box size and position
 			x = 10;
-			y = layout.getWaterLevel() + 10;
+			y = bs.config.canvas.elements.water + 10;
 			width = 300;
 			height = 250;
 			// define box background gradient
@@ -74,7 +74,7 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 			
 			// define box size and position
 			x = 330;
-			y = layout.getWaterLevel() + 10;
+			y = bs.config.canvas.elements.water + 10;
 			width = 365;
 			height = 250;
 			// define box background gradient
@@ -104,8 +104,8 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 			
 			
 			// define box size and position
-			x = layout.getWidth() - 280;
-			y = layout.getWaterLevel() + 10;
+			x = bs.config.canvas.width - 280;
+			y = bs.config.canvas.elements.water + 10;
 			width = 260;
 			height = 350;
 			// define box background gradient
@@ -135,7 +135,7 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 			// define box size and position
 			x = 50;
 			height = 250;
-			y = layout.getHeight() -height-25;
+			y = bs.config.canvas.height -height-25;
 			width = 600;
 			// define box background gradient
 			gradient = context.createLinearGradient(x,y,x+width,y+height);

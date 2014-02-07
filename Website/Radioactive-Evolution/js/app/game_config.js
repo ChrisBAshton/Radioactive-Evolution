@@ -1,7 +1,6 @@
-// TODO - use. And rename to game_config.js
 define(function() {
     return {
-        game {
+        game: {
             countdown:   30,
             minFish:     1,
             maxFish:     false,
@@ -14,12 +13,12 @@ define(function() {
             height:      700,
             elements: {
                 console: 50,
-                water:   200,
-                sand:    600
+                water:   140,
+                sand:    630
             }
         },
-        menu {
-            button {
+        menu: {
+            button: {
                 width:   250,
                 height:  120
             }  

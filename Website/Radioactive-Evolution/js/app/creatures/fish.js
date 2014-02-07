@@ -1,4 +1,4 @@
-define(['bootstrap', 'creatures/_creature', 'module/model/Layout', 'creatures/user'], function (bs, Creature, layout, user) {
+define(['bootstrap', 'creatures/_creature', 'creatures/user'], function (bs, Creature, user) {
 
 	/**
 	* Defines a fish.
@@ -41,9 +41,9 @@ define(['bootstrap', 'creatures/_creature', 'module/model/Layout', 'creatures/us
 			var spawningOnUser = true;
 			do {
 				// give the fish some coordinates
-				this.y = Math.floor(Math.random() * (layout.getHeight()-layout.getWaterLevel()-(layout.getHeight()-layout.getSandLevel())))+layout.getWaterLevel();
+				this.y = Math.floor(Math.random() * (bs.config.canvas.height-bs.config.canvas.elements.water-(bs.config.canvas.height-bs.config.canvas.elements.sand)))+bs.config.canvas.elements.water;
 				var dir = Math.random();	// come from right or left, 50/50 chance
-				this.x = (dir > 0.5) ? 0:layout.getWidth();
+				this.x = (dir > 0.5) ? 0:bs.config.canvas.width;
 				// check if fish has spawned on top of user
 				// TODO - fix. CHris 2014
 				// if(!level.collision(this, user)) {
@@ -164,21 +164,21 @@ define(['bootstrap', 'creatures/_creature', 'module/model/Layout', 'creatures/us
 				if(this.x <= 0) {
 					this.direction = "right";
 					this.x = 0;
-				} else if(this.x >= layout.getWidth()) {
+				} else if(this.x >= bs.config.canvas.width) {
 					this.direction = "left";
-					this.x = layout.getWidth();
+					this.x = bs.config.canvas.width;
 				}
 				// if fish has followed user "above" water level (user has flying fish ability) then force fish below water level
-				if(this.y <= layout.getWaterLevel()) {
-					this.y = layout.getWaterLevel();
-				} else if(this.y >= layout.getSandLevel()) {
-					this.y = layout.getSandLevel();
+				if(this.y <= bs.config.canvas.elements.water) {
+					this.y = bs.config.canvas.elements.water;
+				} else if(this.y >= bs.config.canvas.elements.sand) {
+					this.y = bs.config.canvas.elements.sand;
 				}
 			} else {
 				// fish is dead- make it float to the surface
-				if(this.y < layout.getWaterLevel()) {
+				if(this.y < bs.config.canvas.elements.water) {
 					this.y++;
-				} else if(this.y > layout.getWaterLevel()) {
+				} else if(this.y > bs.config.canvas.elements.water) {
 					this.y--;
 				}
 			}

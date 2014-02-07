@@ -62,16 +62,16 @@ Poison.prototype.move = function() {
 	}
 	
 	// check poison isn't out of bounds
-	if(this.x > layout.getWidth()) {
+	if(this.x > bs.config.canvas.width) {
 		this.x--;
 	} else if(this.x < 0) {
 		this.x++;
 	}
-	if(this.y > layout.getHeight()) {
+	if(this.y > bs.config.canvas.height) {
 		this.y--;
-	} else if(this.y <= layout.getWaterLevel()) {
+	} else if(this.y <= bs.config.canvas.elements.water) {
 		this.y++;
-	} else if(this.y >= layout.getSandLevel()) {
+	} else if(this.y >= bs.config.canvas.elements.sand) {
 		this.y--;
 	}
 }

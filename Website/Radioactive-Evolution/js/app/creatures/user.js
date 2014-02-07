@@ -1,4 +1,4 @@
-define(['creatures/_creature', 'bootstrap', 'module/model/Layout', 'upgrades/camouflage', 'upgrades/flying_fish'], function (Creature, bs, layout, upgrade_camouflage, upgrade_flying) {
+define(['creatures/_creature', 'bootstrap', 'upgrades/camouflage', 'upgrades/flying_fish'], function (Creature, bs, upgrade_camouflage, upgrade_flying) {
 
 
 /**
@@ -73,33 +73,33 @@ User.prototype.move = function(x,y) {
 	}
 	
 	// impose limits on y-axis
-	if(y > layout.getSandLevel()) {
-		this.y = layout.getSandLevel();
-	} else if(y > layout.getWaterLevel()) {
+	if(y > bs.config.canvas.elements.sand) {
+		this.y = bs.config.canvas.elements.sand;
+	} else if(y > bs.config.canvas.elements.water) {
 		this.y = y;
-	} else if(y <= layout.getWaterLevel()) {
+	} else if(y <= bs.config.canvas.elements.water) {
 		// apply flying fish ability if user has unlocked it
 		if(upgrade_flying.getLevel() == 1) {
-			if(y >= layout.getSystemLevel()) {
+			if(y >= bs.config.canvas.elements.console) {
 				this.y = y;
 			} else {
-				this.y = layout.getSystemLevel();
+				this.y = bs.config.canvas.elements.console;
 			}
 		} else {
-			this.y = layout.getWaterLevel();
+			this.y = bs.config.canvas.elements.water;
 		}
 	}
 	// impose limits on x-axis
 	if(x <= 0) {
 		this.x = 0;
-	} else if (x >= layout.getWidth()) {
-		this.x = layout.getWidth();
+	} else if (x >= bs.config.canvas.width) {
+		this.x = bs.config.canvas.width;
 	} else {
 		this.x = x;
 	}
 	
 	// apply camouflage if user has unlocked it and is near sand
-	if(upgrade_camouflage.getLevel() == 1 && Math.abs((this.y - layout.getSandLevel())) < 6) {
+	if(upgrade_camouflage.getLevel() == 1 && Math.abs((this.y - bs.config.canvas.elements.sand)) < 6) {
 		this.currentlyCamouflaged = true;
 		this.color = "#CEB499";
 	} else {

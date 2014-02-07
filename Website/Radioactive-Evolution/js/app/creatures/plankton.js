@@ -1,4 +1,4 @@
-define(['bootstrap', 'creatures/_creature', 'module/model/Layout', 'module/model/Countdown'], function (bs, Creature, layout, countdown) {
+define(['bootstrap', 'creatures/_creature', 'module/model/Countdown'], function (bs, Creature, countdown) {
 
 	/**
 	* Defines a plankton.
@@ -17,8 +17,8 @@ define(['bootstrap', 'creatures/_creature', 'module/model/Layout', 'module/model
 		* @method reset
 		*/
 		this.reset = function() {
-			this.x = Math.floor(Math.random() * layout.getWidth());
-			this.y = Math.floor(Math.random() * (layout.getHeight()-layout.getWaterLevel()-(layout.getHeight()-layout.getSandLevel())))+layout.getWaterLevel();
+			this.x = Math.floor(Math.random() * bs.config.canvas.width);
+			this.y = Math.floor(Math.random() * (bs.config.canvas.height-bs.config.canvas.elements.water-(bs.config.canvas.height-bs.config.canvas.elements.sand)))+bs.config.canvas.elements.water;
 			this.width = 5;
 			this.height = 5;
 			this.color = "green";
@@ -75,16 +75,16 @@ define(['bootstrap', 'creatures/_creature', 'module/model/Layout', 'module/model
 			}
 			
 			// check plankton isn't out of bounds
-			if(this.x > layout.getWidth()) {
+			if(this.x > bs.config.canvas.width) {
 				this.x--;
 			} else if(this.x < 0) {
 				this.x++;
 			}
-			if(this.y > layout.getHeight()) {
+			if(this.y > bs.config.canvas.height) {
 				this.y--;
-			} else if(this.y <= layout.getWaterLevel()) {
+			} else if(this.y <= bs.config.canvas.elements.water) {
 				this.y++;
-			} else if(this.y >= layout.getSandLevel()) {
+			} else if(this.y >= bs.config.canvas.elements.sand) {
 				this.y--;
 			}
 		}

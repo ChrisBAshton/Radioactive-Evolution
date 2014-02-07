@@ -1,4 +1,4 @@
-define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/Achievements', 'module/model/Layout', 'module/model/Assets'], function (bs, Menu, game, Achievements, layout, assets) {
+define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/Achievements', 'module/model/Assets'], function (bs, Menu, game, Achievements, layout, assets) {
 
     /**
     * The menu shown when the user dies; offers them the chance to restart or 
@@ -13,8 +13,8 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
         bs.extend(Menu, this);
         
         // add custom buttons   
-        this.createButton("restart", "Restart", (layout.getWidth()/4)-50, layout.getHeight()/2, this.button_width, this.button_height);
-        this.createButton("mainMenu", "Return to main menu",(layout.getWidth()/2)+50, (layout.getHeight()/2), this.button_width, this.button_height);
+        this.createButton("restart", "Restart", (bs.config.canvas.width/4)-50, bs.config.canvas.height/2, this.button_width, this.button_height);
+        this.createButton("mainMenu", "Return to main menu",(bs.config.canvas.width/2)+50, (bs.config.canvas.height/2), this.button_width, this.button_height);
 
         // custom menu stuff TODO
         //sound_death.play();

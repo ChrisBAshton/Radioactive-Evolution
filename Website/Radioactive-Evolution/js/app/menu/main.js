@@ -1,11 +1,11 @@
-define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/model/layout'], function (bs, Menu, game, layout) {
+define(['bootstrap', 'menu/_menu', 'module/controller/Game'], function (bs, Menu, game) {
 
 	var MainMenu = function () {
 
 		bs.extend(Menu, this);
 
-		this.createButton("play", "Play Game", (layout.getWidth()/4)-50, layout.getHeight()/2, this.button_width, this.button_height);
-		this.createButton("achievements", "View Achievements",(layout.getWidth()/2)+50, (layout.getHeight()/2), this.button_width, this.button_height);
+		this.createButton("play", "Play Game", (bs.config.canvas.width/4)-50, bs.config.canvas.height/2, this.button_width, this.button_height);
+		this.createButton("achievements", "View Achievements",(bs.config.canvas.width/2)+50, (bs.config.canvas.height/2), this.button_width, this.button_height);
 
 		// reset global variables
 		notification = "Welcome to Radioactive Evolution";

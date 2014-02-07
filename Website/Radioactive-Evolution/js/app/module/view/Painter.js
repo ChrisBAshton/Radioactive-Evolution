@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/model/Layout', 'module/model/Assets', 'module/model/Level', 'module/model/LevelConfig', 'creatures/user'], function (bs, layout, assets, level, LevelConfig, user) {
+define(['bootstrap', 'module/model/Assets', 'module/model/Level', 'module/model/LevelConfig', 'creatures/user'], function (bs, assets, level, LevelConfig, user) {
 
     /**
     * An abstract class that paints the game environment to the canvas, including the
@@ -12,6 +12,10 @@ define(['bootstrap', 'module/model/Layout', 'module/model/Assets', 'module/model
         var self = this;
 
         this.init = function () {
+            canvas.width        = bs.config.canvas.width;
+            canvas.height       = bs.config.canvas.height;
+            canvas.style.border = "black 1px solid";
+
             bs.pubsub.addListener('regame:paint:redraw', function () {
                 self.redraw();
             });
@@ -108,28 +112,35 @@ define(['bootstrap', 'module/model/Layout', 'module/model/Assets', 'module/model
         */
         this.draw_background = function() {
             context.save();
+
+            var consoleLevel = bs.config.canvas.elements.console,
+                waterLevel = bs.config.canvas.elements.water,
+                sandLevel = bs.config.canvas.elements.sand,
+                width = bs.config.canvas.width,
+                height = bs.config.canvas.height;
+
             
             // Create Linear Gradients
-            var lingrad = context.createLinearGradient(0,0,0,layout.getSystemLevel());
+            var lingrad = context.createLinearGradient(0,0,0,consoleLevel);
             lingrad.addColorStop(0, '#7d7e7d');
             lingrad.addColorStop(1, '#0e0e0e');
             // draw sky
             context.fillStyle="#EDEDED";
-            context.fillRect(0, layout.getSystemLevel(), layout.getWidth(), (layout.getHeight()-layout.getSystemLevel()));
+            context.fillRect(0, consoleLevel, width, (height-consoleLevel));
             context.drawImage(assets.img_cloud_1, 10, 30);
             context.drawImage(assets.img_cloud_2, 300, 40);
-            context.drawImage(assets.img_sun, (layout.getWidth()-200), 20);
+            context.drawImage(assets.img_sun, (width-200), 20);
             // draw system background
             context.fillStyle = lingrad;
-            context.fillRect(0, 0, layout.getWidth(), layout.getSystemLevel());
+            context.fillRect(0, 0, width, consoleLevel);
             // draw water
             context.fillStyle="#82CAFF";
-            context.fillRect(0, layout.getWaterLevel(), layout.getWidth(), (layout.getHeight()-layout.getWaterLevel()));
-            context.drawImage(assets.img_water,0,layout.getWaterLevel(), layout.getWidth(), layout.getSandLevel());
+            context.fillRect(0, waterLevel, width, (height-waterLevel));
+            context.drawImage(assets.img_water,0,waterLevel, width, sandLevel);
             // draw sand
             context.fillStyle="#FFF380";
-            context.fillRect(0, layout.getSandLevel(), layout.getWidth(), (layout.getHeight()-layout.getSandLevel()));
-            context.drawImage(assets.img_sand,0,layout.getSandLevel());
+            context.fillRect(0, sandLevel, width, (height-sandLevel));
+            context.drawImage(assets.img_sand,0,sandLevel);
             
             context.restore();
         }
@@ -152,7 +163,7 @@ define(['bootstrap', 'module/model/Layout', 'module/model/Assets', 'module/model
             //         // set text to red
             //         context.fillStyle = "red";
             //     }
-            //     context.fillText("Time Left: "+countdown.secondsLeft(), layout.getWidth()/2, 30);
+            //     context.fillText("Time Left: "+countdown.secondsLeft(), bs.config.canvas.width/2, 30);
             //     if(countdown.secondsLeft() <= 5) {
             //         // now reset to normal color
             //         context.fillStyle = "#FFFFFF";
@@ -161,14 +172,14 @@ define(['bootstrap', 'module/model/Layout', 'module/model/Assets', 'module/model
             //     // add help instructions
             //     context.save();
             //     context.font = "12px Jura";
-            //     context.fillText("Press space for help", layout.getWidth()/2, 48);
+            //     context.fillText("Press space for help", bs.config.canvas.width/2, 48);
             //     context.restore();
                 
             // } else if(notification != null) {
-            //     context.fillText(notification, layout.getWidth()/2, 30);
+            //     context.fillText(notification, bs.config.canvas.width/2, 30);
             // }
             context.textAlign = 'right';
-            context.fillText(xp+" XP", layout.getWidth()-10, 30);
+            context.fillText(xp+" XP", bs.config.canvas.width-10, 30);
             context.restore();
         }
     };

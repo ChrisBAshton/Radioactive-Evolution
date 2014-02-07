@@ -1,4 +1,4 @@
-define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/Achievements', 'module/model/Layout', 'module/model/Assets',
+define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/Achievements', 'module/model/Assets',
 	'upgrades/camouflage',
 	'upgrades/flying_fish',
 	'upgrades/grow',
@@ -141,25 +141,25 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 
 		var init = function () {
 			// add custom buttons	
-			self.createButton("nextLevel", "Next Level", (layout.getWidth()/2)-(self.button_width/2), layout.getSystemLevel() + 50, self.button_width, self.button_height);
+			self.createButton("nextLevel", "Next Level", (bs.config.canvas.width/2)-(self.button_width/2), bs.config.canvas.elements.console + 50, self.button_width, self.button_height);
 			// temporary variable for setting the button text
 			var upgrade;
 			
 			// set the buttons
 			upgrade = upgrade_grow;
-			self.createButton("grow", self.getUpgradeDescription(upgrade), (layout.getWidth()/100)*35-(self.button_width), (layout.getHeight()/2)-50, self.button_width, self.button_height );
+			self.createButton("grow", self.getUpgradeDescription(upgrade), (bs.config.canvas.width/100)*35-(self.button_width), (bs.config.canvas.height/2)-50, self.button_width, self.button_height );
 			
 			upgrade = upgrade_poison;
-			self.createButton("poison", self.getUpgradeDescription(upgrade), (layout.getWidth()/2)-(self.button_width/2), (layout.getHeight()/2)-50, self.button_width, self.button_height  );
+			self.createButton("poison", self.getUpgradeDescription(upgrade), (bs.config.canvas.width/2)-(self.button_width/2), (bs.config.canvas.height/2)-50, self.button_width, self.button_height  );
 			
 			upgrade = upgrade_murkyWater;
-			self.createButton("murkyWater", self.getUpgradeDescription(upgrade), (layout.getWidth()/100)*65, (layout.getHeight()/2)-50, self.button_width, self.button_height );
+			self.createButton("murkyWater", self.getUpgradeDescription(upgrade), (bs.config.canvas.width/100)*65, (bs.config.canvas.height/2)-50, self.button_width, self.button_height );
 			
 			upgrade = upgrade_camouflage;
-			self.createButton("camouflage", self.getUpgradeDescription(upgrade), (layout.getWidth()/2)-20 - self.button_width, (layout.getHeight()/1.5), self.button_width, self.button_height );
+			self.createButton("camouflage", self.getUpgradeDescription(upgrade), (bs.config.canvas.width/2)-20 - self.button_width, (bs.config.canvas.height/1.5), self.button_width, self.button_height );
 			
 			upgrade = upgrade_flying;
-			self.createButton("flyingFish", self.getUpgradeDescription(upgrade), (layout.getWidth()/2)+20, (layout.getHeight()/1.5), self.button_width, self.button_height);
+			self.createButton("flyingFish", self.getUpgradeDescription(upgrade), (bs.config.canvas.width/2)+20, (bs.config.canvas.height/1.5), self.button_width, self.button_height);
 			
 			// check for buttons that are hidden
 			self.checkButtonVisibility();
