@@ -1,4 +1,4 @@
-define(['bootstrap', 'creatures/user', 'module/controller/MenuInstance'], function (bs, user, menuInstance) {
+define(['bootstrap', 'creatures/user', 'module/controller/MenuInstance', 'module/model/level'], function (bs, user, menuInstance, level) {
 	/**
 	* A class defining what actions to take when the user moves or clicks the mouse.
 	*
@@ -56,14 +56,7 @@ define(['bootstrap', 'creatures/user', 'module/controller/MenuInstance'], functi
 					user.move(mouseX,mouseY);
 				}
 			} else {
-				// look for an "unused" poison object
-				for(i=0; i < number_of_poison; i++) {
-					if(poison[i] == null) {
-						// current poison object is unused, so we can create our poison
-						poison[i] = new Poison(mouseX,mouseY);
-						break;
-					}
-				}
+				level.attemptToDropPoison(mouseX, mouseY);
 			}
 
 			//console.log('clicked in event listener');

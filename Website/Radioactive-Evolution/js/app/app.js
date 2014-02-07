@@ -1,4 +1,4 @@
-define(['module/controller/Achievements', 'module/controller/Game', 'module/controller/MenuInstance', 'IO/EventListener', 'IO/Sound'], function (achievements, game, menu, event, sound) {
+define(['module/controller/Achievements', 'module/controller/Game', 'module/controller/MenuInstance', 'module/controller/AudioController', 'IO/EventListener'], function (achievements, game, menu, sound, event) {
 
 	var App = function () {
 

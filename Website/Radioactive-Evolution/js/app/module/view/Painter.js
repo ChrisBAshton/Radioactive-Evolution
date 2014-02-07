@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/model/Assets', 'module/model/Level', 'module/model/LevelConfig', 'creatures/user'], function (bs, assets, level, LevelConfig, user) {
+define(['bootstrap', 'module/model/Assets', 'module/model/Level', 'creatures/user', 'module/controller/Status'], function (bs, assets, level, user, status) {
 
     /**
     * An abstract class that paints the game environment to the canvas, including the
@@ -163,6 +163,9 @@ define(['bootstrap', 'module/model/Assets', 'module/model/Level', 'module/model/
             // } else if(notification != null) {
             //     context.fillText(notification, bs.config.canvas.width/2, 30);
             // }
+
+            context.fillText(status.get(), bs.config.canvas.width/2, 30);
+
             context.textAlign = 'right';
             context.fillText(" XP", bs.config.canvas.width-10, 30);
             context.restore();

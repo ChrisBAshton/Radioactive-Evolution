@@ -10,7 +10,8 @@ TODO - remove the vars from this class and point to config.js instead
 define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/user', 'module/model/Countdown'], function (bs, Fish, Plankton, user, countdown) {
 
     var level,
-        xp,
+        evolution_points,
+        score,
         plankton,
         fish,
         poison;
@@ -89,11 +90,12 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/user', '
         * Generate all of the creatures for the level.
         */
         this.reset = function () {
-            level    = 1;
-            xp       = 0;
-            fish     = [];
-            plankton = [];
-            poison   = [];
+            level            = 1;
+            score            = 0;
+            evolution_points = 0;
+            fish             = [];
+            plankton         = [];
+            poison           = [];
 
             var loop;
 
@@ -143,11 +145,10 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/user', '
             while (i-- > 0) {
                 if(collision(user, plankton[i])) {
                     // play crunch sound. Reset time to zero so that sound plays multiple times if user hits multiple plankton in short time frame
-                    sound_crunch.currentTime=0;
-                    sound_crunch.play();
+                    bs.pubsub.emitEvent('regame:sound:play', ['crunch']);
                     // remove plankton and gain XP
-                    xp++;
-                    final_score++;
+                    evolution_points++;
+                    score++;
                     plankton[i].reset();
                 }
             }
@@ -188,18 +189,30 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/user', '
                         } else {
                             // user is dead
                             bs.pubsub.emitEvent('regame:game:stop');
+                            bs.pubsub.emitEvent('regame:status', ["You died! Final Score: " + score]);
                             bs.pubsub.emitEvent('regame:menu:new', ['death']);
                         }
                     } else {
                         // player eats the dead fish and gets some XP (but not as much as if they'd eaten the fish directly)
                         var gain = Math.floor((fish[i].getXP())/2);
-                        xp += gain;
-                        final_score += gain;
+                        evolution_points += gain;
+                        score += gain;
                         fish[i].reset();
                     }
                 }
             }
         }
+
+        this.attemptToDropPoison = function (mouseX, mouseY) {
+            // look for an "unused" poison object
+            for(i=0; i < poison.length; i++) {
+                if(poison[i] == null) {
+                    // current poison object is unused, so we can create our poison
+                    poison[i] = new Poison(mouseX,mouseY);
+                    break;
+                }
+            }
+        };
 
         /**
         * Check two creatures' co-ordinates and sizes, return true if the two objects overlap.

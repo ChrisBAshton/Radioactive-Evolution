@@ -18,8 +18,6 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 
         // custom menu stuff TODO
         //sound_death.play();
-        notification = "You died! Final Score: "+final_score;
-
 
         /**
         * Checks for button presses and responds appropriately.
