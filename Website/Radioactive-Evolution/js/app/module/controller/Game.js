@@ -37,12 +37,7 @@ define(['bootstrap', 'module/controller/Achievements', 'module/view/Painter', 'm
 		* @method reset_game
 		*/
 		this.reset = function () {
-			// reset level variables
-			notification = "";
-			xp = 0;
-			final_score = 0;
-			fish_killed = 0;
-			//level = 1;
+			level.reset();
 		}
 
 		/**
@@ -62,7 +57,7 @@ define(['bootstrap', 'module/controller/Achievements', 'module/view/Painter', 'm
 			startAnimating();
 			
 			// generate fish and plankton
-			level.populate();
+			level.reset();
 			// reset countdown timer
 			countdown.reset();
 

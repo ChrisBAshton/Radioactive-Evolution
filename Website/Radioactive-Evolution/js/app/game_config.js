@@ -6,6 +6,8 @@ define(function() {
             maxFish:     false,
             minPlankton: 3,
             maxPlankton: 15,
+            minPoison:   0,
+            maxPoison:   5,
             planktonXP:  1
         },
         canvas: {

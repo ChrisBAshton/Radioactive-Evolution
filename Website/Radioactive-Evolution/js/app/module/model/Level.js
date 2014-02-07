@@ -7,30 +7,38 @@ TODO - remove the vars from this class and point to config.js instead
 
 
 
-define(['bootstrap', 'module/model/LevelConfig', 'creatures/fish', 'creatures/plankton', 'creatures/user', 'module/model/Countdown'], function (bs, LevelConfig, Fish, Plankton, user, countdown) {
+define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/user', 'module/model/Countdown'], function (bs, Fish, Plankton, user, countdown) {
+
+    var level,
+        xp,
+        plankton,
+        fish,
+        poison;
+
+
 
     /**
     * Gaming variables
-    */
-    // level variables
-    var level;
-    var final_score;
-    var xp;
-    var fish_killed;
-    // "real world" objects
-    var poison = new Array();
-    var plankton = new Array();
-    var fish = new Array();
-    // upgrades
-    var upgrade_camouflage;
-    var upgrade_flying;
-    var upgrade_grow;
-    var upgrade_murkyWater;
-    var upgrade_poison;
-    // achievements are stored in this array
-    var achievements;
-    // "functional" objects
-    var notification;
+    // */
+    // // level variables
+    // var level;
+    // var final_score;
+    // var xp;
+    // var fish_killed;
+    // // "real world" objects
+    // var poison = new Array();
+    // var plankton = new Array();
+    // var fish = new Array();
+    // // upgrades
+    // var upgrade_camouflage;
+    // var upgrade_flying;
+    // var upgrade_grow;
+    // var upgrade_murkyWater;
+    // var upgrade_poison;
+    // // achievements are stored in this array
+    // var achievements;
+    // // "functional" objects
+    // var notification;
 
     var Level = function () {
 
@@ -47,21 +55,24 @@ define(['bootstrap', 'module/model/LevelConfig', 'creatures/fish', 'creatures/pl
             // move user if appropriate keyboard key is down
             user.keyboardMove();
             
-            // move plankton
-            for(var i=0; i < LevelConfig.number_of_plankton; i++) {
+            var i;
+
+            i = plankton.length;
+            while (i-- > 0) {
                 plankton[i].move();
                 plankton[i].glow();
             }
-            // move poison
-            for(var i=0; i < LevelConfig.number_of_poison; i++) {
-                if(poison[i] !== null) {
-                    poison[i].move();
-                }
+
+            i = poison.length;
+            while (i-- > 0) {
+                poison[i].move();
             }
-            // move fish
-            for(var i=0; i < LevelConfig.number_of_fish; i++) {
+
+            i = fish.length;
+            while (i-- > 0) {
                 fish[i].move();
             }
+
             countdown.nextFrame();
             if(countdown.secondsLeft() <= 0) {
                 // user survived the level and now has the opportunity to purchase upgrades
@@ -76,24 +87,45 @@ define(['bootstrap', 'module/model/LevelConfig', 'creatures/fish', 'creatures/pl
 
         /**
         * Generate all of the creatures for the level.
-        *
-        * @method populate
         */
-        this.populate = function () {
-            if(level === 1) {
-                LevelConfig.update({number_of_fish: 3});
-            } else {
-                LevelConfig.update({number_of_fish: (LevelConfig.number_of_fish++)});
+        this.reset = function () {
+            level    = 1;
+            xp       = 0;
+            fish     = [];
+            plankton = [];
+            poison   = [];
+
+            var loop;
+
+            loop = bs.config.game.minFish;
+            while (loop-- > 0) {
+                fish.push(new Fish());
             }
-            // reset creatures between levels
-            for(var i=0; i < LevelConfig.number_of_plankton; i++) {
-                plankton[i] = new Plankton();
+            loop = bs.config.game.minPlankton;
+            while (loop-- > 0) {
+                plankton.push(new Plankton());
             }
-            for(var i=0; i < LevelConfig.number_of_fish; i++) {
-                fish[i] = new Fish();
+            loop = bs.config.game.minPoison;
+            while (loop-- > 0) {
+                poison.push(new Poison());
             }
-            for(var i=0; i < LevelConfig.number_of_poison; i++) {
-                poison[i] = null;
+        };
+
+        this.drawCreatures = function () {
+
+            var i;
+
+            i = plankton.length;
+            while (i-- > 0) {
+                plankton[i].draw();
+            }
+            i = poison.length;
+            while (i-- > 0) {
+                poison[i].draw();
+            }
+            i = fish.length;
+            while (i-- > 0) {
+                fish[i].draw();
             }
         };
 
@@ -104,8 +136,11 @@ define(['bootstrap', 'module/model/LevelConfig', 'creatures/fish', 'creatures/pl
         * @method calculate
         */
         this.calculate = function () {
+            var i;
+
             // check user has eaten plankton
-            for(var i=0; i < LevelConfig.number_of_plankton; i++) {
+            i = plankton.length;
+            while (i-- > 0) {
                 if(collision(user, plankton[i])) {
                     // play crunch sound. Reset time to zero so that sound plays multiple times if user hits multiple plankton in short time frame
                     sound_crunch.currentTime=0;
@@ -116,12 +151,12 @@ define(['bootstrap', 'module/model/LevelConfig', 'creatures/fish', 'creatures/pl
                     plankton[i].reset();
                 }
             }
-            
-            // check fish has wandered into poison
-            for(var i=0; i < LevelConfig.number_of_poison; i++) {
+
+            i = poison.length;
+            while (i-- > 0) {
                 if(poison[i] !== null) {
                     // poison has been placed by the user- check against other fish coordinates
-                    for(var j=0; j < LevelConfig.number_of_fish; j++) {
+                    for(var j=0; j < fish.length; j++) {
                         // check fish is alive- a dead fish can't eat poison!
                         if(fish[j].isAlive()) {
                             // if fish comes into contact with poison
@@ -134,13 +169,13 @@ define(['bootstrap', 'module/model/LevelConfig', 'creatures/fish', 'creatures/pl
                             }
                         }
                     }
-                }
+                }                
             }
             
             // check user has touched a fish
-            for(var i=0; i < LevelConfig.number_of_fish; i++) {
+            i = fish.length;
+            while (i-- > 0) {
                 if(collision(user, fish[i])) {
-                    
                     if(fish[i].isAlive()) {
                         // check which fish is bigger
                         if( (user.getWidth() * user.getHeight()) > (fish[i].getWidth() * fish[i].getHeight()) ) {
@@ -192,12 +227,6 @@ define(['bootstrap', 'module/model/LevelConfig', 'creatures/fish', 'creatures/pl
             
             return (Xoverlap && Yoverlap);
         };
-
-        this.fish = fish;
-
-        this.poison = poison;
-
-        this.plankton = plankton;
 
     };
 

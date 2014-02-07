@@ -81,22 +81,7 @@ define(['bootstrap', 'module/model/Assets', 'module/model/Level', 'module/model/
             // draw background
             this.draw_background();
             
-            // draw plankton
-            for(var i=0; i < LevelConfig.number_of_plankton; i++) {
-                level.plankton[i].draw();
-            }
-            
-            // draw poison
-            for(var i=0; i < LevelConfig.number_of_poison; i++) {
-                if(level.poison[i] != null) {
-                    level.poison[i].draw();
-                }
-            }
-            
-            // draw fish
-            for(var i=0; i < LevelConfig.number_of_fish; i++) {
-                level.fish[i].draw();
-            }
+            level.drawCreatures();
             
             // draw user
             user.draw();
@@ -179,7 +164,7 @@ define(['bootstrap', 'module/model/Assets', 'module/model/Level', 'module/model/
             //     context.fillText(notification, bs.config.canvas.width/2, 30);
             // }
             context.textAlign = 'right';
-            context.fillText(xp+" XP", bs.config.canvas.width-10, 30);
+            context.fillText(" XP", bs.config.canvas.width-10, 30);
             context.restore();
         }
     };
