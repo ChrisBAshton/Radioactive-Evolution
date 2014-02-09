@@ -1,4 +1,4 @@
-define([], function () {
+define(['bootstrap'], function (bs) {
 
     /**
     * Class defining number of seconds per level, and other variables
@@ -12,7 +12,7 @@ define([], function () {
 
         this.init = function () {
             // number of seconds per level
-            self.LEVEL_DURATION = 10;
+            self.LEVEL_DURATION = bs.config.game.countdown;
             // sets the number of milliseconds between frames
             self.frameInterval = 20;
             // therefore calculates the number of frames per second
@@ -64,6 +64,7 @@ define([], function () {
                 // a second has passed
                 this.countdown--;
                 this.frameCount = 0;
+                bs.pubsub.emitEvent('regame:status', ["Time left: " + self.countdown]);
             }
         }
 

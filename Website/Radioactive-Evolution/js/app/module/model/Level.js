@@ -1,49 +1,21 @@
-/*
-
-TODO - remove the vars from this class and point to config.js instead
-
-*/
-
-
-
-
-define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/user', 'module/model/Countdown'], function (bs, Fish, Plankton, user, countdown) {
-
-    var level,
-        evolution_points,
-        score,
-        plankton,
-        fish,
-        poison;
-
-
-
-    /**
-    * Gaming variables
-    // */
-    // // level variables
-    // var level;
-    // var final_score;
-    // var xp;
-    // var fish_killed;
-    // // "real world" objects
-    // var poison = new Array();
-    // var plankton = new Array();
-    // var fish = new Array();
-    // // upgrades
-    // var upgrade_camouflage;
-    // var upgrade_flying;
-    // var upgrade_grow;
-    // var upgrade_murkyWater;
-    // var upgrade_poison;
-    // // achievements are stored in this array
-    // var achievements;
-    // // "functional" objects
-    // var notification;
+define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison', 'creatures/user', 'module/model/Countdown'], function (bs, Fish, Plankton, Poison, user, countdown) {
 
     var Level = function () {
 
-        var self = this;
+        var self = this,
+            level,
+            evolution_points,
+            score,
+            plankton,
+            fish,
+            poison,
+            number_of_fish,
+            number_of_poison,
+            number_of_plankton;
+
+        bs.pubsub.addListener('regame:nextLevel', function () {
+            self.nextLevel();
+        });
 
         /**
         * Move all creatures and paint results to canvas.
@@ -86,6 +58,12 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/user', '
             }
         };
 
+        this.nextLevel = function () {
+            level++;
+            number_of_fish++;
+            self.populate();
+        };
+
         /**
         * Generate all of the creatures for the level.
         */
@@ -93,24 +71,24 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/user', '
             level            = 1;
             score            = 0;
             evolution_points = 0;
-            fish             = [];
-            plankton         = [];
-            poison           = [];
+            number_of_fish     = bs.config.game.minFish;
+            number_of_plankton = bs.config.game.minPlankton;
+            number_of_poison   = bs.config.game.minPoison;
+            self.populate();
+        };
 
-            var loop;
+        this.populate = function () {
+            fish = populateArray(Fish, number_of_fish);
+            plankton = populateArray(Plankton, number_of_plankton);
+            poison = populateArray(Poison, number_of_poison);
+        };
 
-            loop = bs.config.game.minFish;
-            while (loop-- > 0) {
-                fish.push(new Fish());
+        var populateArray = function (objectName, numberOfTimes) {
+            var myArray = [];
+            while (numberOfTimes-- > 0) {
+                myArray.push(new objectName());
             }
-            loop = bs.config.game.minPlankton;
-            while (loop-- > 0) {
-                plankton.push(new Plankton());
-            }
-            loop = bs.config.game.minPoison;
-            while (loop-- > 0) {
-                poison.push(new Poison());
-            }
+            return myArray;
         };
 
         this.drawCreatures = function () {

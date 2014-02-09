@@ -57,7 +57,7 @@ define(['bootstrap', 'module/controller/Achievements', 'module/view/Painter', 'm
 			startAnimating();
 			
 			// generate fish and plankton
-			level.reset();
+			level.populate();
 			// reset countdown timer
 			countdown.reset();
 
@@ -102,8 +102,6 @@ define(['bootstrap', 'module/controller/Achievements', 'module/view/Painter', 'm
 			stopAnimating();
 			// create help menu
 			bs.pubsub.emitEvent('regame:menu:new', ['help']);
-			// draw menu
-			menu.draw();
 		}
 
 		/**
@@ -114,8 +112,6 @@ define(['bootstrap', 'module/controller/Achievements', 'module/view/Painter', 'm
 		this.resume = function() {
 			// resume animation
 			startAnimating();
-			// remove menu
-			menu = null;
 			// hide cursor
 			Painter.changeCursor("none");
 			// paint game

@@ -1,9 +1,9 @@
-define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/Achievements', 'module/model/Assets',
+define(['bootstrap', 'menu/_menu', 'module/controller/Achievements', 'module/model/Assets',
 	'upgrades/camouflage',
 	'upgrades/flying_fish',
 	'upgrades/grow',
 	'upgrades/murky_water',
-	'upgrades/poison'], function (bs, Menu, game, Achievements, layout, assets, upgrade_camouflage, upgrade_flying, upgrade_grow, upgrade_murkyWater, upgrade_poison) {
+	'upgrades/poison'], function (bs, Menu, Achievements, assets, upgrade_camouflage, upgrade_flying, upgrade_grow, upgrade_murkyWater, upgrade_poison) {
 
 	var MenuLevel = function () {
 		
@@ -25,13 +25,13 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 				if(this.buttons[i].isSelected()) {
 					hoveringOverSomething = true;
 					if(this.buttons[i].getKey() === "nextLevel") {
-						notification = "Proceed to the next level.";
+						bs.pubsub.emitEvent('regame:status', ["Proceed to the next level."]);
 					} else {
 						var hoveringOver = this.getUpgradeInstance(this.buttons[i].getKey());
 						if(hoveringOver !== null) {
 							if(this.buttons[i].isVisible()) {
 								// display description if user is hovering over a visible button
-								notification = hoveringOver.getDescription();
+								bs.pubsub.emitEvent('regame:status', [hoveringOver.getDescription()]);
 							}
 						}
 					}
@@ -39,7 +39,7 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 			}
 			// we aren't hovering over any button, so clear the notification area
 			if(!hoveringOverSomething) {
-				notification = "";
+				bs.pubsub.emitEvent('regame:status', [""]);
 			}
 		}
 
@@ -86,15 +86,14 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 			for(var i = 0; i < this.buttons.length; i++) {
 				if(this.buttons[i].isSelected()) {
 					if(this.buttons[i].getKey() === "nextLevel") {
-						notification = null;
-						level++;
-						game.start();
+						bs.pubsub.emitEvent('regame:nextLevel');
+						bs.pubsub.emitEvent('regame:game:start');
 					} else {
 						var upgradeClicked = this.getUpgradeInstance(this.buttons[i].getKey());
 						if(!upgradeClicked.canUpgrade()) {
-							notification = "You have maxed out this upgrade!";
+							bs.pubsub.emitEvent('regame:status', ["You have maxed out this upgrade!"]);
 						} else if(!upgradeClicked.canAffordUpgrade()) {
-							notification = "You cannot afford this upgrade!";
+							bs.pubsub.emitEvent('regame:status', ["You cannot afford this upgrade!"]);
 						} else {
 							upgradeClicked.applyUpgrade();
 							sound_success.currentTime=0;
@@ -104,7 +103,7 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 							} else {
 								this.buttons[i].setText(this.getUpgradeDescription(upgradeClicked));
 							}
-							notification = "Upgrade purchased!";
+							bs.pubsub.emitEvent('regame:status', ["Upgrade purchased!"]);
 						}
 					}
 				}

@@ -3,7 +3,7 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 	var HelpMenu = function () {
 		
 		bs.extend(Menu, this);
-		notification = "Game Paused";
+		bs.pubsub.emitEvent('regame:status', ["Game Paused"]);
 
 		/**
 		* Draws boxes on the screen, with each box containing useful hints and tips.
