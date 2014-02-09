@@ -167,7 +167,7 @@ define(['bootstrap', 'module/model/Assets', 'module/model/Level', 'creatures/use
             context.fillText(status.get(), bs.config.canvas.width/2, 30);
 
             context.textAlign = 'right';
-            context.fillText(" XP", bs.config.canvas.width-10, 30);
+            context.fillText(level.ep() + " XP", bs.config.canvas.width-10, 30);
             context.restore();
         }
     };

@@ -1,4 +1,4 @@
-define(['bootstrap', 'upgrades/_upgrade', 'creatures/user'], function (bs, Upgrade, user) {
+define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 
 	/**
 	* Growing, as the name suggests, increases the player's fish size. As the player can eat any fish
@@ -67,7 +67,7 @@ define(['bootstrap', 'upgrades/_upgrade', 'creatures/user'], function (bs, Upgra
 					break;
 			}
 			height = Math.floor(width/2);
-			user.setSize(width, height);
+			bs.pubsub.emitEvent('regame:upgrade:grow', [width, height]);
 		}
 
 	};

@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/model/Level'], function (bs, level) {	
+define(['bootstrap'], function (bs) {	
 	/**
 	* An upgrade is an ability or property that the user is able to purchase, using XP, to improve their
 	* gaming experience and help them to meet the demands of the challenging later levels.
@@ -75,7 +75,8 @@ define(['bootstrap', 'module/model/Level'], function (bs, level) {
 		* @return {Boolean}		True if can afford to upgrade
 		*/
 		this.canAffordUpgrade = function() {
-			return (level.ep() >= self.cost);
+			//return (level.ep() >= self.cost);
+			return false;
 		}
 
 		/**
@@ -87,7 +88,7 @@ define(['bootstrap', 'module/model/Level'], function (bs, level) {
 		*/
 		this.applyUpgrade = function() {
 			// charge user
-			level.spendEp(self.cost);
+			//level.spendEp(self.cost);
 			// increment level of upgrade
 			self.currentLevel++;
 			// calculate new cost of upgrade

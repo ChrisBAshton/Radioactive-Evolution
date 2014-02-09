@@ -12,10 +12,11 @@ define(['bootstrap', 'menu/main', 'menu/level', 'menu/death', 'menu/achievements
 
 		var _listen = function () {
 			bs.pubsub.addListener('regame:menu:new', function (menu) {
+				self.destroy();
 				self.set(menu);
 			});
 			bs.pubsub.addListener('regame:game:start', function () {
-				instance = null;
+				self.destroy();
 			});
 		}
 
@@ -37,7 +38,6 @@ define(['bootstrap', 'menu/main', 'menu/level', 'menu/death', 'menu/achievements
 				instance = new HelpMenu();
 				break;
 			}
-
 			instance.draw();
 		};
 
@@ -49,6 +49,12 @@ define(['bootstrap', 'menu/main', 'menu/level', 'menu/death', 'menu/achievements
 			return instance !== null;
 		}
 
+		this.destroy = function () {
+			if (typeof instance !== 'undefined' && instance !== null) {
+				instance.destroy();
+			}
+			instance = null;
+		}
 	};
 
 	return new MenuInstance();

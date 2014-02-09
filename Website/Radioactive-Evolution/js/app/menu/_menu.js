@@ -18,6 +18,10 @@ define(['bootstrap', 'module/view/Button', 'module/view/Painter'], function (bs,
 		// declare an array of buttons
 		this.buttons = new Array();	// we then use: this.buttons.push(new Button(parameters));
 
+		this.destroy = function () {
+			self.buttons = [];
+		};
+
 		this.createButton = function (identifier, text, posTopLeft, posBottomLeft, posTopRight, posBottomRight) {
 			// add custom buttons
 			var button = new Button(identifier, text, posTopLeft, posBottomLeft, posTopRight, posBottomRight);

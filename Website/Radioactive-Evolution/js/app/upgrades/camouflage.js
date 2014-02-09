@@ -23,7 +23,7 @@ define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 		* @method updateCost
 		*/
 		this.updateCost = function() {
-			console.log("Console log should come from here" + self.currentLevel);
+			console.log("Console log should come from here. Oddly enough, once you upgrade past first level, this starts working.");
 			switch(self.currentLevel) {
 				case 0:
 					self.cost = 25;

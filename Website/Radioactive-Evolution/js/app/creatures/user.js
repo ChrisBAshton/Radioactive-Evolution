@@ -1,4 +1,4 @@
-define(['creatures/_creature', 'bootstrap'], function (Creature, bs) {
+define(['creatures/_creature', 'bootstrap', 'module/controller/UpgradeController'], function (Creature, bs, upgrades) {
 
 
 /**
@@ -21,6 +21,9 @@ var User = function () {
 
 	bs.pubsub.addListener('regame:game:reset', function () {
 		self.reset();
+	});
+	bs.pubsub.addListener('regame:upgrade:grow', function (width, height) {
+		self.setSize(width, height);
 	});
 }
 
@@ -113,14 +116,12 @@ User.prototype.move = function(x,y) {
 	}
 }
 
-// @TODO
 var hasCamouflage = function () {
-	return false;
+	return upgrades.get("Camouflage").getLevel() === 1;
 };
 
-// @TODO
 var hasFlying = function () {
-	return false;
+	return upgrades.get("Flying Fish").getLevel() === 1;
 };
 
 /**
