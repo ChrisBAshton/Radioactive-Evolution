@@ -9,6 +9,7 @@ define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 	* @constructor
 	*/
 	var UpgradeCamouflage = function () {
+		var self = this;
 		bs.extend(Upgrade, this);
 		// initialise variables
 		this.maxLevel = 1;
@@ -22,13 +23,14 @@ define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 		* @method updateCost
 		*/
 		this.updateCost = function() {
-			switch(this.currentLevel) {
+			console.log("Console log should come from here" + self.currentLevel);
+			switch(self.currentLevel) {
 				case 0:
-					this.cost = 25;
-					this.description = "Blend into the sand to evade your enemy!";
+					self.cost = 25;
+					self.description = "Blend into the sand to evade your enemy!";
 			}
 		}
 	};
 
-	return new UpgradeCamouflage();
+	return UpgradeCamouflage;
 });

@@ -77,6 +77,6 @@ define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 		}
 	};
 
-	return new UpgradePoison();
+	return UpgradePoison;
 
 });

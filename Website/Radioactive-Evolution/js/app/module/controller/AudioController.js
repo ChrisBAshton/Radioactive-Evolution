@@ -9,9 +9,12 @@ define(['bootstrap'], function (bs) {
         this.init = function () {
             crunch = document.createElement('audio');
             crunch.setAttribute('src', "sounds/crunch.wav");
+            success = document.createElement('audio');
+            success.setAttribute('src', "sounds/success.wav");
             
             audioAssets = {
-                "crunch": crunch
+                "crunch": crunch,
+                "success": success
             };
 
             bs.pubsub.addListener('regame:sound:play', function (asset) {

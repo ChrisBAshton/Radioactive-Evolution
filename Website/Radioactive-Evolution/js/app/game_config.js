@@ -1,7 +1,7 @@
 define(function() {
     return {
         game: {
-            countdown:   10,    // number of seconds per level
+            countdown:   3,    // number of seconds per level
             minFish:     1,
             maxFish:     false,
             minPlankton: 3,
@@ -12,11 +12,11 @@ define(function() {
         },
         canvas: {
             width:       1000,
-            height:      700,
+            height:      400,
             elements: {
                 console: 50,
                 water:   140,
-                sand:    630
+                sand:    360
             }
         },
         menu: {

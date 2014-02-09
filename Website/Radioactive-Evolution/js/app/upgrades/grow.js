@@ -72,6 +72,6 @@ define(['bootstrap', 'upgrades/_upgrade', 'creatures/user'], function (bs, Upgra
 
 	};
 
-	return new UpgradeGrow();
+	return UpgradeGrow;
 
 });

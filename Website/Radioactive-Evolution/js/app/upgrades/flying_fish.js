@@ -31,6 +31,6 @@ define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 	};
 
 
-	return new UpgradeFlyingFish();
+	return UpgradeFlyingFish;
 
 });

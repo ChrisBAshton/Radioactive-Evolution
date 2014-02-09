@@ -76,6 +76,6 @@ define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 		}
 	}
 
-	return new UpgradeMurkyWater();
+	return UpgradeMurkyWater;
 
 });

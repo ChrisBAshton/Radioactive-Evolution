@@ -1,4 +1,4 @@
-define(['creatures/_creature', 'bootstrap', 'upgrades/camouflage', 'upgrades/flying_fish'], function (Creature, bs, upgrade_camouflage, upgrade_flying) {
+define(['creatures/_creature', 'bootstrap'], function (Creature, bs) {
 
 
 /**
@@ -79,7 +79,9 @@ User.prototype.move = function(x,y) {
 		this.y = y;
 	} else if(y <= bs.config.canvas.elements.water) {
 		// apply flying fish ability if user has unlocked it
-		if(upgrade_flying.getLevel() == 1) {
+		// @TODO
+		// upgrade_flying.getLevel() == 1
+		if(hasFlying()) {
 			if(y >= bs.config.canvas.elements.console) {
 				this.y = y;
 			} else {
@@ -99,7 +101,10 @@ User.prototype.move = function(x,y) {
 	}
 	
 	// apply camouflage if user has unlocked it and is near sand
-	if(upgrade_camouflage.getLevel() == 1 && Math.abs((this.y - bs.config.canvas.elements.sand)) < 6) {
+	// @TODO
+	//upgrade_camouflage.getLevel() == 1
+	
+	if(hasCamouflage() && Math.abs((this.y - bs.config.canvas.elements.sand)) < 6) {
 		this.currentlyCamouflaged = true;
 		this.color = "#CEB499";
 	} else {
@@ -107,6 +112,16 @@ User.prototype.move = function(x,y) {
 		this.color = "red";
 	}
 }
+
+// @TODO
+var hasCamouflage = function () {
+	return false;
+};
+
+// @TODO
+var hasFlying = function () {
+	return false;
+};
 
 /**
 * Returns true if the user is currently camouflaged in the sand.
