@@ -16,8 +16,7 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game'], function (bs, Menu
 		* @param {Number} mouseX	The mouse's X co-ordinate
 		* @param {Number} mouseY	The mouse's Y co-ordinate
 		*/
-		this.mouseClicked = function(mouseX,mouseY) {
-			console.log('clicked in Menu Main');
+		this.mouseClicked = function (mouseX, mouseY) {
 			for(var i = 0; i < this.buttons.length; i++) {
 				if(this.buttons[i].isSelected()) {
 					switch(this.buttons[i].getKey()) {

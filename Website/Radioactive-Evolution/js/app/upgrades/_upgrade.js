@@ -71,12 +71,11 @@ define(['bootstrap'], function (bs) {
 		/**
 		* Checks if the user can afford the cost of upgrading to the next level.
 		*@TODO
-		* @method canAffordUpgrade
+		* @param whatICanSpend {Number}
 		* @return {Boolean}		True if can afford to upgrade
 		*/
-		this.canAffordUpgrade = function() {
-			//return (level.ep() >= self.cost);
-			return false;
+		this.canAffordUpgrade = function (whatICanSpend) {
+			return (whatICanSpend >= self.cost);
 		}
 
 		/**
@@ -86,9 +85,9 @@ define(['bootstrap'], function (bs) {
 		*
 		* @method applyUpgrade
 		*/
-		this.applyUpgrade = function() {
+		this.applyUpgrade = function (level) {
 			// charge user
-			//level.spendEp(self.cost);
+			level.spendEp(self.cost);
 			// increment level of upgrade
 			self.currentLevel++;
 			// calculate new cost of upgrade

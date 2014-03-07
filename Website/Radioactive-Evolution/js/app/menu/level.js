@@ -1,4 +1,4 @@
-define(['bootstrap', 'menu/_menu', 'module/controller/Achievements', 'module/model/Assets', 'module/controller/UpgradeController'], function (bs, Menu, Achievements, assets, upgradeController) {
+define(['bootstrap', 'menu/_menu', 'module/controller/Achievements', 'module/model/Assets', 'module/controller/UpgradeController', 'module/model/Level'], function (bs, Menu, Achievements, assets, upgradeController, level) {
 
 	var MenuLevel = function () {
 		
@@ -13,9 +13,6 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Achievements', 'module/mod
 		* @method mouseMovedActions
 		*/
 		this.mouseMovedActions = function() {
-
-			console.log("STILL LISTENING FOR MOUSE MOVE in MENU LEVEL");
-
 			var hoveringOverSomething = false;
 			// loop through buttons and update description based on button we're hovering over
 			for(var i = 0; i < this.buttons.length; i++) {
@@ -58,10 +55,10 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Achievements', 'module/mod
 						var upgradeClicked = upgradeController.get(this.buttons[i].getKey());
 						if(!upgradeClicked.canUpgrade()) {
 							bs.pubsub.emitEvent('regame:status', ["You have maxed out this upgrade!"]);
-						} else if(!upgradeClicked.canAffordUpgrade()) {
+						} else if(!upgradeClicked.canAffordUpgrade(level.ep())) {
 							bs.pubsub.emitEvent('regame:status', ["You cannot afford this upgrade!"]);
 						} else {
-							upgradeClicked.applyUpgrade();
+							upgradeClicked.applyUpgrade(level);
 							bs.pubsub.emitEvent('regame:sound:play', ['success']);
 							if(!upgradeClicked.canUpgrade()) {
 								this.buttons[i].setVisible(false);
