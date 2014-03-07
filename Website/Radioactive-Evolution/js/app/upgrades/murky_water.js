@@ -9,11 +9,14 @@ define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 	* @constructor
 	*/
 	var UpgradeMurkyWater = function () {
+		var self = this;
 		bs.extend(Upgrade, this);
-		// initialise variables
-		this.maxLevel = 5;
-		this.title = "Murky Water";
-		this.updateCost();
+
+		var construct = function () {
+			self.maxLevel = 5;
+			self.title = "Murky Water";
+			self.updateCost();
+		};
 
 		/**
 		* Updates the cost of the upgrade based on the current level.
@@ -74,6 +77,8 @@ define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 					break;
 			}
 		}
+
+		construct();
 	}
 
 	return UpgradeMurkyWater;

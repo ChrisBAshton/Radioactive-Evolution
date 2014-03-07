@@ -178,6 +178,13 @@ define(['bootstrap', 'module/view/Button', 'module/view/Painter'], function (bs,
 			console.log('clicked inside Menu', mouseX, mouseY);
 		}
 
+		/**
+		 * Called when the menu instance changes.
+		 */
+		this.destroy = function () {
+			bs.pubsub.removeEvent('regame:mouse:moved');
+		};
+
 		bs.pubsub.addListener('regame:mouse:clicked', function (x, y) {
 			console.log('clicked in Menu');
 			self.mouseClicked(x, y);

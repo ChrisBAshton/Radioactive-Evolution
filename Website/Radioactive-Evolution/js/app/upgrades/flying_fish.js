@@ -9,11 +9,14 @@ define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 	* @constructor
 	*/
 	var UpgradeFlyingFish = function () {
+		var self = this;
 		bs.extend(Upgrade, this);
-		// initialise variables
-		this.maxLevel = 1;
-		this.title = "Flying Fish";
-		this.updateCost();
+
+		var construct = function () {
+			self.maxLevel = 1;
+			self.title = "Flying Fish";
+			self.updateCost();
+		};
 
 		/**
 		* Updates the cost of the upgrade based on the current level.
@@ -28,6 +31,8 @@ define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 					this.description = "Leap above the surface of the water to avoid your predators!";
 			}
 		}
+
+		construct();
 	};
 
 

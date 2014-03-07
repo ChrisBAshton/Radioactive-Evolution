@@ -11,10 +11,12 @@ define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 	var UpgradeCamouflage = function () {
 		var self = this;
 		bs.extend(Upgrade, this);
-		// initialise variables
-		this.maxLevel = 1;
-		this.title = "Camouflage";
-		this.updateCost();
+
+		var construct = function () {
+			self.maxLevel = 1;
+			self.title = "Camouflage";
+			self.updateCost();
+		};
 
 		/**
 		* Updates the cost of the upgrade based on the current level.
@@ -23,13 +25,14 @@ define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 		* @method updateCost
 		*/
 		this.updateCost = function() {
-			console.log("Console log should come from here. Oddly enough, once you upgrade past first level, this starts working.");
 			switch(self.currentLevel) {
 				case 0:
 					self.cost = 25;
 					self.description = "Blend into the sand to evade your enemy!";
 			}
 		}
+
+		construct();
 	};
 
 	return UpgradeCamouflage;

@@ -9,13 +9,15 @@ define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 	* @constructor
 	*/
 	var UpgradeGrow = function () {
+		var self = this;
 		// call the parent constructor
 		bs.extend(Upgrade, this);
 
-		// initialise variables
-		this.maxLevel = 4;
-		this.title = "Grow";
-		this.updateCost();
+		var construct = function () {
+			self.maxLevel = 4;
+			self.title = "Grow";
+			self.updateCost();
+		};
 
 		/**
 		* Updates the cost of the upgrade based on the current level.
@@ -70,6 +72,7 @@ define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 			bs.pubsub.emitEvent('regame:upgrade:grow', [width, height]);
 		}
 
+		construct();
 	};
 
 	return UpgradeGrow;

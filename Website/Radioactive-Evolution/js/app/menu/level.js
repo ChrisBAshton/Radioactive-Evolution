@@ -13,6 +13,9 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Achievements', 'module/mod
 		* @method mouseMovedActions
 		*/
 		this.mouseMovedActions = function() {
+
+			console.log("STILL LISTENING FOR MOUSE MOVE in MENU LEVEL");
+
 			var hoveringOverSomething = false;
 			// loop through buttons and update description based on button we're hovering over
 			for(var i = 0; i < this.buttons.length; i++) {

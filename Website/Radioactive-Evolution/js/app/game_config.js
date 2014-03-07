@@ -11,8 +11,8 @@ define(function() {
             planktonXP:  1
         },
         canvas: {
-            width:       1000,
-            height:      400,
+            width:       780,
+            height:      500,
             elements: {
                 console: 50,
                 water:   140,
