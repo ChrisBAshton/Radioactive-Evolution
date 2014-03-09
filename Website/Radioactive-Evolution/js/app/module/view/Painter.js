@@ -78,12 +78,10 @@ define(['bootstrap', 'module/model/Assets', 'module/model/Level', 'creatures/use
         * @method redraw
         */
         this.redraw = function() {
-            // draw background
             this.draw_background();
             
             level.drawCreatures();
             
-            // draw user
             user.draw();
             
             // draw level summary

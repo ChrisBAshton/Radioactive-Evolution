@@ -59,6 +59,9 @@ define(['bootstrap'], function (bs) {
         * @method nextFrame
         */
         this.nextFrame = function() {
+            if (this.frameCount === 0) {
+                bs.pubsub.emitEvent('regame:status', ["Time left: " + self.countdown]);
+            }
             this.frameCount++;
             if(this.frameCount >= this.framesPerSecond) {
                 // a second has passed
