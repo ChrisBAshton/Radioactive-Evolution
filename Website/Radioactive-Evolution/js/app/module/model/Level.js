@@ -16,13 +16,6 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
         bs.pubsub.addListener('regame:nextLevel', function () {
             self.nextLevel();
         });
-        
-        /**
-        * Returns true if playing, false if in a menu.
-        */
-        this.playing = function () {
-
-        };
 
         this.level = function () {
             return level;
@@ -125,6 +118,7 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
         * e.g. the user swimming into plankton.
         *
         * @method calculate
+        * @TODO - move out into separate functions, reuse the looping code.
         */
         this.calculate = function () {
             var i;

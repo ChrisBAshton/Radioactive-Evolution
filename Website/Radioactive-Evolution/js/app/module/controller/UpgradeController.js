@@ -18,14 +18,15 @@ define(['bootstrap', 'upgrades/camouflage', 'upgrades/flying_fish', 'upgrades/gr
         ];
 
         /**
-        * Returns the upgrade instance (object) of the given string, e.g.
+        * Returns the upgrade instance (object) of the given string
+
+        * For example:
         * if "camouflage" is provided as a parameter, the upgrade_camouflage variable will be returned.
-        * If no parameter is provided, the upgrades array is returned.
         *
         * @override
         * @method get
         * @param {String} upgradeName   The name of the upgrade whose instance (object) we want to find.
-        * @return {Upgrade}             The upgrade corresponding to the given string.
+        * @return {Mixed}               If a paramter is provided, returns the upgrade corresponding to the given string. Otherwise returns the upgrades array.
         */
         this.get = function(upgradeName) {
 

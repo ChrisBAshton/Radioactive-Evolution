@@ -1,9 +1,3 @@
-// TODO (?) - point to collision function in this class, remove from module/model/Level?
-
-
-
-
-
 define(function () {
 
     var ObjectHelper = function () {
@@ -44,5 +38,4 @@ define(function () {
     };
 
     return new ObjectHelper();
-
 });
