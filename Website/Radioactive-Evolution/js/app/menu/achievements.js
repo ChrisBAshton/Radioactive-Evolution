@@ -1,7 +1,7 @@
-define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/Achievements', 'module/model/Assets'], function (bs, Menu, game, Achievements, layout, assets) {
+define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/Achievements'], function (bs, Menu, game, Achievements, layout) {
 
 	var AchievementsMenu = function () {
-		
+
 		var self = this;
 		bs.extend(Menu, this);
 
@@ -33,6 +33,7 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 		* @method drawExtra
 		*/
 		this.drawExtra = function() {
+
 			// set size of icons
 			var iconSize = 50,
 				achievement,
@@ -42,9 +43,9 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 				achievement = Achievements.getAchievementInstance(this.buttons[i].getKey());
 				if(achievement !== null) {
 					if(achievement.isAchieved()) {
-						icon = assets.img_tick;
+						icon = this.assets.img_tick;
 					} else {
-						icon = assets.img_cross;
+						icon = this.assets.img_cross;
 					}
 					context.drawImage(
 						icon, 

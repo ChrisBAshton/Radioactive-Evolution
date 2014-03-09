@@ -56,6 +56,7 @@ define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 		* @method specificUpgrades
 		*/
 		this.specificUpgrades = function() {
+			console.log('Chris, in murky_water.js we increase number_of_plankton, but that is a local variable. Need to emit an event instead.');
 			switch(this.currentLevel) {
 				case 0:
 					number_of_plankton = 3;

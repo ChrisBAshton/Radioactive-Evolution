@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/view/Button', 'module/view/Painter'], function (bs, Button, painter) {
+define(['bootstrap', 'module/view/Button', 'module/view/Painter', 'module/model/Assets'], function (bs, Button, painter, assets) {
 
 	/**
 	* A menu is practically any screen outside of the core gameplay. It is often made up of buttons which can 
@@ -12,7 +12,9 @@ define(['bootstrap', 'module/view/Button', 'module/view/Painter'], function (bs,
 	var Menu = function () {
 		var self = this;
 
-		// define standard button width and height
+		this.assets = assets;
+
+		// define standard button width and height @TODO -move to button class
 		this.button_width = 250;
 		this.button_height = 120;
 		// declare an array of buttons
