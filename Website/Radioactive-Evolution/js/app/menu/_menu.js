@@ -14,9 +14,6 @@ define(['bootstrap', 'module/view/Button', 'module/view/Painter', 'module/model/
 
 		this.assets = assets;
 
-		// define standard button width and height @TODO -move to button class
-		this.button_width = 250;
-		this.button_height = 120;
 		// declare an array of buttons
 		this.buttons = new Array();	// we then use: this.buttons.push(new Button(parameters));
 
@@ -24,7 +21,11 @@ define(['bootstrap', 'module/view/Button', 'module/view/Painter', 'module/model/
 			self.buttons = [];
 		};
 
-		this.createButton = function (identifier, text, posTopLeft, posBottomLeft, posTopRight, posBottomRight) {
+		this.createButton = function (identifier, text, posTopLeft, posBottomLeft, button_width, button_height) {
+
+			posTopRight = button_width || 250;
+			posBottomRight = button_height || 120;
+
 			// add custom buttons
 			var button = new Button(identifier, text, posTopLeft, posBottomLeft, posTopRight, posBottomRight);
 			this.buttons.push(button);

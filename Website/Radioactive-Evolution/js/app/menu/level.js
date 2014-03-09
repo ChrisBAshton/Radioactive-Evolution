@@ -89,17 +89,17 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Achievements', 'module/mod
 
 		var init = function () {
 			// add custom buttons	
-			self.createButton("nextLevel", "Next Level", (bs.config.canvas.width/2)-(self.button_width/2), bs.config.canvas.elements.console + 50, self.button_width, self.button_height);
+			self.createButton("nextLevel", "Next Level", (bs.config.canvas.width/2)-(125), bs.config.canvas.elements.console + 50);
 
 			var upgrades = upgradeController.get(),
 				upgrade,
 				positions = [
 					[
-						(bs.config.canvas.width/100)*35-(self.button_width), 
+						((bs.config.canvas.width/100)*35)-250, 
 						(bs.config.canvas.height/2)-50
 					],
 					[
-						(bs.config.canvas.width/2)-(self.button_width/2),
+						(bs.config.canvas.width/2)-(125),
 						(bs.config.canvas.height/2)-50
 					],
 					[
@@ -107,7 +107,7 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Achievements', 'module/mod
 						(bs.config.canvas.height/2)-50
 					],
 					[
-						((bs.config.canvas.width/2)-20)-self.button_width,
+						((bs.config.canvas.width/2)-20)-250,
 						(bs.config.canvas.height/1.5)
 					],
 					[
@@ -122,9 +122,7 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Achievements', 'module/mod
 					upgrade.getTitle(), 
 					upgradeController.getUpgradeDescription(upgrade), 
 					positions[i][0], 
-					positions[i][1],
-					self.button_width, 
-					self.button_height
+					positions[i][1]
 				);
 			}
 			

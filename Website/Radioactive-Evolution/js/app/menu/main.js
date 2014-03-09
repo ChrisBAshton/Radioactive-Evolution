@@ -5,8 +5,8 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game'], function (bs, Menu
 		bs.extend(Menu, this);
 		bs.pubsub.emitEvent('regame:status', ["Welcome to Radioactive Evolution"]);
 
-		this.createButton("play", "Play Game", (bs.config.canvas.width/4)-50, bs.config.canvas.height/2, this.button_width, this.button_height);
-		this.createButton("achievements", "View Achievements",(bs.config.canvas.width/2)+50, (bs.config.canvas.height/2), this.button_width, this.button_height);
+		this.createButton("play", "Play Game", (bs.config.canvas.width/4)-50, bs.config.canvas.height/2);
+		this.createButton("achievements", "View Achievements",(bs.config.canvas.width/2)+50, (bs.config.canvas.height/2));
 
 		/**
 		* Checks for button presses and responds appropriately.
