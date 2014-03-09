@@ -21,9 +21,6 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 		this.createButton("allUpgrades", "Purchased all upgrades", (bs.config.canvas.width/100)*65, (bs.config.canvas.height/3)+(240)+20);
 		
 		this.createButton("clear", "Reset all achievements", (bs.config.canvas.width/100)*65, bs.config.canvas.elements.console + 50, 250, 50);
-		
-		// used for rewarding user
-		this.message;
 
 		/**
 		* Print icons over each achievement button, showing the user at a
@@ -55,24 +52,6 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 						iconSize
 					);
 				}
-			}
-
-			if(this.message) {
-				// draw box
-				context.fillStyle = "black";
-				context.fillRect(
-					(bs.config.canvas.width/100)*35-(250), 
-					bs.config.canvas.elements.sand+15, 
-					(bs.config.canvas.width /100) *80, 
-					25
-				);
-				
-				// write message
-				context.fillStyle = "#FFFFFF";
-				context.font = "12px Verdana";
-				context.textAlign = 'center';
-			
-				context.fillText(this.message, (bs.config.canvas.width/2), bs.config.canvas.elements.sand+30);
 			}
 		}
 
@@ -112,31 +91,31 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 				// user has achieved the achievement
 				switch(achievementInstance.getTitle()) {
 					case "level3":
-						this.message = "Well done on getting to level 3. See if you can do better!";
+						bs.pubsub.emitEvent('regame:status', ["Well done on getting to level 3. See if you can do better!"]);
 						break;
 					case "level5":
-						this.message = "Reach level 10 for a nice surprise...";
+						bs.pubsub.emitEvent('regame:status', ["Reach level 10 for a nice surprise..."]);
 						break;
 					case "level10":
-						this.message = "Enter the following cheat code to gain 1000 XP. CODE: *xp";
+						bs.pubsub.emitEvent('regame:status', ["Enter the following cheat code to gain 1000 XP. CODE: *xp"]);
 						break;
 					case "earlyDeath":
-						this.message = "Oh dear- looks like you need some help. Unlock flying fish with CODE: *fly";
+						bs.pubsub.emitEvent('regame:status', ["Oh dear- looks like you need some help. Unlock flying fish with CODE: *fly"]);
 						break;
 					case "bigEarner":
-						this.message = "Don't waste your hard-earned XP buying upgrades 'legitimately'. CODE: *camo";
+						bs.pubsub.emitEvent('regame:status', ["Don't waste your hard-earned XP buying upgrades 'legitimately'. CODE: *camo"]);
 						break;
 					case "fishKiller":
-						this.message = "You beast! CODE: *grow";
+						bs.pubsub.emitEvent('regame:status', ["You beast! CODE: *grow"]);
 						break;
 					case "allGrowth":
-						this.message = "You used to be so big!";
+						bs.pubsub.emitEvent('regame:status', ["You used to be so big!"]);
 						break;
 					case "allPoison":
-						this.message = "You poisonous thing, you!";
+						bs.pubsub.emitEvent('regame:status', ["You poisonous thing, you!"]);
 						break;
 					case "allUpgrades":
-						this.message = "Skip entire levels! CODE: *end";
+						bs.pubsub.emitEvent('regame:status', ["Skip entire levels! CODE: *end"]);
 						break;
 				}
 			} else {
