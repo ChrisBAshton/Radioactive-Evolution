@@ -11,19 +11,12 @@ define(['bootstrap', 'achievements/_achievement'], function (bs, Achievement) {
         var self = this;
         bs.extend(Achievement, this);
     	this.title="level3";
-    }
 
-    /**
-    * Check if the achievement has been achieved.
-    *
-    * @override
-    * @method checkAchieved
-    */
-    Level3.prototype.checkAchieved = function() {
-    	if(level >= 3) {
-    		this.setAchieved(true);
-    		this.saveAchieved(true);
-    	}
+        bs.pubsub.addListener('regame:nextLevel', function (level) {
+            if (level === 3) {
+                self.updateStatus(true);
+            }
+        });
     }
 
     return Level3;

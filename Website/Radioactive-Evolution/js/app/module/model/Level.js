@@ -17,6 +17,10 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
             self.nextLevel();
         });
 
+        this.level = function () {
+            return level;
+        };
+
         /**
         * Move all creatures and paint results to canvas.
         * If countdown reaches zero, trigger LevelMenu.

@@ -49,7 +49,7 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Achievements', 'module/mod
 			for(var i = 0; i < this.buttons.length; i++) {
 				if(this.buttons[i].isSelected()) {
 					if(this.buttons[i].getKey() === "nextLevel") {
-						bs.pubsub.emitEvent('regame:nextLevel');
+						bs.pubsub.emitEvent('regame:nextLevel', [level.level() + 1]);
 						bs.pubsub.emitEvent('regame:game:start');
 					} else {
 						var upgradeClicked = upgradeController.get(this.buttons[i].getKey());
