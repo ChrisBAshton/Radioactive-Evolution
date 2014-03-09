@@ -16,7 +16,7 @@ define(function() {
             elements: {
                 console: 50,
                 water:   140,
-                sand:    360
+                sand:    420
             }
         },
         menu: {

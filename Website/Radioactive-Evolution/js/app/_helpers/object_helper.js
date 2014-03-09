@@ -1,4 +1,4 @@
-// TODO (?) - point to collision function in this class, remove from Level?
+// TODO (?) - point to collision function in this class, remove from module/model/Level?
 
 
 
@@ -23,7 +23,7 @@ define(function () {
         * @param {Creature} obj2    The second object
         * @return {Boolean}         True if the two objects have collided
         */
-        this.collision = function (obj1, obj2) {
+        this.collide = function (obj1, obj2) {
             // x,y are the CENTRAL coordinates of the object
             // calculate side coordinates
             var obj1_left = obj1.getX() - (obj1.getWidth()/2);

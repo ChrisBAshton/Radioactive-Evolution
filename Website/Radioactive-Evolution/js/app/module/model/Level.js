@@ -1,4 +1,4 @@
-define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison', 'creatures/user', 'module/model/Countdown'], function (bs, Fish, Plankton, Poison, user, countdown) {
+define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison', 'creatures/user', 'module/model/Countdown', '_helpers/object_helper'], function (bs, Fish, Plankton, Poison, user, countdown, objects) {
 
     var Level = function () {
 
@@ -132,7 +132,7 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
             // check user has eaten plankton
             i = plankton.length;
             while (i-- > 0) {
-                if(collision(user, plankton[i])) {
+                if(objects.collide(user, plankton[i])) {
                     // play crunch sound. Reset time to zero so that sound plays multiple times if user hits multiple plankton in short time frame
                     bs.pubsub.emitEvent('regame:sound:play', ['crunch']);
                     // remove plankton and gain XP
@@ -150,7 +150,7 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
                         // check fish is alive- a dead fish can't eat poison!
                         if(fish[j].isAlive()) {
                             // if fish comes into contact with poison
-                            if(collision(fish[j], poison[i])) {
+                            if(objects.collide(fish[j], poison[i])) {
                                 // fish dies, remove poison
                                 fish[j].eatPoison();
                                 fish_killed++;
@@ -165,7 +165,7 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
             // check user has touched a fish
             i = fish.length;
             while (i-- > 0) {
-                if(collision(user, fish[i])) {
+                if(objects.collide(user, fish[i])) {
                     if(fish[i].isAlive()) {
                         // check which fish is bigger
                         if( (user.getWidth() * user.getHeight()) > (fish[i].getWidth() * fish[i].getHeight()) ) {
@@ -201,33 +201,6 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
                     break;
                 }
             }
-        };
-
-        /**
-        * Check two creatures' co-ordinates and sizes, return true if the two objects overlap.
-        *
-        * @method collision
-        * @param {Creature} obj1    The first object
-        * @param {Creature} obj2    The second object
-        * @return {Boolean}         True if the two objects have collided
-        */
-        var collision = function (obj1, obj2) {
-            // x,y are the CENTRAL coordinates of the object
-            // calculate side coordinates
-            var obj1_left = obj1.getX() - (obj1.getWidth()/2);
-            var obj1_right = obj1.getX() + (obj1.getWidth()/2);
-            var obj1_top = obj1.getY() - (obj1.getHeight()/2);
-            var obj1_bottom = obj1.getY() + (obj1.getHeight()/2);
-            
-            var obj2_left = obj2.getX() - (obj2.getWidth()/2);
-            var obj2_right = obj2.getX() + (obj2.getWidth()/2);
-            var obj2_top = obj2.getY() - (obj2.getHeight()/2);
-            var obj2_bottom = obj2.getY() + (obj2.getHeight()/2);
-            
-            var Xoverlap = (obj1_right >= obj2_left && obj1_left <= obj2_right);
-            var Yoverlap = (obj1_bottom >= obj2_top && obj1_top <= obj2_bottom);
-            
-            return (Xoverlap && Yoverlap);
         };
 
         this.ep = function () {
