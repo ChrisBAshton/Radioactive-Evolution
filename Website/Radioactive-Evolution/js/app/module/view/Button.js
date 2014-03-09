@@ -1,4 +1,4 @@
-define(function () {
+define(['bootstrap'], function (bs) {
 
 	/**
 	* A menu is practically any screen outside of the core gameplay. It is often made up of buttons which can 
@@ -15,13 +15,17 @@ define(function () {
 	* @param {Number} width		Button width
 	* @param {Number} height	Button height
 	*/
-	var Button = function (key,text,x,y, width, height) {
+	var Button = function (key, text, x, y, width, height) {
+		
+		// variables from parameters
 		this.key = key;
 		this.text = text;
 		this.x = x;
 		this.y = y;
-		this.width = width;
-		this.height = height;
+		this.width = width || bs.config.menu.button.width;
+		this.height = height || bs.config.menu.button.height;
+
+		// default variables
 		this.visible = true;
 		this.selected = false;
 

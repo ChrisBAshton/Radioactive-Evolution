@@ -84,6 +84,7 @@ define(['bootstrap', 'module/controller/Achievements', 'module/view/Painter', 'm
 			achievements.check();
 			// give the user their cursor back!
 			Painter.changeCursor("default");
+
 			// draw the menu
 			// glitch - for some obscure reason, calling menu.draw() directly doesn't work 
 			// in this instance, so we get the setTimeout function to call it

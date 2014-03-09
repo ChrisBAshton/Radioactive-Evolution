@@ -21,10 +21,7 @@ define(['bootstrap', 'module/view/Button', 'module/view/Painter', 'module/model/
 			self.buttons = [];
 		};
 
-		this.createButton = function (identifier, text, posTopLeft, posBottomLeft, button_width, button_height) {
-
-			posTopRight = button_width || 250;
-			posBottomRight = button_height || 120;
+		this.createButton = function (identifier, text, posTopLeft, posBottomLeft, posTopRight, posBottomRight) {
 
 			// add custom buttons
 			var button = new Button(identifier, text, posTopLeft, posBottomLeft, posTopRight, posBottomRight);

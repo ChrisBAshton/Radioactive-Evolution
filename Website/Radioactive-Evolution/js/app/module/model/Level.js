@@ -16,6 +16,13 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
         bs.pubsub.addListener('regame:nextLevel', function () {
             self.nextLevel();
         });
+        
+        /**
+        * Returns true if playing, false if in a menu.
+        */
+        this.playing = function () {
+
+        };
 
         this.level = function () {
             return level;
