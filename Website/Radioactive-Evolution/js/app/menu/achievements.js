@@ -42,7 +42,7 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 			for(var i = 0; i < this.buttons.length; i++) {
 				achievement = Achievements.getAchievementInstance(this.buttons[i].getKey());
 				if(achievement !== null) {
-					if(achievement.isAchieved()) {
+					if(achievement.isAlreadyAchieved()) {
 						icon = this.assets.img_tick;
 					} else {
 						icon = this.assets.img_cross;
@@ -108,7 +108,7 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 		* @param {Achievement} achievementInstance	Achievement object selected
 		*/
 		this.rewardUser = function(achievementInstance) {
-			if(achievementInstance.isAchieved()) {
+			if(achievementInstance.isAlreadyAchieved()) {
 				// user has achieved the achievement
 				switch(achievementInstance.getTitle()) {
 					case "level3":

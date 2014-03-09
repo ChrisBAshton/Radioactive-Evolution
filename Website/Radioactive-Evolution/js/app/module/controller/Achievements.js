@@ -6,35 +6,9 @@ define(['achievements/level_3', 'achievements/level_5', 'achievements/level_10',
 			achievements;
 
 		/**
-		* Checks local storage for previously achieved achievements.
-		*
-		* @method loadAchievements
-		*/
-		this.load = function () {
-
-			var title,
-				isAlreadyAchieved;
-
-			_initialiseAchievements();
-			
-			for(var i = 0; i < achievements.length; i++) {
-
-				title = achievements[i].getTitle();
-				isAlreadyAchieved = _isAchieved(title);
-				
-				if(isAlreadyAchieved) {
-					achievements[i].setAchieved(true);
-				} else {
-					// first time user, so achievements haven't been earned- save this in local storage
-					localStorage[title] = false;
-				}
-			}
-		}
-
-		/**
 		 * Initialises the array of achievements with Achievement objects.
 		 */
-		var _initialiseAchievements = function () {
+		var _instantiateAchievements = function () {
 			achievements = new Array(
 				new Level3(),
 				new Level5(),
@@ -49,14 +23,20 @@ define(['achievements/level_3', 'achievements/level_5', 'achievements/level_10',
 		};
 
 		/**
-		 * Checks if the given achievement is already in local storage.
-		 *
-		 * @param achievementTitle {String} The name of the achievement.
-		 * @return {Boolean} 				True if set, false if not.
-		 */
-		var _isAchieved = function (achievementTitle) {
-			return localStorage[achievementTitle] === 'true' ? true:false;
-		};
+		* Checks local storage for previously achieved achievements.
+		*
+		* @method loadAchievements
+		*/
+		this.load = function () {
+
+			_instantiateAchievements();
+
+			var allAchievements = achievements.length;
+
+			while (allAchievements-- > 0) {
+				achievements[allAchievements].setup();
+			}
+		}
 
 		/**
 		* Loop through all achievements and check each of them to see if they've been achieved.
@@ -66,7 +46,7 @@ define(['achievements/level_3', 'achievements/level_5', 'achievements/level_10',
 		this.check = function () {
 			for(var i = 0; i < achievements.length; i++) {
 				// only check achievements that have not yet been achieved
-				if(!achievements[i].isAchieved()) {
+				if(!achievements[i].isAlreadyAchieved()) {
 					achievements[i].checkAchieved();
 				}
 			}

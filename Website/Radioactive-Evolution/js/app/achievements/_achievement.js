@@ -3,15 +3,19 @@ define([], function () {
     /**
     * An achievement is gained through skilled (or unskilled!) gameplay.
     * 
-    * This class is an abstract Achievement, defining attributes and methods shared between all menus that extend it.
+    * This class is an abstract Achievement, defining attributes and methods shared between all achievements that extend it.
     *
     * @class Achievement
     * @constructor
     */
     var Achievement = function () {
     	this.title = "not yet defined";
-    	this.achieved = false;
     
+        this.setup = function () {
+            if (localStorage.getItem(this.title) === null) {
+                localStorage[this.title] = false;
+            } 
+        };
 
         /**
         * Returns the title of the achivement.
@@ -23,20 +27,6 @@ define([], function () {
         	return this.title;
         }
 
-    
-
-        /**
-        * Sets the 'achieved' property.
-        * Achievements are stored in two places- in HTML5 localStorage, and in the Achievement
-        * object in memory. This method updates the achievement in memory.
-        *
-        * @method setAchieved
-        * @param {Boolean} bool		True or false
-        */
-        this.setAchieved = function(bool) {
-        	this.achieved = bool;
-        }
-
         /**
         * Saves the achievement and its achieved status (true/false) in HTML5 localStorage.
         * 
@@ -46,21 +36,21 @@ define([], function () {
         * the browser, we read from localStorage and therefore need to update the achievement objects
         * (and ONLY the achievement objects).
         *
-        * @method saveAchieved
         * @param {Boolean} bool		True or false
         */
-        this.saveAchieved = function(bool) {
+        this.updateStatus = function(bool) {
         	localStorage[this.title] = bool;
         }
 
         /**
         * Returns true if the achievement has been achieved.
         *
-        * @method isAchieved
+        * @method isAlreadyAchieved
         * @return {Boolean} True if the achievement has been achieved.
         */
-        this.isAchieved = function() {
-        	return this.achieved;
+        this.isAlreadyAchieved = function() {
+            // check for false because don't want to check for 'true' AND true
+        	return !(localStorage[this.title] === 'false');
         }
 
         /**
