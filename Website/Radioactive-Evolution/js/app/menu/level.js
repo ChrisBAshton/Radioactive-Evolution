@@ -59,7 +59,6 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Achievements', 'module/mod
 							bs.pubsub.emitEvent('regame:status', ["You cannot afford this upgrade!"]);
 						} else {
 							upgradeClicked.applyUpgrade(level);
-							bs.pubsub.emitEvent('regame:sound:play', ['success']);
 							if(!upgradeClicked.canUpgrade()) {
 								this.buttons[i].setVisible(false);
 							} else {

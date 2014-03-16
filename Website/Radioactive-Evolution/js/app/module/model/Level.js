@@ -128,7 +128,8 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
             while (i-- > 0) {
                 if(objects.collide(user, plankton[i])) {
                     // play crunch sound. Reset time to zero so that sound plays multiple times if user hits multiple plankton in short time frame
-                    bs.pubsub.emitEvent('regame:sound:play', ['crunch']);
+                    bs.pubsub.emitEvent('regame:action:ate_plankton');
+
                     // remove plankton and gain XP
                     evolution_points++;
                     score++;
@@ -163,14 +164,17 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
                     if(fish[i].isAlive()) {
                         // check which fish is bigger
                         if( (user.getWidth() * user.getHeight()) > (fish[i].getWidth() * fish[i].getHeight()) ) {
+                            // @TODO - get all below actions to be invoked by this event
+                            bs.pubsub.emitEvent('regame:action:killed_fish');
                             // user is bigger, so eats the other fish
-                            sound_crunch.play();
                             xp += fish[i].getXP();
                             final_score += fish[i].getXP();
                             fish[i].reset();
                             fish_killed++;
                         } else {
                             // user is dead
+                            bs.pubsub.emitEvent('regame:action:user_died');
+                            // @todo - remove this and respond to above event instead
                             bs.pubsub.emitEvent('regame:game:stop');
                             bs.pubsub.emitEvent('regame:status', ["You died! Final Score: " + score]);
                             bs.pubsub.emitEvent('regame:menu:new', ['death']);

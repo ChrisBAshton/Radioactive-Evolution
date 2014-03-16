@@ -88,6 +88,7 @@ define(['_helpers/browser', 'bootstrap'], function (browser, bs) {
         bs.pubsub.emitEvent('regame:loaded:file');
     }
 
+
     return {
         img_tick: img_tick,
         img_cross: img_cross,
