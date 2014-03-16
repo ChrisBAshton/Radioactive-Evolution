@@ -11,19 +11,13 @@ define(['bootstrap', 'achievements/_achievement', 'upgrades/grow'], function (bs
         var self = this;
         bs.extend(Achievement, this);
     	this.title="allGrowth";
-    }
+        
+        bs.pubsub.addListener('regame:upgrade:purchased', function (upgradeName, cost, newLevel) {
+            if (upgradeName === 'Grow' && upgrade_grow.currentLevel === upgrade_grow.maxLevel) {
+                self.updateStatus(true);
+            }
+        });
 
-    /**
-    * Check if the achievement has been achieved.
-    *
-    * @override
-    * @method checkAchieved
-    */
-    AllGrowth.prototype.checkAchieved = function() {
-    	if(!upgrade_grow.canUpgrade()) {
-    		this.setAchieved(true);
-    		this.saveAchieved(true);
-    	}
     }
 
     return AllGrowth;

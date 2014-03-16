@@ -94,6 +94,8 @@ define(['bootstrap'], function (bs) {
 			self.updateCost();
 			// apply upgrade, if applicable
 			self.specificUpgrades();
+			// send notification
+			bs.pubsub.emitEvent('regame:upgrade:purchased', [self.title, self.cost, self.currentLevel]);
 		}
 
 		/**

@@ -65,7 +65,7 @@ define(['achievements/level_3', 'achievements/level_5', 'achievements/level_10',
 					return achievements[i];
 				}
 			}
-			return null
+			return null;
 		}
 
 		this.reset = function () {
