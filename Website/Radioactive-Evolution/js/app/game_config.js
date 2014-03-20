@@ -21,8 +21,8 @@ define(function() {
         },
         menu: {
             button: {
-                width:   250,
-                height:  120
+                width:   240,
+                height:  90
             }  
         }
     };

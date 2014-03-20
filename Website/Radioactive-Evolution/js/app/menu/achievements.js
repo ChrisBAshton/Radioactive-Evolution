@@ -2,25 +2,28 @@ define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/
 
 	var AchievementsMenu = function () {
 
-		var self = this;
+		var self = this,
+			rowHeight;
 		bs.extend(Menu, this);
 
-		// add custom buttons	
-		this.createButton("mainMenu", "Return to menu", (bs.config.canvas.width/2)-(125), bs.config.canvas.elements.console + 50);
+		rowHeight = bs.config.canvas.elements.console * 1.1;
+		this.createButton("mainMenu", "Return to menu", (bs.config.canvas.width/2)-(125), rowHeight);
+		this.createButton("clear", "Reset all achievements", (bs.config.canvas.width/100)*65, rowHeight, 250, 50);
 		
-		this.createButton("level3", "Reached Level 3", (bs.config.canvas.width/100)*35-(250), (bs.config.canvas.height/3));
-		this.createButton("level5", "Reached Level 5", (bs.config.canvas.width/2)-(125), (bs.config.canvas.height/3));
-		this.createButton("level10", "Reached Level 10", (bs.config.canvas.width/100)*65, (bs.config.canvas.height/3));
+		rowHeight = (bs.config.canvas.height/3);
+		this.createButton("level3", "Reached Level 3", (bs.config.canvas.width/100)*35-(250), rowHeight);
+		this.createButton("level5", "Reached Level 5", (bs.config.canvas.width/2)-(125), rowHeight);
+		this.createButton("level10", "Reached Level 10", (bs.config.canvas.width/100)*65, rowHeight);
 		
-		this.createButton("earlyDeath", "Die within 5 seconds", (bs.config.canvas.width/100)*35-250, (bs.config.canvas.height/3)+130);
-		this.createButton("bigEarner", "Earn over 200XP", (bs.config.canvas.width/2)-(125), (bs.config.canvas.height/3)+(130));
-		this.createButton("fishKiller", "Kill 10 fish in one level", (bs.config.canvas.width/100)*65, (bs.config.canvas.height/3)+(130));
+		rowHeight = (bs.config.canvas.height/1.85);
+		this.createButton("earlyDeath", "Die within 5 seconds", (bs.config.canvas.width/100)*35-250, rowHeight);
+		this.createButton("bigEarner", "Earn over 200XP", (bs.config.canvas.width/2)-(125), rowHeight);
+		this.createButton("fishKiller", "Kill 10 fish in one level", (bs.config.canvas.width/100)*65, rowHeight);
 		
-		this.createButton("allGrowth", "Purchased all growth upgrades", (bs.config.canvas.width/100)*35-(250), (bs.config.canvas.height/3)+(240)+20);	
-		this.createButton("allPoison", "Purchased all poison upgrades", (bs.config.canvas.width/2)-(125), (bs.config.canvas.height/3)+(240)+20);
-		this.createButton("allUpgrades", "Purchased all upgrades", (bs.config.canvas.width/100)*65, (bs.config.canvas.height/3)+(240)+20);
-		
-		this.createButton("clear", "Reset all achievements", (bs.config.canvas.width/100)*65, bs.config.canvas.elements.console + 50, 250, 50);
+		rowHeight = (bs.config.canvas.height/1.35);
+		this.createButton("allGrowth", "Purchased all growth upgrades", (bs.config.canvas.width/100)*35-(250), rowHeight);	
+		this.createButton("allPoison", "Purchased all poison upgrades", (bs.config.canvas.width/2)-(125), rowHeight);
+		this.createButton("allUpgrades", "Purchased all upgrades", (bs.config.canvas.width/100)*65, rowHeight);
 
 		/**
 		* Print icons over each achievement button, showing the user at a
