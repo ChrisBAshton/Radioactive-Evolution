@@ -11,19 +11,12 @@ define(['bootstrap', 'achievements/_achievement', 'upgrades/poison'], function (
         var self = this;
         bs.extend(Achievement, this);
     	this.title="allPoison";
-    }
 
-    /**
-    * Check if the achievement has been achieved.
-    *
-    * @override
-    * @method checkAchieved
-    */
-    AllPoison.prototype.checkAchieved = function() {
-    	if(!upgrade_poison.canUpgrade()) {
-    		this.setAchieved(true);
-    		this.saveAchieved(true);
-    	}
+        bs.pubsub.addListener('regame:upgrade:purchased', function (upgradeName, cost, newLevel) {
+            if (upgradeName === 'Poison' && upgrade_poison.currentLevel === upgrade_poison.maxLevel) {
+                self.updateStatus(true);
+            }
+        });
     }
 
     return AllPoison;

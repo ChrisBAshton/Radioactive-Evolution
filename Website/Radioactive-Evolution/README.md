@@ -7,3 +7,5 @@ Bug / TODO list so far:
     On first load, image background etc don't render.
 
     Need to remove capital letters from filenames.
+
+    Resize buttons and reposition them using percentage values

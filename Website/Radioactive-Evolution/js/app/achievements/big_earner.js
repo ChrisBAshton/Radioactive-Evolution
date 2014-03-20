@@ -11,19 +11,12 @@ define(['bootstrap', 'achievements/_achievement'], function (bs, Achievement) {
         var self = this;
         bs.extend(Achievement, this);
     	this.title="bigEarner";
-    }
 
-    /**
-    * Check if the achievement has been achieved.
-    *
-    * @override
-    * @method checkAchieved
-    */
-    BigEarner.prototype.checkAchieved = function() {
-    	if(final_score >= 200) {
-    		this.setAchieved(true);
-    		this.saveAchieved(true);
-    	}
+        bs.pubsub.addListener('regame:action:user_died', function (level, score) {
+            if (score >= 200) {
+                self.updateStatus(true);
+            }
+        });
     }
 
     return BigEarner;

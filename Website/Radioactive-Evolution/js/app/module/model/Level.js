@@ -131,7 +131,7 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
                     bs.pubsub.emitEvent('regame:action:ate_plankton');
 
                     // remove plankton and gain XP
-                    evolution_points++;
+                    evolution_points += bs.config.game.planktonXP;
                     score++;
                     plankton[i].reset();
                 }
@@ -172,7 +172,7 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
                             fish[i].reset();
                         } else {
                             // user is dead
-                            bs.pubsub.emitEvent('regame:action:user_died');
+                            bs.pubsub.emitEvent('regame:action:user_died', [level, score]);
                             // @todo - remove this and respond to above event instead
                             bs.pubsub.emitEvent('regame:game:stop');
                             bs.pubsub.emitEvent('regame:status', ["You died! Final Score: " + score]);
