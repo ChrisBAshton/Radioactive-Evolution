@@ -15,3 +15,9 @@ Bug / TODO list so far:
     Need to remove capital letters from filenames.
 
     Only the last button in a menu has a cursor: pointer; hover state. The rest don't.
+
+    Would be nice to bring back the loading screen.
+
+    More config options would be good
+
+    Better/more graceful fallback/degradation on Safari, IE etc

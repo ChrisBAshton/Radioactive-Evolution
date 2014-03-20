@@ -17,6 +17,11 @@ define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 			self.maxLevel = 5;
 			self.title = "Poison";
 			self.updateCost();
+			// when user dies, reset plankton to default level
+	        bs.pubsub.addListener('regame:action:user_died', function () {
+            	self.currentLevel = 0;
+            	self.specificUpgrades();
+        	});
 		};
 
 		/**
@@ -57,6 +62,8 @@ define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 		* @method specificUpgrades
 		*/
 		this.specificUpgrades = function() {
+			var number_of_poison;
+
 			switch(this.currentLevel) {
 				case 0:
 					number_of_poison = 0;
@@ -77,6 +84,8 @@ define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 					number_of_poison = 7;
 					break;
 			}
+
+			bs.pubsub.emitEvent('regame:upgrade:poisonCountChanged', [number_of_poison]);
 		}
 
 		construct();
