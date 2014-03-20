@@ -148,7 +148,7 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
                             if(objects.collide(fish[j], poison[i])) {
                                 // fish dies, remove poison
                                 fish[j].eatPoison();
-                                fish_killed++;
+                                bs.pubsub.emitEvent('regame:action:killed_fish');
                                 poison[i] = null;
                                 break;
                             }
@@ -167,10 +167,9 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
                             // @TODO - get all below actions to be invoked by this event
                             bs.pubsub.emitEvent('regame:action:killed_fish');
                             // user is bigger, so eats the other fish
-                            xp += fish[i].getXP();
-                            final_score += fish[i].getXP();
+                            evolution_points += fish[i].getXP();
+                            score += fish[i].getXP();
                             fish[i].reset();
-                            fish_killed++;
                         } else {
                             // user is dead
                             bs.pubsub.emitEvent('regame:action:user_died');

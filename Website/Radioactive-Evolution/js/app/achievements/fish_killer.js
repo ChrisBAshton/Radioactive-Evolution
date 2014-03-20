@@ -8,22 +8,22 @@ define(['bootstrap', 'achievements/_achievement'], function (bs, Achievement) {
     * @constructor
     */
     var FishKiller = function () {
-        var self = this;
+        var self = this,
+            fish_killed = 0;
         bs.extend(Achievement, this);
     	this.title="fishKiller";
-    }
 
-    /**
-    * Check if the achievement has been achieved.
-    *
-    * @override
-    * @method checkAchieved
-    */
-    FishKiller.prototype.checkAchieved = function() {
-    	if(fish_killed >= 10) {
-    		this.setAchieved(true);
-    		this.saveAchieved(true);
-    	}
+        bs.pubsub.addListener('regame:action:killed_fish', function () {
+            fish_killed++;
+
+            if (fish_killed >= 10) {
+                self.updateStatus(true);
+            }
+        });
+
+        bs.pubsub.addListener('regame:nextLevel', function () {
+            fish_killed = 0;
+        });
     }
 
     return FishKiller;
