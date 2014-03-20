@@ -17,6 +17,10 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
             self.nextLevel();
         });
 
+        bs.pubsub.addListener('regame:upgrade:planktonCountChanged', function (newTotal) {
+            number_of_plankton = newTotal;
+        });
+
         this.level = function () {
             return level;
         };

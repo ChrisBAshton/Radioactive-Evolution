@@ -16,6 +16,11 @@ define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 			self.maxLevel = 5;
 			self.title = "Murky Water";
 			self.updateCost();
+			// when user dies, reset plankton to default level
+	        bs.pubsub.addListener('regame:action:user_died', function () {
+            	self.currentLevel = 0;
+            	self.specificUpgrades();
+        	});
 		};
 
 		/**
@@ -56,7 +61,8 @@ define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 		* @method specificUpgrades
 		*/
 		this.specificUpgrades = function() {
-			console.log('Chris, in murky_water.js we increase number_of_plankton, but that is a local variable. Need to emit an event instead.');
+			var number_of_plankton = 0;
+
 			switch(this.currentLevel) {
 				case 0:
 					number_of_plankton = 3;
@@ -77,6 +83,8 @@ define(['bootstrap', 'upgrades/_upgrade'], function (bs, Upgrade) {
 					number_of_plankton = 12;
 					break;
 			}
+ 		
+ 			bs.pubsub.emitEvent('regame:upgrade:planktonCountChanged', [number_of_plankton]);
 		}
 
 		construct();
