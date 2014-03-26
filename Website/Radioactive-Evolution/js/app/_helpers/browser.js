@@ -1,3 +1,5 @@
+/* @TODO - remove all dependencies on this. Should never discriminate according to browser. */
+
 define(function () {
     var browser = "unknown";
     var browser_array = ["firefox", "chrome", "safari", "opera", "msie"];

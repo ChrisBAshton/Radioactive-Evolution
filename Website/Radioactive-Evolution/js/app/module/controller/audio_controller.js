@@ -3,29 +3,48 @@ define(['bootstrap'], function (bs) {
     var AudioController = function () {
 
         this.init = function () {
-            var crunch = document.createElement('audio');
-            crunch.setAttribute('src', "sounds/crunch.wav");
-            var success = document.createElement('audio');
-            success.setAttribute('src', "sounds/success.wav");
-            var death = document.createElement('audio');
-            death.setAttribute('src', "sounds/death.wav");
+            var background = createAudio('sounds/background.wav'),
+                crunch = createAudio('sounds/crunch.wav'),
+                success = createAudio('sounds/success.wav'),
+                death = createAudio('sounds/death.wav');
+
+            initiateBackgroundNoise(background);
 
             bs.pubsub.addListener('regame:action:user_died', function () {
-                death.play();
+                playAudio(death);
             });
 
             bs.pubsub.addListener('regame:action:killed_fish', function () {
-                crunch.play();
+                playAudio(crunch);
             });
 
             bs.pubsub.addListener('regame:action:ate_plankton', function () {
-                crunch.play();
+                playAudio(crunch);
             });
 
             bs.pubsub.addListener('regame:upgrade:purchased', function () {
-                success.play();
+                playAudio(success);
             });
         }
+
+        var createAudio = function (file) {
+            var audioFile = document.createElement('audio');
+            audioFile.setAttribute('src', file);
+            return audioFile;
+        };
+
+        var playAudio = function (audioFile) {
+            audioFile.currentTime = 0;
+            audioFile.play();
+        };
+
+        var initiateBackgroundNoise = function (background) {
+            background.volume = 0.5;
+            background.addEventListener('ended', function() {
+                playAudio(this);
+            }, false);
+            background.play();
+        };
     };
 
     return new AudioController();
