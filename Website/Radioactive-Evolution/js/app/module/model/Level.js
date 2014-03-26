@@ -31,6 +31,7 @@ define(['bootstrap', 'module/model/Countdown', 'module/model/Population'], funct
         });
 
         bs.pubsub.addListener('regame:upgrade:purchased', function (upgradeName, cost, upgradeLevel) {
+            self.spendEp(cost);
             bs.pubsub.emitEvent('regame:status:score', [evolution_points]);
         });
 
