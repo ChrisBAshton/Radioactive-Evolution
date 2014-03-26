@@ -30,6 +30,10 @@ define(['bootstrap', 'module/model/Countdown', 'module/model/Population'], funct
             bs.pubsub.emitEvent('regame:menu:new', ['death']);            
         });
 
+        bs.pubsub.addListener('regame:upgrade:purchased', function (upgradeName, cost, upgradeLevel) {
+            bs.pubsub.emitEvent('regame:status:score', [evolution_points]);
+        });
+
 
         this.level = function () {
             return level;
