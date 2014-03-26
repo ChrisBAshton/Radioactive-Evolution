@@ -2,8 +2,6 @@
 
 Bug / TODO list so far:
 
-    Still need to get Poison working again
-
     Need to fix "All upgrades purchased" achievement
 
     Need to re-add Mousetrap to support keyboard control (or at least cheats)
