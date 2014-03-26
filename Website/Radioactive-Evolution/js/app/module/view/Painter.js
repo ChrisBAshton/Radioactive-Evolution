@@ -73,12 +73,8 @@ define(['bootstrap', 'module/model/Assets', 'module/model/Level', 'creatures/use
         */
         this.redraw = function() {
             this.draw_background();
-            
             level.drawCreatures();
-            
             user.draw();
-            
-            // draw level summary
             this.draw_summary();
         }
 

@@ -11,24 +11,10 @@ define(['bootstrap'], function (bs) {
         var self = this;
 
         this.init = function () {
-            // number of seconds per level
-            self.LEVEL_DURATION = bs.config.game.countdown;
             // sets the number of milliseconds between frames
             self.frameInterval = 20;
             // therefore calculates the number of frames per second
             self.framesPerSecond = 1000 / this.frameInterval;
-
-            self.reset();  
-        }
-
-        /**
-        * Returns the total number of seconds per level.
-        *
-        * @method levelDuration
-        * @return {Number}  The number of seconds.
-        */
-        this.levelDuration = function() {
-            return this.LEVEL_DURATION;
         }
 
         /**
@@ -59,17 +45,21 @@ define(['bootstrap'], function (bs) {
         * @method nextFrame
         */
         this.nextFrame = function() {
-            if (this.frameCount === 0) {
-                bs.pubsub.emitEvent('regame:status', ["Time left: " + self.countdown]);
-            }
             this.frameCount++;
-            if(this.frameCount >= this.framesPerSecond) {
-                // a second has passed
+            if (aSecondHasPassed()) {
                 this.countdown--;
                 this.frameCount = 0;
-                bs.pubsub.emitEvent('regame:status', ["Time left: " + self.countdown]);
+                updateTimeLeft();
             }
         }
+
+        var aSecondHasPassed = function () {
+            return self.frameCount >= self.framesPerSecond;
+        };
+
+        var updateTimeLeft = function () {
+            bs.pubsub.emitEvent('regame:status', ["Time left: " + self.countdown]);
+        };
 
         /**
         * Resets the countdown (called at the beginning of each level).
@@ -77,9 +67,9 @@ define(['bootstrap'], function (bs) {
         * @method reset
         */
         this.reset = function() {
-            // framerate, seconds per level, etc
-            this.countdown = this.LEVEL_DURATION;   // tracks seconds left until end of level
-            this.frameCount = 0;                    // tracks "current" position in the frame
+            this.countdown = bs.config.game.countdown;
+            this.frameCount = 0;
+            updateTimeLeft();
         }
     }
 
