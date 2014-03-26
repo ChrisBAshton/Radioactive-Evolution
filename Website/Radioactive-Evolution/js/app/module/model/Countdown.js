@@ -9,13 +9,8 @@ define(['bootstrap'], function (bs) {
     */
     var Countdown = function () {
         var self = this;
-
-        this.init = function () {
-            // sets the number of milliseconds between frames
-            self.frameInterval = 20;
-            // therefore calculates the number of frames per second
-            self.framesPerSecond = 1000 / this.frameInterval;
-        }
+        self.millisecondsBetweenFrames = 20;
+        self.framesPerSecond = 1000 / self.millisecondsBetweenFrames; // framerate
 
         /**
         * Returns the number of milliseconds required to wait between frames
@@ -24,7 +19,7 @@ define(['bootstrap'], function (bs) {
         * @return {Number}  The number of milliseconds
         */
         this.getFrameInterval = function() {
-            return this.frameInterval;
+            return this.millisecondsBetweenFrames;
         }
 
         /**
@@ -73,8 +68,5 @@ define(['bootstrap'], function (bs) {
         }
     }
 
-    var countdown = new Countdown();
-    countdown.init();
-    return countdown;
-
+    return new Countdown();
 });
