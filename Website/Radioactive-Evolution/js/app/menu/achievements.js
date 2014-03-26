@@ -18,7 +18,7 @@ define(['bootstrap', 'menu/_menu', 'module/controller/game', 'module/controller/
 		rowHeight = (bs.config.canvas.height/1.85);
 		this.createButton("earlyDeath", "Die within 5 seconds", (bs.config.canvas.width/100)*35-250, rowHeight);
 		this.createButton("bigEarner", "Earn over 200XP", (bs.config.canvas.width/2)-(125), rowHeight);
-		this.createButton("fishKiller", "Kill 10 fish in one level", (bs.config.canvas.width/100)*65, rowHeight);
+		this.createButton("fishKiller", "Eat 10 fish in one level", (bs.config.canvas.width/100)*65, rowHeight);
 		
 		rowHeight = (bs.config.canvas.height/1.35);
 		this.createButton("allGrowth", "Purchased all growth upgrades", (bs.config.canvas.width/100)*35-(250), rowHeight);	
