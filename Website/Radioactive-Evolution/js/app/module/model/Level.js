@@ -106,7 +106,6 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
         };
 
         this.drawCreatures = function () {
-
             var i;
 
             i = plankton.length;
@@ -128,16 +127,18 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
         * e.g. the user swimming into plankton.
         *
         * @method calculate
-        * @TODO - move out into separate functions, reuse the looping code.
         */
         this.calculate = function () {
-            var i;
+            checkUserHasEatenPlankton();
+            checkFishHasEatenPoison();
+            checkUserAndFishCollision();
+        }
 
-            // check user has eaten plankton
-            i = plankton.length;
+        var checkUserHasEatenPlankton = function () {
+            var i = plankton.length;
             while (i-- > 0) {
                 if(objects.collide(user, plankton[i])) {
-                    // play crunch sound. Reset time to zero so that sound plays multiple times if user hits multiple plankton in short time frame
+                    // @TODO - play crunch sound. Reset time to zero so that sound plays multiple times if user hits multiple plankton in short time frame
                     bs.pubsub.emitEvent('regame:action:ate_plankton');
 
                     // remove plankton and gain XP
@@ -146,28 +147,28 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
                     plankton[i].reset();
                 }
             }
+        };
 
-            i = poison.length;
+        var checkFishHasEatenPoison = function () {
+            var i = poison.length;
             while (i-- > 0) {
-                //if(poison[i] !== null) {
-                    // poison has been placed by the user- check against other fish coordinates
-                    for(var j=0; j < fish.length; j++) {
-                        // check fish is alive- a dead fish can't eat poison!
-                        if(fish[j].isAlive()) {
-                            // if fish comes into contact with poison
-                            if(objects.collide(fish[j], poison[i])) {
-                                // fish dies, remove poison
-                                fish[j].eatPoison();
-                                bs.pubsub.emitEvent('regame:action:killed_fish');
-                                poison[i].remove();// = null;
-                                break;
-                            }
+                // poison has been placed by the user- check against other fish coordinates
+                for(var j=0; j < fish.length; j++) {
+                    // check fish is alive- a dead fish can't eat poison!
+                    if(fish[j].isAlive()) {
+                        // if fish comes into contact with poison
+                        if(objects.collide(fish[j], poison[i])) {
+                            fish[j].eatPoison();
+                            bs.pubsub.emitEvent('regame:action:killed_fish');
+                            poison[i].remove();
+                            break;
                         }
                     }
-                //}                
+                }         
             }
-            
-            // check user has touched a fish
+        };
+
+        var checkUserAndFishCollision = function () {
             i = fish.length;
             while (i-- > 0) {
                 if(objects.collide(user, fish[i])) {
@@ -176,7 +177,6 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
                         if( (user.getWidth() * user.getHeight()) > (fish[i].getWidth() * fish[i].getHeight()) ) {
                             // @TODO - get all below actions to be invoked by this event
                             bs.pubsub.emitEvent('regame:action:killed_fish');
-                            // user is bigger, so eats the other fish
                             evolution_points += fish[i].getXP();
                             score += fish[i].getXP();
                             fish[i].reset();
@@ -197,7 +197,7 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
                     }
                 }
             }
-        }
+        };
 
         this.attemptToDropPoison = function (mouseX, mouseY) {
             console.log('lowercase "level" - why?');
@@ -217,10 +217,7 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
                 throw new Exception ("MINUS POINTS");
             }
         };
-
     };
 
     return new Level();
-
-
 });
