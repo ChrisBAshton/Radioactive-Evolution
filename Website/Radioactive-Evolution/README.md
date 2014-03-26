@@ -1,8 +1,14 @@
-@TODO
-
-Bug / TODO list so far:
+# BUGS
 
     Need to fix "All upgrades purchased" achievement
+
+    When fish swims into user, death message appears but death menu doesn't paint until mouse is moved. Interestingly, when a level ends the level menu displays automatically, so the logic is correct. I think lots of things happen when the event is fired so I need to clean up the order in which things respond to events.
+
+    On first load, image background etc don't render.
+
+    Only the last button in a menu has a cursor: pointer; hover state. The rest don't.
+
+# IMPROVEMENTS
 
     Need to re-add Mousetrap to support keyboard control (or at least cheats)
 
@@ -10,13 +16,9 @@ Bug / TODO list so far:
 
     Add a delay of a few seconds when re-spawning fish so that the user has time to get away from the side of the screen.
 
-    When fish swims into user, death message appears but death menu doesn't paint until mouse is moved. Interestingly, when a level ends the level menu displays automatically, so the logic is correct. I think lots of things happen when the event is fired so I need to clean up the order in which things respond to events.
-
-    On first load, image background etc don't render.
-
     Need to remove capital letters from filenames.
 
-    Only the last button in a menu has a cursor: pointer; hover state. The rest don't.
+    Restructure files so we no longer have model/view/controller directories.
 
     Would be nice to bring back the loading screen.
 
