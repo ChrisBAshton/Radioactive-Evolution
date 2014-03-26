@@ -8,7 +8,7 @@ Bug / TODO list so far:
 
     Need to re-add Mousetrap to support keyboard control (or at least cheats)
 
-    When fish swims into user, death message appears but death menu doesn't paint until mouse is moved.
+    When fish swims into user, death message appears but death menu doesn't paint until mouse is moved. Interestingly, when a level ends the level menu displays automatically, so the logic is correct. I think lots of things happen when the event is fired so I need to clean up the order in which things respond to events.
 
     On first load, image background etc don't render.
 

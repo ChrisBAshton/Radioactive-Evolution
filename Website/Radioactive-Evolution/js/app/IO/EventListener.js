@@ -40,8 +40,6 @@ define(['bootstrap', 'creatures/user', 'module/controller/MenuInstance', 'module
 		* @param {Object} e		Event handler.
 		*/
 		this.mouseClicked= function(e) {
-			console.log('IO/EventListener - mouse clicked');
-
 			// get mouse co-ordinates
 			var bounding_box=canvas.getBoundingClientRect(),
 				mouseX = Math.floor((e.clientX-bounding_box.left) * (canvas.width/bounding_box.width)),
@@ -49,7 +47,6 @@ define(['bootstrap', 'creatures/user', 'module/controller/MenuInstance', 'module
 			
 			// if user is playing the game
 			if(menuInstance.exists()) {
-				console.log('treated as menu click');
 				// call menu mouseClicked() function
 				menuInstance.menu().mouseClicked(mouseX,mouseY);
 				// mouse click could have started the game, thereby setting menu to null. Check `menu` exists before calling its method.
@@ -60,7 +57,6 @@ define(['bootstrap', 'creatures/user', 'module/controller/MenuInstance', 'module
 					user.move(mouseX,mouseY);
 				}
 			} else {
-				console.log('treated as game click');
 				level.attemptToDropPoison(mouseX, mouseY);
 			}
 

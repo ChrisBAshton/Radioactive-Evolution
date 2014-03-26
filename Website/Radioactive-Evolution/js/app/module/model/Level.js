@@ -92,7 +92,7 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
         this.populate = function () {
             fish = populateArray(Fish, number_of_fish);
             plankton = populateArray(Plankton, number_of_plankton);
-            poison = populateArray(Poison, number_of_poison);
+            poison = [];//populateArray(Poison, number_of_poison);
         };
 
         var populateArray = function (objectName, numberOfTimes) {
@@ -147,7 +147,7 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
 
             i = poison.length;
             while (i-- > 0) {
-                if(poison[i] !== null) {
+                //if(poison[i] !== null) {
                     // poison has been placed by the user- check against other fish coordinates
                     for(var j=0; j < fish.length; j++) {
                         // check fish is alive- a dead fish can't eat poison!
@@ -157,12 +157,12 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
                                 // fish dies, remove poison
                                 fish[j].eatPoison();
                                 bs.pubsub.emitEvent('regame:action:killed_fish');
-                                poison[i] = null;
+                                poison[i].remove();// = null;
                                 break;
                             }
                         }
                     }
-                }                
+                //}                
             }
             
             // check user has touched a fish
@@ -198,13 +198,8 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
         }
 
         this.attemptToDropPoison = function (mouseX, mouseY) {
-            // look for an "unused" poison object
-            for(i=0; i < poison.length; i++) {
-                if(poison[i] == null) {
-                    // current poison object is unused, so we can create our poison
-                    poison[i] = new Poison(mouseX,mouseY);
-                    break;
-                }
+            if (number_of_poison > poison.length) {
+                poison.push(new Poison(mouseX, mouseY));
             }
         };
 
