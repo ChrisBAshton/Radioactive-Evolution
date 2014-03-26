@@ -13,7 +13,7 @@ define(['bootstrap', 'module/model/countdown', 'module/model/population'], funct
 
         bs.pubsub.addListener('regame:action:ate_plankton', function () {
             evolution_points += bs.config.game.planktonXP;
-            score++;
+            score += bs.config.game.planktonXP;
             bs.pubsub.emitEvent('regame:status:score', [evolution_points]);    
         });
 

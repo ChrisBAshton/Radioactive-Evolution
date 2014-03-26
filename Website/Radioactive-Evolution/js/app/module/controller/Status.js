@@ -20,7 +20,7 @@ define(['bootstrap'], function (bs) {
         }
 
         this.getScore = function () {
-            return Status.score;
+            return Status.score + ' XP';
         }
     }
 

@@ -156,7 +156,7 @@ define(['bootstrap', 'module/model/assets', 'creatures/user', 'module/controller
             context.fillText(status.get(), bs.config.canvas.width/2, 30);
 
             context.textAlign = 'right';
-            context.fillText(status.getScore() + " XP", bs.config.canvas.width-10, 30);
+            context.fillText(status.getScore(), bs.config.canvas.width-10, 30);
             context.restore();
         }
     };
