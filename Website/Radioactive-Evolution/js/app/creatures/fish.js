@@ -15,6 +15,14 @@ define(['bootstrap', 'creatures/_creature', 'creatures/user', '_helpers/object_h
         	return array[Math.floor(Math.random() * array.length)];
         };
 
+        var selectiveRandomElement = function (array, avoidThis) {
+			var random;
+			do {
+				random = randomElement(array);
+			} while (random === avoidThis);
+			return random;
+        };
+
 		/**
 		* Resets all of the fish's variables
 		*
@@ -24,20 +32,15 @@ define(['bootstrap', 'creatures/_creature', 'creatures/user', '_helpers/object_h
 			var widths = [25, 40, 65, 100, 140],
 				speeds = [1,2],
 				ranges = [120,140,160,180,200,220],
-				// these colors are picked from images of real fish!
-				colors = ["#FF9233", "#00FF9C", "#F2530F", "#2E2B3E", "#FE5D62", "#E7E8ED", "#FBF221", "#9D48C9"];
+				colors = ["#FF9233", "#00FF9C", "#F2530F", "#2E2B3E", "#FE5D62", "#E7E8ED", "#FBF221", "#9D48C9"]; // NB: these colors are picked from images of real fish!
 			
-			// appearance
-			this.width = randomElement(widths);
-			this.height = Math.floor(this.width/2);
-			this.xp = Math.floor((this.width + this.height)/20);
-			this.speed = randomElement(speeds);
-			this.range = randomElement(ranges);
-			this.color = randomElement(colors);
-			// set eye color, making sure it's different from the body color
-			do {
-				this.eyecolor = randomElement(colors);
-			} while (this.eyecolor == this.color);
+			this.width    = randomElement(widths);
+			this.height   = Math.floor(this.width/2);
+			this.xp       = Math.floor((this.width + this.height)/20);
+			this.speed    = randomElement(speeds);
+			this.range    = randomElement(ranges);
+			this.color    = randomElement(colors);
+			this.eyecolor = selectiveRandomElement(colors);
 			
 			// @TODO - implement Chris 2014.
 			var spawningOnUser = false;//true;
