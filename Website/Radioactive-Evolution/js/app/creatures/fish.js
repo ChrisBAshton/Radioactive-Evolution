@@ -11,6 +11,10 @@ define(['bootstrap', 'creatures/_creature', 'creatures/user'], function (bs, Cre
         var self = this;
         bs.extend(Creature, this);
 
+        var randomElement = function (array) {
+        	return array[Math.floor(Math.random() * array.length)];
+        };
+
 		/**
 		* Resets all of the fish's variables
 		*
@@ -24,18 +28,16 @@ define(['bootstrap', 'creatures/_creature', 'creatures/user'], function (bs, Cre
 				colors = ["#FF9233", "#00FF9C", "#F2530F", "#2E2B3E", "#FE5D62", "#E7E8ED", "#FBF221", "#9D48C9"];
 			
 			// appearance
-			this.width = widths[Math.floor(Math.random()*widths.length)];
+			this.width = randomElement(widths);
 			this.height = Math.floor(this.width/2);
-			this.color = colors[Math.floor(Math.random()*colors.length)];
-			// set eye color, making sure it's different from the body color
-			this.eyecolor = this.color;
-			do {
-				this.eyecolor = colors[Math.floor(Math.random()*colors.length)];
-			} while(this.eyecolor == this.color);
-			// technical abilities
 			this.xp = Math.floor((this.width + this.height)/20);
-			this.speed = speeds[Math.floor(Math.random()*speeds.length)];
-			this.range = ranges[Math.floor(Math.random()*ranges.length)];
+			this.speed = randomElement(speeds);
+			this.range = randomElement(ranges);
+			this.color = randomElement(colors);
+			// set eye color, making sure it's different from the body color
+			do {
+				this.eyecolor = randomElement(colors);
+			} while (this.eyecolor == this.color);
 			
 			// position
 			var spawningOnUser = true;
@@ -45,7 +47,7 @@ define(['bootstrap', 'creatures/_creature', 'creatures/user'], function (bs, Cre
 				var dir = Math.random();	// come from right or left, 50/50 chance
 				this.x = (dir > 0.5) ? 0:bs.config.canvas.width;
 				// check if fish has spawned on top of user
-				// TODO - fix. CHris 2014
+				// TODO - fix. Chris 2014
 				// if(!level.collision(this, user)) {
 				// 	// fish hasn't spawned on user, so these coordinates are fine
 				spawningOnUser = false;

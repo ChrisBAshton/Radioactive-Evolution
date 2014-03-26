@@ -17,7 +17,6 @@ var Creature = function () {
 	this.color = "white";
 	this.eyecolor = "black";
 
-
 	/**
 	* Returns the x co-ordinate of the creature.
 	*
