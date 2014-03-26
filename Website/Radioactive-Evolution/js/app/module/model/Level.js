@@ -1,31 +1,38 @@
 /* @TODO there is a lot of computation in this class. Need to modularise betterer */
 
-define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison', 'creatures/user', 'module/model/Countdown', '_helpers/object_helper'], function (bs, Fish, Plankton, Poison, user, countdown, objects) {
+define(['bootstrap', 'module/model/Countdown', 'module/model/Population'], function (bs, countdown, population) {
 
     var Level = function () {
 
         var self = this,
             level,
             evolution_points,
-            score,
-            plankton,
-            fish,
-            poison,
-            number_of_fish,
-            number_of_poison,
-            number_of_plankton;
+            score;
 
         bs.pubsub.addListener('regame:nextLevel', function () {
             self.nextLevel();
         });
 
-        bs.pubsub.addListener('regame:upgrade:planktonCountChanged', function (newTotal) {
-            number_of_plankton = newTotal;
+        bs.pubsub.addListener('regame:action:ate_plankton', function () {
+            evolution_points += bs.config.game.planktonXP;
+            score++;
+            bs.pubsub.emitEvent('regame:status:score', [evolution_points]);    
         });
 
-        bs.pubsub.addListener('regame:upgrade:poisonCountChanged', function (newTotal) {
-            number_of_poison = newTotal;
+        bs.pubsub.emitEvent('regame:action:killed_fish', function (xpGained) {
+            evolution_points += xpGained;
+            score += xpGained;
+            bs.pubsub.emitEvent('regame:status:score', [evolution_points]);
         });
+
+        bs.pubsub.addListener('temporary-message-from-population.js', function () {
+            bs.pubsub.emitEvent('regame:action:user_died', [level, score]);
+            // @todo - remove this and respond to above event instead
+            bs.pubsub.emitEvent('regame:game:stop');
+            bs.pubsub.emitEvent('regame:status', ["You died! Final Score: " + score]);
+            bs.pubsub.emitEvent('regame:menu:new', ['death']);            
+        });
+
 
         this.level = function () {
             return level;
@@ -39,26 +46,7 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
         */
         this.animate = function () {
             
-            // move user if appropriate keyboard key is down
-            user.keyboardMove();
-            
-            var i;
-
-            i = plankton.length;
-            while (i-- > 0) {
-                plankton[i].move();
-                plankton[i].glow();
-            }
-
-            i = poison.length;
-            while (i-- > 0) {
-                poison[i].move();
-            }
-
-            i = fish.length;
-            while (i-- > 0) {
-                fish[i].move();
-            }
+            population.animate();
 
             countdown.nextFrame();
             if(countdown.secondsLeft() <= 0) {
@@ -67,143 +55,21 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
                 bs.pubsub.emitEvent('regame:menu:new', ['level']);
             } else {
                 // calculate collisions etc
-                self.calculate();
+                population.calculate();
                 bs.pubsub.emitEvent('regame:paint:redraw');
             }
         };
 
         this.nextLevel = function () {
             level++;
-            number_of_fish++;
-            self.populate();
         };
 
-        /**
-        * Generate all of the creatures for the level.
-        */
         this.reset = function () {
             level            = 1;
             score            = 0;
             evolution_points = 0;
-            number_of_fish     = bs.config.game.minFish;
-            number_of_plankton = bs.config.game.minPlankton;
-            number_of_poison   = bs.config.game.minPoison;
-            self.populate();
-        };
-
-        this.populate = function () {
-            fish = populateArray(Fish, number_of_fish);
-            plankton = populateArray(Plankton, number_of_plankton);
-            poison = [];//populateArray(Poison, number_of_poison);
-        };
-
-        var populateArray = function (objectName, numberOfTimes) {
-            var myArray = [];
-            while (numberOfTimes-- > 0) {
-                myArray.push(new objectName());
-            }
-            return myArray;
-        };
-
-        this.drawCreatures = function () {
-            var i;
-
-            i = plankton.length;
-            while (i-- > 0) {
-                plankton[i].draw();
-            }
-            i = poison.length;
-            while (i-- > 0) {
-                poison[i].draw();
-            }
-            i = fish.length;
-            while (i-- > 0) {
-                fish[i].draw();
-            }
-        };
-
-        /**
-        * Check for collisions and process the impact of any such collisions,
-        * e.g. the user swimming into plankton.
-        *
-        * @method calculate
-        */
-        this.calculate = function () {
-            checkUserHasEatenPlankton();
-            checkFishHasEatenPoison();
-            checkUserAndFishCollision();
-        }
-
-        var checkUserHasEatenPlankton = function () {
-            var i = plankton.length;
-            while (i-- > 0) {
-                if(objects.collide(user, plankton[i])) {
-                    // @TODO - play crunch sound. Reset time to zero so that sound plays multiple times if user hits multiple plankton in short time frame
-                    bs.pubsub.emitEvent('regame:action:ate_plankton');
-
-                    // remove plankton and gain XP
-                    evolution_points += bs.config.game.planktonXP;
-                    score++;
-                    plankton[i].reset();
-                }
-            }
-        };
-
-        var checkFishHasEatenPoison = function () {
-            var i = poison.length;
-            while (i-- > 0) {
-                // poison has been placed by the user- check against other fish coordinates
-                for(var j=0; j < fish.length; j++) {
-                    // check fish is alive- a dead fish can't eat poison!
-                    if(fish[j].isAlive()) {
-                        // if fish comes into contact with poison
-                        if(objects.collide(fish[j], poison[i])) {
-                            fish[j].eatPoison();
-                            bs.pubsub.emitEvent('regame:action:killed_fish');
-                            poison[i].remove();
-                            break;
-                        }
-                    }
-                }         
-            }
-        };
-
-        var checkUserAndFishCollision = function () {
-            i = fish.length;
-            while (i-- > 0) {
-                if(objects.collide(user, fish[i])) {
-                    if(fish[i].isAlive()) {
-                        // check which fish is bigger
-                        if( (user.getWidth() * user.getHeight()) > (fish[i].getWidth() * fish[i].getHeight()) ) {
-                            // @TODO - get all below actions to be invoked by this event
-                            bs.pubsub.emitEvent('regame:action:killed_fish');
-                            evolution_points += fish[i].getXP();
-                            score += fish[i].getXP();
-                            fish[i].reset();
-                        } else {
-                            // user is dead
-                            bs.pubsub.emitEvent('regame:action:user_died', [level, score]);
-                            // @todo - remove this and respond to above event instead
-                            bs.pubsub.emitEvent('regame:game:stop');
-                            bs.pubsub.emitEvent('regame:status', ["You died! Final Score: " + score]);
-                            bs.pubsub.emitEvent('regame:menu:new', ['death']);
-                        }
-                    } else {
-                        // player eats the dead fish and gets some XP (but not as much as if they'd eaten the fish directly)
-                        var gain = Math.floor((fish[i].getXP())/2);
-                        evolution_points += gain;
-                        score += gain;
-                        fish[i].reset();
-                    }
-                }
-            }
-        };
-
-        this.attemptToDropPoison = function (mouseX, mouseY) {
-            console.log('lowercase "level" - why?');
-            if (number_of_poison > poison.length) {
-                poison.push(new Poison(mouseX, mouseY));
-            }
+            bs.pubsub.emitEvent('regame:status:score', [evolution_points]);
+            population.reset();
         };
 
         this.ep = function () {

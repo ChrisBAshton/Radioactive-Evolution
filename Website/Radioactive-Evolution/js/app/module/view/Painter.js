@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/model/Assets', 'module/model/Level', 'creatures/user', 'module/controller/Status'], function (bs, assets, level, user, status) {
+define(['bootstrap', 'module/model/Assets', 'creatures/user', 'module/controller/Status', 'module/model/Population'], function (bs, assets, user, status, population) {
 
     /**
     * An abstract class that paints the game environment to the canvas, including the
@@ -73,7 +73,7 @@ define(['bootstrap', 'module/model/Assets', 'module/model/Level', 'creatures/use
         */
         this.redraw = function() {
             this.draw_background();
-            level.drawCreatures();
+            population.drawCreatures();
             user.draw();
             this.draw_summary();
         }
@@ -155,7 +155,7 @@ define(['bootstrap', 'module/model/Assets', 'module/model/Level', 'creatures/use
             context.fillText(status.get(), bs.config.canvas.width/2, 30);
 
             context.textAlign = 'right';
-            context.fillText(level.ep() + " XP", bs.config.canvas.width-10, 30);
+            context.fillText(status.getScore() + " XP", bs.config.canvas.width-10, 30);
             context.restore();
         }
     };
