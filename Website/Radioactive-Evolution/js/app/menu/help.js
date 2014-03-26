@@ -1,4 +1,4 @@
-define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/MenuInstance'], function (bs, Menu, game, menu) {
+define(['bootstrap', 'menu/_menu', 'module/controller/game', 'module/controller/menu_instance'], function (bs, Menu, game, menu) {
 
 	var HelpMenu = function () {
 		

@@ -16,8 +16,6 @@
 
     Add a delay of a few seconds when re-spawning fish so that the user has time to get away from the side of the screen.
 
-    Need to remove capital letters from filenames.
-
     Restructure files so we no longer have model/view/controller directories.
 
     Would be nice to bring back the loading screen.

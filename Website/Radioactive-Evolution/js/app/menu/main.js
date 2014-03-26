@@ -1,4 +1,4 @@
-define(['bootstrap', 'menu/_menu', 'module/controller/Game'], function (bs, Menu, game) {
+define(['bootstrap', 'menu/_menu', 'module/controller/game'], function (bs, Menu, game) {
 
 	var MainMenu = function () {
 

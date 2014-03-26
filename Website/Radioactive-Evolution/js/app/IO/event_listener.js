@@ -1,4 +1,4 @@
-define(['bootstrap', 'creatures/user', 'module/controller/MenuInstance', 'module/model/Population'], function (bs, user, menuInstance, population) {
+define(['bootstrap', 'creatures/user', 'module/controller/menu_instance', 'module/model/population'], function (bs, user, menuInstance, population) {
 
 	/**
 	* A class defining what actions to take when the user moves or clicks the mouse.

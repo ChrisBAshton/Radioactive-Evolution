@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/model/Assets', 'creatures/user', 'module/controller/Status', 'module/model/Population'], function (bs, assets, user, status, population) {
+define(['bootstrap', 'module/model/assets', 'creatures/user', 'module/controller/status', 'module/model/population'], function (bs, assets, user, status, population) {
 
     /**
     * An abstract class that paints the game environment to the canvas, including the

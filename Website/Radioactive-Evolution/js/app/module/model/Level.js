@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/model/Countdown', 'module/model/Population'], function (bs, countdown, population) {
+define(['bootstrap', 'module/model/countdown', 'module/model/population'], function (bs, countdown, population) {
 
     var Level = function () {
 

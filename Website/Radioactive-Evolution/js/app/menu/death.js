@@ -1,4 +1,4 @@
-define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/Achievements', 'module/model/Assets'], function (bs, Menu, game, Achievements, layout, assets) {
+define(['bootstrap', 'menu/_menu', 'module/controller/game', 'module/controller/achievements', 'module/model/assets'], function (bs, Menu, game, Achievements, layout, assets) {
 
     /**
     * The menu shown when the user dies; offers them the chance to restart or 

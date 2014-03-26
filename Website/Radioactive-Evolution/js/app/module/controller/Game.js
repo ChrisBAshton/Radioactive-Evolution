@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/controller/Achievements', 'module/model/Countdown', 'module/model/Level'], function (bs, achievements, countdown, level) {
+define(['bootstrap', 'module/controller/achievements', 'module/model/countdown', 'module/model/level'], function (bs, achievements, countdown, level) {
 
 	var Game = function () {
 

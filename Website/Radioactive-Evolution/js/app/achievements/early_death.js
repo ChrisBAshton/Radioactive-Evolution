@@ -1,4 +1,4 @@
-define(['bootstrap', 'achievements/_achievement', 'module/model/Countdown'], function (bs, Achievement, countdown) {
+define(['bootstrap', 'achievements/_achievement', 'module/model/countdown'], function (bs, Achievement, countdown) {
 
     /**
     * An achievement gained by completely failing and dying within a few seconds (on any level).

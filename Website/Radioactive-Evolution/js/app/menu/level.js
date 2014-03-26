@@ -1,4 +1,4 @@
-define(['bootstrap', 'menu/_menu', 'module/controller/Achievements', 'module/model/Assets', 'module/controller/UpgradeController', 'module/model/Level'], function (bs, Menu, Achievements, assets, upgradeController, level) {
+define(['bootstrap', 'menu/_menu', 'module/controller/achievements', 'module/model/assets', 'module/controller/upgrade_controller', 'module/model/level'], function (bs, Menu, Achievements, assets, upgradeController, level) {
 
 	var MenuLevel = function () {
 		

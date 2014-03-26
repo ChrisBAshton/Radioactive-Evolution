@@ -1,4 +1,4 @@
-define(['creatures/_creature', 'bootstrap', 'module/controller/UpgradeController'], function (Creature, bs, upgrades) {
+define(['creatures/_creature', 'bootstrap', 'module/controller/upgrade_controller'], function (Creature, bs, upgrades) {
 
 
 /**

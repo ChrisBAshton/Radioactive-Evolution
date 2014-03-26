@@ -1,4 +1,4 @@
-define(['bootstrap', 'creatures/_creature', 'module/model/Countdown'], function (bs, Creature, countdown) {
+define(['bootstrap', 'creatures/_creature', 'module/model/countdown'], function (bs, Creature, countdown) {
 
 	/**
 	* Defines a plankton.

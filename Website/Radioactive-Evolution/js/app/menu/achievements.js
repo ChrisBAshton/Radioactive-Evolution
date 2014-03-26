@@ -1,4 +1,4 @@
-define(['bootstrap', 'menu/_menu', 'module/controller/Game', 'module/controller/Achievements'], function (bs, Menu, game, Achievements, layout) {
+define(['bootstrap', 'menu/_menu', 'module/controller/game', 'module/controller/achievements'], function (bs, Menu, game, Achievements, layout) {
 
 	var AchievementsMenu = function () {
 

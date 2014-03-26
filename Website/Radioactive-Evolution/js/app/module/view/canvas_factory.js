@@ -1,6 +1,6 @@
 // @TODO - use this!
 
-define(['bootstrap', 'IO/EventListener'], function (bs, EventListener) {
+define(['bootstrap', 'IO/event_listener'], function (bs, EventListener) {
     var CanvasFactory = function (canvas) {
         canvas.id           = 'regame-canvas-unique-id';
         canvas.width        = bs.config.canvas.width;

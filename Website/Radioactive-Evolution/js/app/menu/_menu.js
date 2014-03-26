@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/view/Button', 'module/view/Painter', 'module/model/Assets'], function (bs, Button, painter, assets) {
+define(['bootstrap', 'module/view/button', 'module/view/painter', 'module/model/assets'], function (bs, Button, painter, assets) {
 
 	/**
 	* A menu is practically any screen outside of the core gameplay. It is often made up of buttons which can 
