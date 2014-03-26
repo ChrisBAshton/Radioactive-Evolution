@@ -1,5 +1,3 @@
-/* @TODO there is a lot of computation in this class. Need to modularise betterer */
-
 define(['bootstrap', 'module/model/Countdown', 'module/model/Population'], function (bs, countdown, population) {
 
     var Level = function () {
@@ -10,7 +8,7 @@ define(['bootstrap', 'module/model/Countdown', 'module/model/Population'], funct
             score;
 
         bs.pubsub.addListener('regame:nextLevel', function () {
-            self.nextLevel();
+            level++;
         });
 
         bs.pubsub.addListener('regame:action:ate_plankton', function () {
@@ -27,7 +25,6 @@ define(['bootstrap', 'module/model/Countdown', 'module/model/Population'], funct
 
         bs.pubsub.addListener('temporary-message-from-population.js', function () {
             bs.pubsub.emitEvent('regame:action:user_died', [level, score]);
-            // @todo - remove this and respond to above event instead
             bs.pubsub.emitEvent('regame:game:stop');
             bs.pubsub.emitEvent('regame:status', ["You died! Final Score: " + score]);
             bs.pubsub.emitEvent('regame:menu:new', ['death']);            
@@ -60,10 +57,6 @@ define(['bootstrap', 'module/model/Countdown', 'module/model/Population'], funct
             }
         };
 
-        this.nextLevel = function () {
-            level++;
-        };
-
         this.reset = function () {
             level            = 1;
             score            = 0;
@@ -73,7 +66,6 @@ define(['bootstrap', 'module/model/Countdown', 'module/model/Population'], funct
         };
 
         this.ep = function () {
-            console.log('UPPERCASE "Level"');
             return evolution_points;
         };
 

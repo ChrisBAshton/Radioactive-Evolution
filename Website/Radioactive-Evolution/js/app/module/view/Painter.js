@@ -131,6 +131,7 @@ define(['bootstrap', 'module/model/Assets', 'creatures/user', 'module/controller
             //context.fillText("Level "+level, 10, 30);
             
             context.textAlign = 'center';
+            // @TODO
             // if(!menu.isInView()) {
             //     if(countdown.secondsLeft() <= 5) {
             //         // set text to red
