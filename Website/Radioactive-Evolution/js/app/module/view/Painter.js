@@ -63,23 +63,7 @@ define(['bootstrap', 'module/model/Assets', 'module/model/Level', 'creatures/use
         * @param {String} cursor    The cursor to change to.
         */
         this.changeCursor = function (cursor) {
-            switch(cursor) {
-                case "none":
-                    // hide cursor (e.g. during gameplay)
-                    document.getElementById(CANVAS_NAME).style.cursor = "none";
-                    //document.getElementById(CANVAS_NAME).style.cursor = 'url("Radioactive-Evolution/images/blank.cur"), none';
-                    break;
-                case "default":
-                    // show the cursor so that user can find their way around menu
-                    document.getElementById(CANVAS_NAME).style.cursor = "default";
-                    break;
-                    // turn cursor into hand to show that something is clickable
-                case "pointer":
-                    document.getElementById(CANVAS_NAME).style.cursor = "pointer";
-                    break;
-                default:
-                    document.getElementById(CANVAS_NAME).style.cursor = "auto";
-            }
+            document.getElementById(CANVAS_NAME).style.cursor = cursor;
         }
 
         /**
