@@ -198,21 +198,23 @@ define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison',
         }
 
         this.attemptToDropPoison = function (mouseX, mouseY) {
+            console.log('lowercase "level" - why?');
             if (number_of_poison > poison.length) {
                 poison.push(new Poison(mouseX, mouseY));
             }
         };
 
         this.ep = function () {
+            console.log('UPPERCASE "Level"');
             return evolution_points;
-        }
+        };
 
         this.spendEp = function (amount) {
             evolution_points -= amount;
             if (evolution_points < 0) {
                 throw new Exception ("MINUS POINTS");
             }
-        }
+        };
 
     };
 
