@@ -1,4 +1,4 @@
-define(['bootstrap', 'creatures/user', 'module/controller/MenuInstance', 'module/model/level'], function (bs, user, menuInstance, level) {
+define(['bootstrap', 'creatures/user', 'module/controller/MenuInstance', 'module/model/Population'], function (bs, user, menuInstance, population) {
 
 	/**
 	* A class defining what actions to take when the user moves or clicks the mouse.
@@ -57,11 +57,8 @@ define(['bootstrap', 'creatures/user', 'module/controller/MenuInstance', 'module
 					user.move(mouseX,mouseY);
 				}
 			} else {
-				level.attemptToDropPoison(mouseX, mouseY);
+				population.attemptToDropPoison(mouseX, mouseY);
 			}
-
-			//console.log('clicked in event listener');
-			//bs.pubsub.emitEvent('regame:mouse:clicked', [mouseX, mouseY]);
 		}
 	}
 

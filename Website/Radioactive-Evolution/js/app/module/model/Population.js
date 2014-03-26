@@ -123,7 +123,7 @@ define(['bootstrap', 'creatures/user', 'creatures/fish', 'creatures/plankton', '
                     // if fish comes into contact with poison
                     if(objects.collide(fish[j], poison[i])) {
                         fish[j].eatPoison();
-                        poison[i].remove();
+                        poison.splice(i, 1);
                         break;
                     }
                 }
@@ -156,7 +156,6 @@ define(['bootstrap', 'creatures/user', 'creatures/fish', 'creatures/plankton', '
     };
 
     var attemptToDropPoison = function (mouseX, mouseY) {
-        console.log('lowercase "level" - why?');
         if (number_of_poison > poison.length) {
             poison.push(new Poison(mouseX, mouseY));
         }
@@ -166,7 +165,8 @@ define(['bootstrap', 'creatures/user', 'creatures/fish', 'creatures/plankton', '
         animate: animate,
         reset: reset,
         calculate: calculate,
-        drawCreatures: drawCreatures
+        drawCreatures: drawCreatures,
+        attemptToDropPoison: attemptToDropPoison
     };
 
 });
