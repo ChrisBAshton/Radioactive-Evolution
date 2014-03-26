@@ -104,6 +104,7 @@ define(['bootstrap', 'creatures/_creature', 'creatures/user', '_helpers/object_h
 			} else {
 				makeCarcasFloatToSurface();
 			}
+			stayInsideThePond();
 		}
 
 		var makeFishSwim = function () {
@@ -112,8 +113,6 @@ define(['bootstrap', 'creatures/_creature', 'creatures/user', '_helpers/object_h
 			} else {
 				swimBackAndForth();
 			}
-			
-			stayInsideThePond();
 		};
 
 		var makeCarcasFloatToSurface = function () {
