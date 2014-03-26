@@ -1,4 +1,4 @@
-define(['bootstrap', 'module/controller/Achievements', 'module/view/Painter', 'module/model/Countdown', 'module/model/Level'], function (bs, achievements, Painter, countdown, level) {
+define(['bootstrap', 'module/controller/Achievements', 'module/model/Countdown', 'module/model/Level'], function (bs, achievements, countdown, level) {
 
 	var Game = function () {
 
@@ -48,23 +48,9 @@ define(['bootstrap', 'module/controller/Achievements', 'module/view/Painter', 'm
 		* @method start_game
 		*/
 		this.start = function () {
-
-			// check achievements have been achieved
 			achievements.check();
-			// hide the cursor
-			Painter.changeCursor("none");
-			// start game animation
 			startAnimating();
-			
-			// generate fish and plankton
-			level.populate();
-			// reset countdown timer
 			countdown.reset();
-
-			// start background noise
-			//sound_bg.play();
-			// draw the first game frame
-			//Painter.redraw();
 		}
 
 		/**
@@ -75,22 +61,8 @@ define(['bootstrap', 'module/controller/Achievements', 'module/view/Painter', 'm
 		* @method stop_game
 		*/
 		this.stop = function () {
-			// stop background noise TODO
-			// sound_bg.currentTime = 0;
-			// sound_bg.pause();
-			// stop animation
 			stopAnimating();
-			// check for any new achievements gained
 			achievements.check();
-			// give the user their cursor back!
-			Painter.changeCursor("default");
-
-			// draw the menu
-			// glitch - for some obscure reason, calling menu.draw() directly doesn't work 
-			// in this instance, so we get the setTimeout function to call it
-			// setTimeout(function(){
-			// 	menu.draw();
-			// }, 0);
 		}
 
 		/**
@@ -99,9 +71,7 @@ define(['bootstrap', 'module/controller/Achievements', 'module/view/Painter', 'm
 		* @method pause_game
 		*/
 		this.pause = function () {
-			// stop animation
 			stopAnimating();
-			// create help menu
 			bs.pubsub.emitEvent('regame:menu:new', ['help']);
 		}
 
@@ -111,16 +81,16 @@ define(['bootstrap', 'module/controller/Achievements', 'module/view/Painter', 'm
 		* @method resume_game()
 		*/
 		this.resume = function() {
-			// resume animation
 			startAnimating();
-			// hide cursor
-			Painter.changeCursor("none");
-			// paint game
-			Painter.redraw();
 		}
 
 		var startAnimating = function () {
-			self.loop = setInterval(function(){level.animate()}, countdown.getFrameInterval());
+			self.loop = setInterval(
+				function() {
+					level.animate();
+				},
+				countdown.getFrameInterval()
+			);
 		};
 
 		var stopAnimating = function () {

@@ -1,3 +1,5 @@
+/* @TODO there is a lot of computation in this class. Need to modularise better */
+
 define(['bootstrap', 'creatures/fish', 'creatures/plankton', 'creatures/poison', 'creatures/user', 'module/model/Countdown', '_helpers/object_helper'], function (bs, Fish, Plankton, Poison, user, countdown, objects) {
 
     var Level = function () {

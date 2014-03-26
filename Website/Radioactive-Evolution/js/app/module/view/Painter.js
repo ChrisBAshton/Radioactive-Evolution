@@ -16,6 +16,16 @@ define(['bootstrap', 'module/model/Assets', 'module/model/Level', 'creatures/use
             canvas.height       = bs.config.canvas.height;
             canvas.style.border = "black 1px solid";
 
+            bs.pubsub.addListener('regame:game:start', function () {
+                self.changeCursor("none");
+            });
+            bs.pubsub.addListener('regame:game:resume', function () {
+                self.changeCursor("none");
+            });
+            bs.pubsub.addListener('regame:game:stop', function () {
+                self.changeCursor("default");
+            });
+
             bs.pubsub.addListener('regame:paint:redraw', function () {
                 self.redraw();
             });
