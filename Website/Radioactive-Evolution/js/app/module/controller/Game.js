@@ -1,3 +1,6 @@
+// @TODO - use requestAnimationFrame instead: https://developer.mozilla.org/en/docs/Web/API/window.requestAnimationFrame
+
+
 define(['bootstrap', 'module/controller/achievements', 'module/model/countdown', 'module/model/level'], function (bs, achievements, countdown, level) {
 
 	var Game = function () {
