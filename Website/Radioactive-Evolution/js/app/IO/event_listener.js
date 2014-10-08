@@ -31,15 +31,6 @@ define(['bootstrap', 'creatures/user', 'module/controller/menu_instance', 'modul
 				mouseX = Math.floor((e.clientX-bounding_box.left) * (canvas.width/bounding_box.width)),
 				mouseY = Math.floor((e.clientY-bounding_box.top) * (canvas.height/bounding_box.height));	
 			
-			if(menuInstance.exists()) {
-				// invoke menu's mouseMoved() method, if any
-				menuInstance.menu().mouseMoved(mouseX,mouseY);
-				menuInstance.menu().draw();
-			} else {
-				// update user's position
-				user.move(mouseX, mouseY);
-			}
-
 			bs.pubsub.emitEvent('regame:mouse:moved', [mouseX, mouseY]);
 		}
 

@@ -144,6 +144,7 @@ define(['bootstrap', 'module/view/button', 'module/view/painter', 'module/model/
 				this.buttons[i].setSelected(this.intersects(this.buttons[i], mouseX, mouseY));
 			}
 			this.mouseMovedActions();
+			this.draw();
 		}
 
 		/**
@@ -189,19 +190,22 @@ define(['bootstrap', 'module/view/button', 'module/view/painter', 'module/model/
 			
 		}
 
+		var self = this,
+			listeningForMovement = function (x, y) {
+				self.mouseMoved(x, y);
+			};
+
+		bs.pubsub.addListener('regame:mouse:moved', listeningForMovement);
+
 		/**
 		 * Called when the menu instance changes.
 		 */
 		this.destroy = function () {
-			bs.pubsub.removeEvent('regame:mouse:moved');
+			bs.pubsub.removeListener('regame:mouse:moved', listeningForMovement);
 		};
 
 		bs.pubsub.addListener('regame:mouse:clicked', function (x, y) {
 			self.mouseClicked(x, y);
-		});
-
-		bs.pubsub.addListener('regame:mouse:moved', function (x, y) {
-			self.mouseMoved(x, y);
 		});
 	}
 

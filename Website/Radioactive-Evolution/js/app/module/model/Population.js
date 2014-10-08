@@ -67,14 +67,14 @@ define(['bootstrap', 'creatures/user', 'creatures/fish', 'creatures/plankton', '
     /**
     * Generate all of the creatures for the level.
     */
-    this.reset = function () {
+    var reset = function () {
         number_of_fish     = bs.config.game.minFish;
         number_of_plankton = bs.config.game.minPlankton;
         number_of_poison   = bs.config.game.minPoison;
-        self.populate();
+        populate();
     };
 
-    this.populate = function () {
+    var populate = function () {
         fish = populateArray(Fish, number_of_fish);
         plankton = populateArray(Plankton, number_of_plankton);
         poison = [];//populateArray(Poison, number_of_poison);

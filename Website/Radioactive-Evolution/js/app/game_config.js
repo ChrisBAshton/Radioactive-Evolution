@@ -8,7 +8,7 @@ define(function() {
             maxPlankton: 15,
             minPoison:   0,
             maxPoison:   5,
-            planktonXP:  1
+            planktonXP:  100
         },
         canvas: {
             width:       780,
