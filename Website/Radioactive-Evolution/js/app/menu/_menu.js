@@ -42,17 +42,26 @@ define(['bootstrap', 'module/view/button', 'module/view/painter', 'module/model/
 		};
 
 		this.drawButtons = function () {
+
 			// length stored as variable gives better performance (http://stackoverflow.com/a/10167931)
-			var length = this.buttons.length;
+			var length = this.buttons.length,
+				aButtonIsSelected = false;
 			// loop through all of the buttons
 			for(var i = 0; i < length; i++) {
-				this.drawButton(this.buttons[i]);
+				var buttonSelected = this.drawButton(this.buttons[i]);
+				if (buttonSelected) {
+					aButtonIsSelected = true;
+				}
+			}
+
+			// default cursor by default, turn to pointer if over a button
+			painter.changeCursor("default");
+			if (aButtonIsSelected) {
+				painter.changeCursor("pointer");
 			}
 		}
 
 		this.drawButton = function (button) {
-			// default cursor by default, turn to pointer if over a button
-			painter.changeCursor("default");
 
 			// only display the button if it is supposed to be visible
 			if(button.isVisible()) {
@@ -69,7 +78,6 @@ define(['bootstrap', 'module/view/button', 'module/view/painter', 'module/model/
 				if(selected) {
 					// hovering over button, so highlight it with a different border color
 					context.strokeStyle = 'yellow';
-					painter.changeCursor("pointer");
 				} else {
 					context.strokeStyle = '#FFFFFF';
 				}
@@ -88,6 +96,8 @@ define(['bootstrap', 'module/view/button', 'module/view/painter', 'module/model/
 					button.getX()+(button.getWidth()/2), 
 					button.getY()+(button.getHeight()/2)+6);
 			}
+
+			return selected;
 		};
 
 		/**
@@ -175,7 +185,7 @@ define(['bootstrap', 'module/view/button', 'module/view/painter', 'module/model/
 		* @param {Number} mouseY	The mouse's Y co-ordinate
 		*/
 		this.mouseClicked = function(mouseX,mouseY) {
-			console.log('clicked inside Menu', mouseX, mouseY);
+			
 		}
 
 		/**
@@ -186,7 +196,6 @@ define(['bootstrap', 'module/view/button', 'module/view/painter', 'module/model/
 		};
 
 		bs.pubsub.addListener('regame:mouse:clicked', function (x, y) {
-			console.log('clicked in Menu');
 			self.mouseClicked(x, y);
 		});
 

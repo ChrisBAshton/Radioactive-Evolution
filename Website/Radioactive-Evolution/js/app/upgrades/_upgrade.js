@@ -121,7 +121,7 @@ define(['bootstrap'], function (bs) {
 		*/
 		this.updateCost = function() {
 			// need to be defined in classes that inherit
-			console.log("Console log coming from _upgrade when it shouldn't be");
+			throw "updateCost called from _upgrade when it shouldn't be";
 		}
 
 		/**

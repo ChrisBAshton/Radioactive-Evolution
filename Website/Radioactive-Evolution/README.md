@@ -1,14 +1,14 @@
 # BUGS
 
-    Need to fix "All upgrades purchased" achievement
+    Sometimes, the welcome page background isn't rendered properly (no image, just colors, etc). Happens on every 5-10 refreshes. Probably a RequireJS timing issue.
 
     When fish swims into user, death message appears but death menu doesn't paint until mouse is moved. Interestingly, when a level ends the level menu displays automatically, so the logic is correct. I think lots of things happen when the event is fired so I need to clean up the order in which things respond to events.
 
-    On first load, image background etc don't render.
-
-    Only the last button in a menu has a cursor: pointer; hover state. The rest don't.
-
 # IMPROVEMENTS
+
+    Animate on requestAnimationFrame for efficiency.
+
+    Use /module/view/canvas_factory
 
     Need to re-add Mousetrap to support keyboard control (or at least cheats)
 
@@ -19,6 +19,10 @@
     Restructure files so we no longer have model/view/controller directories.
 
     Would be nice to bring back the loading screen.
+
+    Would be nice to bring back "Time remaining:" in RED when <10 seconds left.
+
+    Show current level on top menu.
 
     More config options would be good
 

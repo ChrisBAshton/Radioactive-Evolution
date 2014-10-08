@@ -77,7 +77,7 @@ define(['bootstrap', 'module/model/countdown', 'module/model/population'], funct
         this.spendEp = function (amount) {
             evolution_points -= amount;
             if (evolution_points < 0) {
-                throw new Exception ("MINUS POINTS");
+                throw "MINUS POINTS";
             }
         };
     };

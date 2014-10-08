@@ -1,41 +1,54 @@
-define(['bootstrap', 'achievements/_achievement', 'upgrades/camouflage', 'upgrades/grow', 'upgrades/murky_water', 'upgrades/poison'], function (bs, Achievement, upgrade_camouflage, upgrade_flying, upgrade_grow, upgrade_murkyWater, upgrade_poison) {
+define(['bootstrap', 'achievements/_achievement'], function (bs, Achievement) {
 
-	/**
-	* An achievement gained by purchasing all upgrades in one play-through session.
-	*
-	* @class AllUpgrades
-	* @extends Achievement
-	* @constructor
-	*/
-	var AllUpgrades = function () {
+    /**
+    * An achievement gained by buying all possible game upgrades.
+    *
+    * @class AllUpgrades
+    * @extends Achievement
+    * @constructor
+    */
+    var AllUpgrades = function () {
         var self = this;
         bs.extend(Achievement, this);
-		this.title="allUpgrades";
-	}
+    	this.title="allUpgrades";
 
-	/**
-	* Check if the achievement has been achieved.
-	*
-	* @override
-	* @method checkAchieved
-	*/
-	AllUpgrades.prototype.checkAchieved = function() {
-		var unlockedAll = true;
-		var upgrades = new Array(upgrade_camouflage, upgrade_flying, upgrade_grow, upgrade_murkyWater, upgrade_poison);
-		for(var i = 0; i < upgrades.length; i++) {
-			if(upgrades[i].canUpgrade()) {
-				// user can still upgrade this upgrade
-				unlockedAll = false;
-				break;
-			}
-		}
-		if(unlockedAll) {
-			// user has unlocked all upgrades! Achievement!
-			this.setAchieved(true);
-			this.saveAchieved(true);
-		}
-	}
+        var allCamouflage = false,
+        	allFlyingFish = false,
+        	allGrow       = false,
+        	allMurkyWater = false,
+        	allPoison     = false;
 
-	return AllUpgrades;
+
+        // @TODO - come up with a less coupled way of checking all upgrades have been purchased.
+        bs.pubsub.addListener('regame:upgrade:purchased', function (title, cost, currentLevel) {
+
+        	if (title === "Camouflage" && currentLevel === 1) {
+        		allCamouflage = true;
+        	}
+        	else if (title === "Flying Fish" && currentLevel === 1) {
+        		allFlyingFish = true;
+        	}
+        	else if (title === "Grow" && currentLevel === 4) {
+        		allGrow = true;
+        	}
+        	else if (title === "Murky Water" && currentLevel === 5) {
+        		allMurkyWater = true;
+        	}
+        	else if (title === "Poison" && currentLevel === 5) {
+        		allPoison = true;
+        	}
+
+        	self.checkAchieved();
+        });
+
+        this.checkAchieved = function () {
+
+        	if (allCamouflage && allFlyingFish && allGrow && allMurkyWater && allPoison) {
+        		self.updateStatus(true);
+        	}
+        }
+    }
+
+    return AllUpgrades;
 
 });

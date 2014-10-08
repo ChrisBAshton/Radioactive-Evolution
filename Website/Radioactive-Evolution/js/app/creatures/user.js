@@ -226,7 +226,7 @@ User.prototype.keyboardMove = function() {
 			this.move(this.x+speed, this.y);
 			break;
 		default:
-			console.log("Error- invalid movement key entered.");
+			throw "Error- invalid movement key entered.";
 	}	
 }
 
