@@ -4,9 +4,13 @@
 
     When fish swims into user, death message appears but death menu doesn't paint until mouse is moved. Interestingly, when a level ends the level menu displays automatically, so the logic is correct. I think lots of things happen when the event is fired so I need to clean up the order in which things respond to events.
 
+    Cheats are half-working. XP is being taken off when you cheat with flying fish, camouflage or growth, and user keeps spontaneously floating to surface when they apply growth upgrade (until they apply another cheat, or they move the user with keyboard controls! It DOESN'T get fixed if they reach the end of the level either - they keep floating in the next level!)
+
 # Things we used to have, but now don't, and should re-add.
 
-    Need to re-add Mousetrap to support keyboard control (or at least cheats)
+    Need to re-add Mousetrap to support keyboard control for the following cheats:
+    * extra xp
+    * skip level
 
     Help menu contents.
 

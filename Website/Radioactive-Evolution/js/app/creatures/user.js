@@ -28,6 +28,11 @@ define(['creatures/_creature', 'bootstrap', 'module/controller/upgrade_controlle
 		bs.pubsub.addListener('regame:mouse:moved', function (x, y) {
 			self.move(x, y);
 		});
+
+        bs.pubsub.addListener('regame:key:pressed', function (key) {
+        	self.keyboardControl(key);
+        	self.keyboardMove();
+        });
 	}
 
 	/**
@@ -217,15 +222,6 @@ define(['creatures/_creature', 'bootstrap', 'module/controller/upgrade_controlle
 			default:
 				throw "Error- invalid movement key entered.";
 		}	
-	}
-
-	/**
-	* Stops the user's movement. (Called when no key is being pressed).
-	*
-	* @method keyboardPause
-	*/
-	User.prototype.keyboardPause = function() {
-		this.keyboardMovement = "NO_KEY_DOWN";
 	}
 
 	return new User();

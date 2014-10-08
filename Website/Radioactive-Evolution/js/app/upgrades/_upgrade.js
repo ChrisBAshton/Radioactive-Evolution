@@ -18,6 +18,14 @@ define(['bootstrap'], function (bs) {
 		this.title = "";
 		this.description = "";
 
+		bs.pubsub.addListener('regame:cheat', function (title) {
+			if (title === self.title) {
+				while (self.canUpgrade()) {
+					self.applyUpgrade();
+				}
+			}
+		});
+		
 		/**
 		* Returns the current level of the upgrade.
 		*
