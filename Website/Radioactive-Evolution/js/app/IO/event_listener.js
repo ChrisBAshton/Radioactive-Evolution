@@ -8,15 +8,24 @@ define(['bootstrap', 'creatures/user', 'module/controller/menu_instance', 'modul
 	*/
 	var EventListener = function () {
 
-		var canvas = bs.canvas;
+		var self = this;
+
+		// listen for mouse movements/clicks
+	    bs.canvas.addEventListener("mousemove", function (e) {
+	    	self.mouseMoved(e, this);
+	    }, false);
+	    bs.canvas.addEventListener("mousedown", function (e) {
+	    	self.mouseClicked(e, this);
+	    }, false);
 
 		/**
 		* Moves the user (when playing the game) or calls the Menu mouseMoved() function.
 		*
 		* @method mouseMoved
-		* @param {Object} e		Event handler.
+		* @param {Object} e			Event handler.
+		* @param {Object} canvas	Canvas
 		*/
-		this.mouseMoved = function(e) {
+		this.mouseMoved = function (e, canvas) {
 			// get mouse co-ordinates
 			var bounding_box=canvas.getBoundingClientRect(),
 				mouseX = Math.floor((e.clientX-bounding_box.left) * (canvas.width/bounding_box.width)),
@@ -39,9 +48,10 @@ define(['bootstrap', 'creatures/user', 'module/controller/menu_instance', 'modul
 		* In menu- calls menu's mouseClicked method.
 		*
 		* @method mouseClicked
-		* @param {Object} e		Event handler.
+		* @param {Object} e			Event handler.
+		* @param {Object} canvas	Canvas
 		*/
-		this.mouseClicked= function(e) {
+		this.mouseClicked= function (e, canvas) {
 			// get mouse co-ordinates
 			var bounding_box=canvas.getBoundingClientRect(),
 				mouseX = Math.floor((e.clientX-bounding_box.left) * (canvas.width/bounding_box.width)),

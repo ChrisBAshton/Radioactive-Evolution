@@ -15,11 +15,10 @@
 
     function loadRadioactiveEvolution(canvas) {
         require(config, ['bootstrap'], function (bs) {
-
             bs.canvas = canvas;
-
+            
             require(config, ['app'], function (app) {
-                app.init(canvas);
+                app.init();
             });
         });
     };
