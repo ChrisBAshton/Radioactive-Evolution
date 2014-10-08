@@ -12,6 +12,7 @@ define(['bootstrap', 'module/view/button', 'module/view/painter', 'module/model/
 	var Menu = function () {
 		var self = this;
 
+		this.context = bs.canvas.getContext("2d");
 		this.assets = assets;
 
 		// declare an array of buttons
@@ -69,30 +70,30 @@ define(['bootstrap', 'module/view/button', 'module/view/painter', 'module/model/
 				var selected = button.isSelected();
 				
 				// draw button
-				context.beginPath();
-				context.rect(button.getX(), button.getY(), button.getWidth(), button.getHeight());
-				context.fillStyle = '#333333';
-				context.fill();
+				this.context.beginPath();
+				this.context.rect(button.getX(), button.getY(), button.getWidth(), button.getHeight());
+				this.context.fillStyle = '#333333';
+				this.context.fill();
 				// draw border button
-				context.lineWidth = 1;
+				this.context.lineWidth = 1;
 				if(selected) {
 					// hovering over button, so highlight it with a different border color
-					context.strokeStyle = 'yellow';
+					this.context.strokeStyle = 'yellow';
 				} else {
-					context.strokeStyle = '#FFFFFF';
+					this.context.strokeStyle = '#FFFFFF';
 				}
-				context.closePath();
-				context.stroke();
+				this.context.closePath();
+				this.context.stroke();
 				
 				// paste button text
 				if(selected) {
-					context.fillStyle = "#FFFFFF";
+					this.context.fillStyle = "#FFFFFF";
 				} else {
-					context.fillStyle = "#737373";
+					this.context.fillStyle = "#737373";
 				}
-				context.font = "bold 16px Arial";
-				context.textAlign = 'center';
-				context.fillText(button.getText(), 
+				this.context.font = "bold 16px Arial";
+				this.context.textAlign = 'center';
+				this.context.fillText(button.getText(), 
 					button.getX()+(button.getWidth()/2), 
 					button.getY()+(button.getHeight()/2)+6);
 			}

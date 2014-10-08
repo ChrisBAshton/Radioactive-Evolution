@@ -18,6 +18,9 @@ define(['bootstrap', 'menu/main', 'menu/level', 'menu/death', 'menu/achievements
 			bs.pubsub.addListener('regame:game:start', function () {
 				self.destroy();
 			});
+			bs.pubsub.addListener('regame:game:resume', function () {
+				self.destroy();
+			});
 		}
 
 		this.set = function (menu) {

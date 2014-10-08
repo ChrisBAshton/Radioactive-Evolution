@@ -38,25 +38,25 @@ define(['bootstrap', '_helpers/browser'], function (bs, browser) {
             var LOADED = Math.floor(((LOADED_FILES/TOTAL_FILES)*100));
             
             // draw background colour
-            context.fillStyle = "#EDEDED";
-            context.fillRect(0, 0, bs.config.canvas.width, bs.config.canvas.height);
+            this.context.fillStyle = "#EDEDED";
+            this.context.fillRect(0, 0, bs.config.canvas.width, bs.config.canvas.height);
             // draw loading bar background
-            var lingrad = context.createLinearGradient((bs.config.canvas.width/4), (bs.config.canvas.height/2)-10, (bs.config.canvas.width/4), (bs.config.canvas.height/2)+10);
+            var lingrad = this.context.createLinearGradient((bs.config.canvas.width/4), (bs.config.canvas.height/2)-10, (bs.config.canvas.width/4), (bs.config.canvas.height/2)+10);
             lingrad.addColorStop(0, '#7d7e7d');
             lingrad.addColorStop(1, '#0e0e0e');
-            context.fillStyle = lingrad;
-            context.fillRect((bs.config.canvas.width/4), (bs.config.canvas.height/2)-10, (bs.config.canvas.width/2), 10);
+            this.context.fillStyle = lingrad;
+            this.context.fillRect((bs.config.canvas.width/4), (bs.config.canvas.height/2)-10, (bs.config.canvas.width/2), 10);
             // draw loading bar
-            var highlightGrad = context.createLinearGradient((bs.config.canvas.width/4), (bs.config.canvas.height/2)-10, (bs.config.canvas.width/4), (bs.config.canvas.height/2)+10);
+            var highlightGrad = this.context.createLinearGradient((bs.config.canvas.width/4), (bs.config.canvas.height/2)-10, (bs.config.canvas.width/4), (bs.config.canvas.height/2)+10);
             highlightGrad.addColorStop(0, '#333333');
             highlightGrad.addColorStop(1, '#666666');
-            context.fillStyle = highlightGrad;
-            context.fillRect((bs.config.canvas.width/4), (bs.config.canvas.height/2)-10, ((bs.config.canvas.width/2)/100) * LOADED, 10);
+            this.context.fillStyle = highlightGrad;
+            this.context.fillRect((bs.config.canvas.width/4), (bs.config.canvas.height/2)-10, ((bs.config.canvas.width/2)/100) * LOADED, 10);
             
             // set up text
-            context.fillStyle = "#737373";
-            context.font = "12px Verdana";
-            context.textAlign = 'center';
+            this.context.fillStyle = "#737373";
+            this.context.font = "12px Verdana";
+            this.context.textAlign = 'center';
             
             // display message regarding user's browser
             switch(browser) {
@@ -70,24 +70,24 @@ define(['bootstrap', '_helpers/browser'], function (bs, browser) {
                     var message = "You appear to be using Opera. Radioactive Evolution is mostly functional in this browser.";
                     break;
                 case "safari":
-                    context.fillStyle = "#CF0000";
+                    this.context.fillStyle = "#CF0000";
                     var message = "You appear to be using Safari. Unfortunately, the audio in this game will not work for you.";
                     break;
                 case "msie":
-                    context.fillStyle = "#CF0000";
+                    this.context.fillStyle = "#CF0000";
                     var message = "You appear to be using Safari. Unfortunately, the audio in this game will not work for you.";
                     break;
                 case "unknown":
-                    context.fillStyle = "#CF0000";
+                    this.context.fillStyle = "#CF0000";
                     var message = "Your browser has not been recognised, so the game might not work as expected.";
                     break;
             }
-            context.fillText(message, (bs.config.canvas.width/2), bs.config.canvas.elements.sand);
+            this.context.fillText(message, (bs.config.canvas.width/2), bs.config.canvas.elements.sand);
             // reset color
-            context.fillStyle = "#737373";
+            this.context.fillStyle = "#737373";
             
             // display message regarding download progress
-            context.fillText("Loading... "+LOADED+"%", (bs.config.canvas.width/2), (bs.config.canvas.height/2)-30);
+            this.context.fillText("Loading... "+LOADED+"%", (bs.config.canvas.width/2), (bs.config.canvas.height/2)-30);
 
         }
     };

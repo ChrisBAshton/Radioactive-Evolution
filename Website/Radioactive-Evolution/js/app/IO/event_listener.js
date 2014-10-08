@@ -8,6 +8,8 @@ define(['bootstrap', 'creatures/user', 'module/controller/menu_instance', 'modul
 	*/
 	var EventListener = function () {
 
+		var canvas = bs.canvas;
+
 		/**
 		* Moves the user (when playing the game) or calls the Menu mouseMoved() function.
 		*

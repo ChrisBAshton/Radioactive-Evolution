@@ -47,7 +47,7 @@ define(['bootstrap', 'menu/_menu', 'module/controller/game', 'module/controller/
 					} else {
 						icon = this.assets.img_cross;
 					}
-					context.drawImage(
+					this.context.drawImage(
 						icon, 
 						(this.buttons[i].getX()+this.buttons[i].getWidth())-iconSize, 
 						(this.buttons[i].getY()+this.buttons[i].getHeight())-iconSize,

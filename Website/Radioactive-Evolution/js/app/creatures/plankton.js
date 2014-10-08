@@ -41,11 +41,11 @@ define(['bootstrap', 'creatures/_creature', 'module/model/countdown'], function 
 		* @method draw
 		*/
 		this.draw = function() {
-			context.fillStyle = this.color;
-			context.beginPath();
-			context.arc(this.x, this.y, (this.width/2), 0, 2 * Math.PI, false);
-			context.closePath();
-			context.fill();
+			this.context.fillStyle = this.color;
+			this.context.beginPath();
+			this.context.arc(this.x, this.y, (this.width/2), 0, 2 * Math.PI, false);
+			this.context.closePath();
+			this.context.fill();
 		}
 
 		/**

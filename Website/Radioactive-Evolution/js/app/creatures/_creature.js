@@ -1,4 +1,4 @@
-define([], function () {
+define(['bootstrap'], function (bs) {
 
 /**
 * A creature is a "living" thing that exists within a player's level.
@@ -10,6 +10,8 @@ define([], function () {
 */
 var Creature = function () {
 	
+	this.context = bs.canvas.getContext("2d");
+
 	this.x = 0;
 	this.y = 0;
 	this.width = 0;
@@ -65,34 +67,34 @@ var Creature = function () {
 	this.draw = function() {
 		
 		// draw the body
-		context.fillStyle = this.color;
-		drawEllipse((this.x - (this.width/2)), (this.y - (this.height/2)), this.width, this.height);
-		context.fill();
+		this.context.fillStyle = this.color;
+		this.drawEllipse((this.x - (this.width/2)), (this.y - (this.height/2)), this.width, this.height);
+		this.context.fill();
 		// draw the eye in different positions depending on direction
 		var eye_x = (this.direction == "left") ? (this.x - (this.width/4)):(this.x + (this.width/4));
-		context.beginPath();
-		context.arc(eye_x, this.y, 2, 0, 2 * Math.PI, false);
-		context.fillStyle = this.eyecolor;
-		context.closePath();
-		context.fill();
+		this.context.beginPath();
+		this.context.arc(eye_x, this.y, 2, 0, 2 * Math.PI, false);
+		this.context.fillStyle = this.eyecolor;
+		this.context.closePath();
+		this.context.fill();
 		
 		// draw the tail
-		context.fillStyle = this.color;
+		this.context.fillStyle = this.color;
 		var temp = (this.direction == "left") ? (this.width):(-(this.width));
-		context.beginPath();
-		context.moveTo((this.x + temp), this.y);
-		context.lineTo((this.x + temp), (this.y - (this.height)/2));
-		context.lineTo(this.x, this.y);
-		context.lineTo((this.x + temp), this.y);
-		context.closePath();
-		context.fill();
-		context.beginPath();
-		context.moveTo((this.x + temp), this.y);
-		context.lineTo((this.x + temp), (this.y + (this.height)/2));
-		context.lineTo(this.x, this.y);
-		context.lineTo((this.x + temp), this.y);
-		context.closePath();
-		context.fill();
+		this.context.beginPath();
+		this.context.moveTo((this.x + temp), this.y);
+		this.context.lineTo((this.x + temp), (this.y - (this.height)/2));
+		this.context.lineTo(this.x, this.y);
+		this.context.lineTo((this.x + temp), this.y);
+		this.context.closePath();
+		this.context.fill();
+		this.context.beginPath();
+		this.context.moveTo((this.x + temp), this.y);
+		this.context.lineTo((this.x + temp), (this.y + (this.height)/2));
+		this.context.lineTo(this.x, this.y);
+		this.context.lineTo((this.x + temp), this.y);
+		this.context.closePath();
+		this.context.fill();
 		
 	}
 
@@ -107,7 +109,7 @@ var Creature = function () {
 	* @param {Number} w		The creature's width
 	* @param {Number} h		The creature's height
 	*/
-	function drawEllipse(x, y, w, h) {
+	this.drawEllipse = function (x, y, w, h) {
 		var kappa = .5522848,
 		  ox = (w / 2) * kappa, // control point offset horizontal
 		  oy = (h / 2) * kappa, // control point offset vertical
@@ -116,16 +118,16 @@ var Creature = function () {
 		  xm = x + w / 2,       // x-middle
 		  ym = y + h / 2;       // y-middle
 
-		context.lineWidth = 2;
-		context.strokeStyle="black";
-		context.beginPath();
-		context.moveTo(x, ym);
-		context.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y);
-		context.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym);
-		context.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
-		context.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
-		context.closePath();
-		context.stroke();
+		this.context.lineWidth = 2;
+		this.context.strokeStyle="black";
+		this.context.beginPath();
+		this.context.moveTo(x, ym);
+		this.context.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y);
+		this.context.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym);
+		this.context.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
+		this.context.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
+		this.context.closePath();
+		this.context.stroke();
 	}
 }
 

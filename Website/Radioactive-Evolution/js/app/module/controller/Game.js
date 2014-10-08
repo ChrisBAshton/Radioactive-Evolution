@@ -7,6 +7,8 @@ define(['bootstrap', 'module/controller/achievements', 'module/model/countdown',
 
 		var self = this;
 
+		this.playing = false;
+
 		this.init = function () {
 			_listen();
 			self.reset();
@@ -18,18 +20,25 @@ define(['bootstrap', 'module/controller/achievements', 'module/model/countdown',
 				if (typeof callback === 'function') {
 					callback();
 				}
+				self.playing = false;
 			});
 			bs.pubsub.addListener('regame:game:start', function () {
 				self.start();
+				self.playing = true;
 			});
 			bs.pubsub.addListener('regame:game:stop', function () {
 				self.stop();
+				self.playing = false;
 			});
-			bs.pubsub.addListener('regame:game:pause', function () {
-				self.pause();
-			});
-			bs.pubsub.addListener('regame:game:resume', function () {
-				self.resume();
+			bs.pubsub.addListener('regame:game:togglePause', function () {
+				
+				if (self.playing) {
+					self.pause();
+					self.playing = false;
+				} else {
+					self.resume();
+					self.playing = true;
+				}
 			});
 		};
 
@@ -84,6 +93,7 @@ define(['bootstrap', 'module/controller/achievements', 'module/model/countdown',
 		* @method resume_game()
 		*/
 		this.resume = function() {
+			bs.pubsub.emitEvent('regame:game:resume');
 			startAnimating();
 		}
 

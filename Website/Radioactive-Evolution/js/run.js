@@ -1,22 +1,27 @@
-var config = {
-	baseUrl: "js/app",
-	paths: {
-		// relative to baseUrl
-		"lib": "../lib"
-	}
-};
+(function () {
 
-var loadRadioactiveEvolution = function () {
-	require(config, ['app'], function (app) {
-		app.init();
-	});
-};
+    var config = {
+            baseUrl: "js/app",
+            paths: {
+                // relative to baseUrl
+                "lib": "../lib"
+            }
+        },
+        canvasName = document.getElementById('radioactive-evolution-script').getAttribute('data-container-div'),
+        canvasElement = document.createElement('canvas');
 
-var CANVAS_NAME = document.getElementById('radioactive-evolution-script').getAttribute('data-container-div');
-var canvas_container = document.getElementById(CANVAS_NAME);
+    document.getElementById(canvasName).appendChild(canvasElement);
+    loadRadioactiveEvolution(canvasElement);
 
-var canvas = document.createElement('canvas');
-canvas_container.appendChild(canvas);
-var context= canvas.getContext("2d");
+    function loadRadioactiveEvolution(canvas) {
+        require(config, ['bootstrap'], function (bs) {
 
-loadRadioactiveEvolution();
+            bs.canvas = canvas;
+
+            require(config, ['app'], function (app) {
+                app.init(canvas);
+            });
+        });
+    };
+
+}());

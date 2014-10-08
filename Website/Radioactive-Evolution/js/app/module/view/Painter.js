@@ -9,7 +9,9 @@ define(['bootstrap', 'module/model/assets', 'creatures/user', 'module/controller
     */
     var Painter = function () {
     
-        var self = this;
+        var self = this,
+            canvas = bs.canvas,
+            context = canvas.getContext("2d");
 
         this.init = function () {
             canvas.width        = bs.config.canvas.width;
@@ -63,7 +65,7 @@ define(['bootstrap', 'module/model/assets', 'creatures/user', 'module/controller
         * @param {String} cursor    The cursor to change to.
         */
         this.changeCursor = function (cursor) {
-            document.getElementById(CANVAS_NAME).style.cursor = cursor;
+            bs.canvas.style.cursor = cursor;
         }
 
         /**
