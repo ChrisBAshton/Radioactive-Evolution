@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Radioactive Evolution</title>
+        <!-- Google fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
+        <!-- Reset the default CSS -->
+        <link rel="stylesheet" href="http://meyerweb.com/eric/tools/css/reset/reset.css" />
+        <!-- Now define our own CSS -->
+        <link rel="stylesheet" href="css/stylesheet.css" />
+        <!-- Define the favicon -->
+        <link rel="shortcut icon" href="css/favicon.ico" />
+    </head>
+
+    <body>
+        <section id="menu">
+            <h1>Radioactive Evolution</h1>
+
+            <ul class="clickables">
+                <li>
+                    <a href=".">About</a>
+                </li>
+                <li>
+                    <a href="game.html">Play Game</a>
+                </li>
+                <li>
+                    <a href="tips.html">Game Tips</a>
+                </li>
+                <li>
+                    <a href="documentation.html">Documentation</a>
+                </li>
+                <li>
+                    <a href="Radioactive-Evolution.zip">Download Source Code</a>
+                </li>
+            </ul>
+
+            <p>Copyright &copy; 2013 <a href="http://twitter.com/ChrisBAshton" target="_blank">@ChrisBAshton</a></p>
+        </section>
+        <section id="content">
+
+<!--
+	Only two elements are required to include the game:
+	* A canvas with id "radioactive-evolution"
+	* A script linking to Run.js, via require.js
+
+	The radioactive-evolution-container div is not required, but gives the flexibility of CSS styling. For example, I've centered the canvas using this div. This div can have any id, it does not matter.
+-->
+<style type="text/css">
+#radioactive-evolution-container {
+	width: 100%;
+	text-align: center;
+}
+</style>
+<div id="radioactive-evolution-container">
+	<canvas id="radioactive-evolution">Your browser does not support the HTML5 canvas element. Please update your browser!</canvas>
+</div>
+<script data-main="Radioactive-Evolution/js/Run" src="http://requirejs.org/docs/release/2.1.5/minified/require.js"></script>
+        </section>
+    </body>
+</html>
