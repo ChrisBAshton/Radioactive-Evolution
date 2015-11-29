@@ -41,17 +41,88 @@
 <h1>Documentation</h1>
 <p><em>Note: the following documentation has been pulled directly from the software's README.txt file and interpreted as best as possible by your browser. Downloading the software and opening the README file in a native application is likely to be more readable for you.</em></p>
 <br /> <br/ >
-<?php
-	// get file contents
-	$file_contents = file_get_contents("Radioactive-Evolution/README.txt");
-	// convert html to text
-	$file_contents = htmlspecialchars($file_contents);
-	// convert \n to <br />
-	$file_contents = nl2br($file_contents);
-	// convert tab to space
-	$file_contents = str_replace("\t",'&nbsp;&nbsp;&nbsp;', $file_contents);
-	echo $file_contents;
-?>
+/****************************************************<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Radioactive Evolution<br />
+<br />
+SUMMARY<br />
+&nbsp;&nbsp;&nbsp;Software Website:&nbsp;&nbsp;&nbsp;http://users.aber.ac.uk/cba1/iwp/<br />
+&nbsp;&nbsp;&nbsp;Version:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.0 (Beta)<br />
+&nbsp;&nbsp;&nbsp;Author:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chris Ashton<br />
+&nbsp;&nbsp;&nbsp;Developer Website:&nbsp;&nbsp;&nbsp;www.christopherashton.com<br />
+&nbsp;&nbsp;&nbsp;Contact:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;appsupport@christopherashton.com<br />
+<br />
+CONTENTS<br />
+&nbsp;&nbsp;&nbsp;1) Introduction<br />
+&nbsp;&nbsp;&nbsp;2) License Agreement<br />
+&nbsp;&nbsp;&nbsp;3) Installation<br />
+&nbsp;&nbsp;&nbsp;4) Modification<br />
+&nbsp;&nbsp;&nbsp;5) Future Improvements<br />
+<br />
+****************************************************/<br />
+<br />
+1) Introduction<br />
+&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;Thank you for downloading Radioactive Evolution. This is a HTML5 Canvas game developed for a university assignment. It uses object-oriented JavaScript and makes use of the RequireJS and Mousetrap JavaScript frameworks.<br />
+&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;For full background information, please visit the official page at http://users.aber.ac.uk/cba1/iwp/<br />
+<br />
+2) License Agreement<br />
+&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;Pah, what license agreement? This is open source software, so you're welcome to download the source code and mess about with it to your heart's content.<br />
+&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;I'd be grateful if you could leave an acknowledgement to me somewhere in your work, but I don't have the legal power nor the inclination to chase you down if you choose not to.<br />
+&nbsp;&nbsp;&nbsp;<br />
+3) Installation<br />
+<br />
+&nbsp;&nbsp;&nbsp;The beauty of this software, if I do say so myself, is in its portability. Here are the simple steps you need to take:<br />
+&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a) Unzip the &quot;Radioactive-Evolution.zip&quot;. You've probably already done this if you're reading this now.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b) Upload the unzipped folder to a web directory of your choice.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c) You can now include the game in any of your web pages- all you need is two elements:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- Put these somewhere in your HTML body, wherever you want the game to appear --&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;canvas id=&quot;Radioactive-Evolution&quot;&gt;&lt;/canvas&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;script data-main=&quot;Radioactive-Evolution/js/Run&quot; src=&quot;http://requirejs.org/docs/release/2.1.5/minified/require.js&quot;&gt;&lt;/script&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   This assumes the following directory structure:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent-directory/<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;---&gt; Radioactive-Evolution/<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;---&gt; your-web-page.html<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   If you've renamed your unzipped folder to something else, or are including the game from a different directory, be sure to update the value inside data-main. This is untested- there may be other variables you need to update, particularly in Includes.js.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <br />
+&nbsp;&nbsp;&nbsp;An example of this can be found at http://users.aber.ac.uk/cba1/iwp/<br />
+<br />
+4) Modification<br />
+<br />
+&nbsp;&nbsp;&nbsp;So, you fancy making some changes yourself, huh? Best of luck!<br />
+&nbsp;&nbsp;&nbsp;I've tried to design the game to be as maintainable as possible, and the code is pretty well commented. Here are a few pointers:<br />
+&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Run.js loads the files. If you create more files, you'll need to add them to the scriptQueue array, and beware of dependencies. Make sure that your file isn't downloaded before another file that it relies upon, and vice-versa.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Define your own achievements in the Achievements directory, extending Achievement.js. You'll need to update loadAchievements in Functions.js<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Define your own creatures in the Creatures directory, extending Creature.js. You'll need to update Functions.js and most probably Globals.js<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Define your own upgrades in the Upgrades directory, extending Upgrade.js. You'll need to update User.js and Globals.js<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Should you need to, you can define your own Menu in the Menus directory, extending Menu.js.<br />
+<br />
+5) Future Improvements<br />
+<br />
+&nbsp;&nbsp;&nbsp;If I find the time, I'll do some modification myself and release the update in a future version of the software. Here is my (somewhat picky!) to-do list, in rough priority order:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Cross browser fixes:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* IE - sounds<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Safari - sounds and cursor hiding<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Opera - cursor hiding<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Keyboard controls need drastic improvement<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* More game sounds<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Better collision detection for fish (i.e. checking ellipse collision instead of assuming rectangle shape)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Improved fish spawning -e.g. not spawning immediately after being eaten, and not spawning too close to the user.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Could make game more challenging - let other fish lay poison, or let poison only be effective against certain sized fish until poison is upgraded, etc<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Random fish colours- a bigger selection of colours, and ensuring that fish are all different colours.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Plankton gradual colour change, instead of flashing every second<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* In game help (HelpMenu.js) - include images, possibly track unlocked cheat codes.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* In some browsers HTML5 sounds appear to get louder as the level progresses<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Double-check the use of button_width and button.getWidth() in Button.js and Menu.js
         </section>
     </body>
 </html>
